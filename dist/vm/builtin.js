@@ -62,6 +62,26 @@ const ArrayGet = (args, processManager) => {
     var index = Number(args[1]);
     return arr[index];
 };
+// takes: array, start, end -> array
+const ArraySplice = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('array_splice', args.length, 3);
+    if (err != undefined) {
+        return err;
+    }
+    // splice 1, 5 -> start: 1, 5-1 -> 1 - 4
+    // array[1:5] -> 1, 2, 3, 4
+    // array[10:(86-10+1)] -> 10, ..., 
+    var arr = args[0];
+    var start = args[1];
+    var end = args[2];
+    if (end >= arr.length) {
+        end = arr.length;
+    }
+    else if (end == -1) {
+        end = arr.length;
+    }
+    return arr.splice(start, end - start);
+};
 // takes: function, array -> any
 const Call = (args, processManager) => {
     var err = (0, builtinHelper_1.CheckParameterCount)('call', args.length, 2);
@@ -190,16 +210,28 @@ const Identical = (args, processManager) => {
     }
     return result;
 };
+// takes: string, function -> function(url, args)
+const route = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 2);
+    if (err != undefined) {
+        return err;
+    }
+    var url = args[0];
+    var f = args[1];
+    return processManager.executeFunction(f.getValue(), [url, url.split('/')]);
+};
 exports.Builtin = new Map([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
     ['array_push', ArrayPush],
     ['array_get', ArrayGet],
+    ['splice', ArraySplice],
     ['call', Call],
     ['foreach', ForEach],
     ['foreachls', ForEachLs],
     ['foreachspec', ForEachSpec],
     ['range', Range],
     ['len', Len],
-    ['identical', Identical]
+    ['identical', Identical],
+    ['route', route]
 ]);

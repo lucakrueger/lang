@@ -22,11 +22,6 @@ class VMProcess extends Process {
         this.description = description;
         this.processManager = processManager;
         /*
-            TODO:
-            - Implement various helper functions
-            - Execute instructions
-            - Determine correct definition -> execute that exact implementation
-            
             Later:
             - Optimize bytecode, dont use strings as names anymore, but ids
         */
@@ -389,6 +384,40 @@ class VMProcess extends Process {
                     return (arr[0].getValue() == atom.getValue());
                 }
                 return (arr[0] == value);
+            case 'url':
+                // evaluate url
+                // arg: supplied url
+                // value: wanted format
+                // evaluate if url matches with format
+                var url = arg;
+                if (url[url.length - 1] == '/') {
+                    url = url.slice(0, -1);
+                }
+                if (value[value.length - 1] == '/') {
+                    value = value.slice(0, -1);
+                }
+                var urlParts = url.split('/');
+                var suppliedParts = value.split('/');
+                if (urlParts.length != suppliedParts.length) {
+                    return false; // not same length -> cant be the same
+                }
+                // go over parts
+                // if part = variable, continue
+                // if part does not math -> false
+                var match = true;
+                var index = 0;
+                for (var elem of urlParts) {
+                    if (suppliedParts[index][0] == ':') {
+                        // variable
+                        index++;
+                        continue;
+                    }
+                    if (suppliedParts[index] != elem) {
+                        match = false;
+                    }
+                    index++;
+                }
+                return match;
         }
         (0, logger_1.ThrowError)(logger_1.NativeErrors.INTERNAL, `Unknown comparison rule ${rule}`);
         return false;

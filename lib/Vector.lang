@@ -1,0 +1,6 @@
+/* Vector */
+
+/* TODO: add mathematical operations, add, sub, mul */
+
+Vec -> x y z => [:vec.t, x, y, z]
+Vec -> x y z w => [:vec.f, x, y, z, w]

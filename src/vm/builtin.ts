@@ -74,6 +74,30 @@ const ArrayGet = (args: any[], processManager: ProcessManager): (any | VMError) 
     return arr[index]
 }
 
+// takes: array, start, end -> array
+const ArraySplice = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('array_splice', args.length, 3)
+    if(err != undefined) {
+        return err
+    }
+
+    // splice 1, 5 -> start: 1, 5-1 -> 1 - 4
+    // array[1:5] -> 1, 2, 3, 4
+    // array[10:(86-10+1)] -> 10, ..., 
+
+    var arr: any[] = args[0]
+    var start: number = args[1]
+    var end: number = args[2]
+
+    if(end >= arr.length) {
+        end = arr.length
+    } else if(end == -1) {
+        end = arr.length
+    }
+
+    return arr.splice(start, end - start)
+}
+
 // takes: function, array -> any
 const Call = (args: any[], processManager: ProcessManager): (any | VMError) => {
     var err = CheckParameterCount('call', args.length, 2)
@@ -228,16 +252,31 @@ const Identical = (args: any[], processManager: ProcessManager): (any | VMError)
     return result
 }
 
+// takes: string, function -> function(url, args)
+const route = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('name', args.length, 2)
+    if(err != undefined) {
+        return err
+    }
+
+    var url: string = args[0]
+    var f: Atom = args[1]
+
+    return processManager.executeFunction(f.getValue(), [url, url.split('/')])
+}
+
 export const Builtin = new Map<string, (args: any[], processManager: ProcessManager) => any>([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
     ['array_push', ArrayPush],
     ['array_get', ArrayGet],
+    ['splice', ArraySplice],
     ['call', Call],
     ['foreach', ForEach],
     ['foreachls', ForEachLs],
     ['foreachspec', ForEachSpec],
     ['range', Range],
     ['len', Len],
-    ['identical', Identical]
+    ['identical', Identical],
+    ['route', route]
 ])

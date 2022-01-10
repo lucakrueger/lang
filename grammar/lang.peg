@@ -33,10 +33,10 @@ FunctionTypeDefinition
   = TypeDef: (Name _ "->" _ (_ Type " ")* _ "=>" _ Type _) {return {ident: 'function_type', name: TypeDef[0], types: TypeDef[4]}}
 
 ParameterRule
-  = Rule: ("(" _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "type" / "head" / "tail") _ (Name / atom / string / Number) ")") {return {ident: 'rule', rule: Rule[2], value: Rule[4]}}
+  = Rule: ("(" _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "type" / "head" / "tail" / "url") _ (Name / atom / string / Number) ")") {return {ident: 'rule', rule: Rule[2], value: Rule[4]}}
 
 Name
-  = text: (([a-z] / [A-Z] / [/.])+) {return {ident: 'name', value: text.join("")}}
+  = text: (([a-z] / [A-Z] / [/.'])+) {return {ident: 'name', value: text.join("")}}
 
 Type
   = Type: ([a-z] / [A-Z]) {return {ident: 'type', value: Type[0]}}
@@ -86,8 +86,10 @@ quotation_mark = '"'
 unescaped      = [\x20-\x21\x23-\x5B\x5D-\u10FFFF]
 
 Number "number"
-    = left:[0-9]+ "." right:[0-9]+ { return {ident: 'number', value: parseFloat(left.join("") + "." +   right.join(""))}}
+  = left:[0-9]+ "." right:[0-9]+ { return {ident: 'number', value: parseFloat(left.join("") + "." +   right.join(""))}}
 	/ left:[0-9]+ {return {ident: 'number', value: parseFloat(left.join(""))}}
+  / "-" left:[0-9]+ "." right:[0-9]+ { return {ident: 'number', value: -parseFloat(left.join("") + "." +   right.join(""))}}
+	/ "-" left:[0-9]+ {return {ident: 'number', value: -parseFloat(left.join(""))}}
 
 Integer "integer"
   = _ [0-9]+ { return parseInt(text(), 10); }
