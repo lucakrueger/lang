@@ -1,0 +1,18 @@
+main -> args => ((Real: /) \ [1, 2, 3, 5])
+
+Real -> / => (range: 0, 100)
+
+Set -> ls => (identical: ls)
+
+if -> cond (= :false) result else => else
+if -> cond (= :true) result else => result
+if -> cond (= :false) result => :none
+if -> cond (= :true) result => result
+
+Sumls -> ls => (foreachspec: ls, :sumHelper, 0)
+Sum -> j n f => (Sumls: (foreachls: (range: j, (n+2)), f))
+sumHelper -> elem index array result => (elem + result)
+
+Productls -> ls => (foreachspec: ls, :productHelper, 1)
+Product -> j n f => (Productls: (foreachls: (range: j, (n+1)), f))
+productHelper -> elem index array result => (elem * result)

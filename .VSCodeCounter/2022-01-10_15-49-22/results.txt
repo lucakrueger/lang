@@ -1,0 +1,44 @@
+Date : 2022-01-10 15:49:22
+Directory : /Users/lucakruger/Documents/Projekte/lang/dist
+Total : 14 files,  1215 codes, 160 comments, 14 blanks, all 1389 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         14 |      1,215 |        160 |         14 |      1,389 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                       | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                          |         14 |      1,215 |        160 |         14 |      1,389 |
+| bytecodes                                                                  |          3 |        120 |         14 |          3 |        137 |
+| core                                                                       |          1 |         36 |          1 |          1 |         38 |
+| internal                                                                   |          1 |         27 |          1 |          1 |         29 |
+| logger                                                                     |          1 |         42 |          4 |          1 |         47 |
+| parser                                                                     |          2 |        343 |         43 |          2 |        388 |
+| vm                                                                         |          5 |        637 |         95 |          5 |        737 |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                   | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/lucakruger/Documents/Projekte/lang/dist/bytecodes/bytecode.js       | JavaScript |         16 |          5 |          1 |         22 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/bytecodes/parser.js         | JavaScript |         27 |          0 |          1 |         28 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/bytecodes/readable.js       | JavaScript |         77 |          9 |          1 |         87 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/core/bytecode.js            | JavaScript |         36 |          1 |          1 |         38 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/index.js                    | JavaScript |         10 |          2 |          1 |         13 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/internal/stack.js           | JavaScript |         27 |          1 |          1 |         29 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/logger/logger.js            | JavaScript |         42 |          4 |          1 |         47 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/parser/ast.js               | JavaScript |         17 |          0 |          1 |         18 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/parser/bytecodeGenerator.js | JavaScript |        326 |         43 |          1 |        370 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/builtin.js               | JavaScript |        181 |         24 |          1 |        206 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/builtinHelper.js         | JavaScript |         14 |          0 |          1 |         15 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/process.js               | JavaScript |        390 |         54 |          1 |        445 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/processManager.js        | JavaScript |         31 |         10 |          1 |         42 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/structs.js               | JavaScript |         21 |          7 |          1 |         29 |
+| Total                                                                      |            |      1,215 |        160 |         14 |      1,389 |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+

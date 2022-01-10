@@ -1,0 +1,119 @@
+example 1: rules
+definition with definition rule
+fib -> a (>= 0) => a
+
+parameter rules
+
+specific parameter rule
+fib -> num (< 2) => num
+
+fallback parameter rule
+fib -> num => (fib: (num - 1)) + (fib: (num - 2))
+
+fib: 4 -> returns correct value
+fib: -1 -> returns error, definition rule is not satisfied
+
+
+example 2: lists
+
+head -> a => a
+head -> ls => list.new: (arr.elem: 0, ls)
+
+tail -> a => a
+tail -> ls => list.new: (arr.after: 0, ls)
+
+
+example 3: maths
+
+main -> / => sum: 0, 100, fn
+fn -> j => j**2
+
+
+example 4: type rules
+
+sum -> a (list) => b
+sum -> a a b (list) => c
+
+sum -> ls => maths.sum_list: ls
+sum -> k n ls => maths.sum_list: (list.cut: ls, k, n)
+
+
+Memory:
+
+function : sum {
+    definitions: [
+        {
+            args: 1
+            similar: [0], [-1]  // -1 indicates return value
+            implementation: 0   // -1 indicates no implementation
+        }
+        {
+            args: 3
+            similar: [0, 1], [2], [-1]
+            implementation: 1
+        }
+    ]
+    implementations: [
+        {
+            bytecode: [...]
+        }
+        {
+            bytecode: [...]
+        }
+    ]
+}
+
+Virtual Machine
+
+Process:
+    value_stack -> list: holds all values
+    functions -> 
+
+Example:
+
+fib -> a => a
+fib -> num (< 2) => num
+fib -> num => (fib: (num - 1)) + (fib: (num - 2))
+
+VM:
+
+function num {
+    definitions: [
+        {
+            args: 1
+            similar: [0, -1]
+            implementation: 0
+            rules: [  // rule for each var
+                {
+                    rule: "<"
+                    value: "2",
+                    implementation: 1
+                }
+            ]
+        }
+    ]
+    implementations: [
+        {
+            bytecode 0: [...]
+        }
+        {
+            bytecode 1: [...]
+        }
+    ]
+}
+
+bytecode 1:
+create num
+push num
+
+bytecode 0:
+create num
+push num
+push 1
+subtract
+call fib 1
+push num
+push 2
+subtract
+call fib 1
+add

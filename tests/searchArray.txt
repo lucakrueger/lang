@@ -1,0 +1,17 @@
+searchArray -> a b => b
+searchArray -> list target => (iterateList: list, (List.middle: list), target)
+
+iterateList -> a b c => d
+iterateList -> list middle target => (Thread.parallel: (List.iterate: list, 0, middle, checkTarget, target), (List.iterate: list, middle, (List.end: list), checkTarget, target))
+                            result >> List.first: result
+
+checkTarget -> a b c d => d // returns index or :none
+checkTarget -> index elem list target => (equals: elem, target, index)
+
+// Searches Array for certain element, returns index
+searchArray: [1, 2, 3, 4, 5, 6], 5 -> 5
+
+
+// Used BuiltIn functions
+
+Thread.parallel -> function, function => resultArray // executes both functions at the same time -> collects all results (which are not :none) in an array

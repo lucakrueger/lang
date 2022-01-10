@@ -1,0 +1,16 @@
+"filename", "language", "TypeScript", "comment", "blank", "total"
+"/Users/lucakruger/Documents/Projekte/lang/src/bytecodes/bytecode.ts", "TypeScript", 37, 5, 3, 45
+"/Users/lucakruger/Documents/Projekte/lang/src/bytecodes/parser.ts", "TypeScript", 23, 0, 6, 29
+"/Users/lucakruger/Documents/Projekte/lang/src/bytecodes/readable.ts", "TypeScript", 53, 9, 16, 78
+"/Users/lucakruger/Documents/Projekte/lang/src/core/bytecode.ts", "TypeScript", 35, 1, 8, 44
+"/Users/lucakruger/Documents/Projekte/lang/src/index.ts", "TypeScript", 13, 2, 1, 16
+"/Users/lucakruger/Documents/Projekte/lang/src/internal/stack.ts", "TypeScript", 21, 1, 7, 29
+"/Users/lucakruger/Documents/Projekte/lang/src/logger/logger.ts", "TypeScript", 29, 4, 6, 39
+"/Users/lucakruger/Documents/Projekte/lang/src/parser/ast.ts", "TypeScript", 9, 0, 2, 11
+"/Users/lucakruger/Documents/Projekte/lang/src/parser/bytecodeGenerator.ts", "TypeScript", 331, 43, 73, 447
+"/Users/lucakruger/Documents/Projekte/lang/src/vm/builtin.ts", "TypeScript", 177, 24, 42, 243
+"/Users/lucakruger/Documents/Projekte/lang/src/vm/builtinHelper.ts", "TypeScript", 9, 0, 1, 10
+"/Users/lucakruger/Documents/Projekte/lang/src/vm/process.ts", "TypeScript", 371, 57, 35, 463
+"/Users/lucakruger/Documents/Projekte/lang/src/vm/processManager.ts", "TypeScript", 27, 10, 8, 45
+"/Users/lucakruger/Documents/Projekte/lang/src/vm/structs.ts", "TypeScript", 18, 8, 5, 31
+"Total", "-", 1153, 164, 213, 1530

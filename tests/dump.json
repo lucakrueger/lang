@@ -1,0 +1,541 @@
+{
+    "descriptions": [
+        {
+            "name": "main",
+            "definitions": [
+                {
+                    "args": [
+                        "args"
+                    ],
+                    "arglength": 1,
+                    "similar": [
+                        [
+                            0
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "args",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "pushl 1",
+                        "pushl 1",
+                        "operation =",
+                        "pushl Hello true",
+                        "pushl none",
+                        "call if 3"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "if",
+            "definitions": [
+                {
+                    "args": [
+                        "cond",
+                        "result",
+                        "else"
+                    ],
+                    "arglength": 3,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ],
+                        [
+                            2
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "cond",
+                                    "rule": "=",
+                                    "value": ":false"
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "else",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        },
+                        {
+                            "implementation": 1,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "cond",
+                                    "rule": "=",
+                                    "value": ":true"
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "else",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "args": [
+                        "cond",
+                        "result"
+                    ],
+                    "arglength": 2,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 2,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "cond",
+                                    "rule": "=",
+                                    "value": ":false"
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        },
+                        {
+                            "implementation": 3,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "cond",
+                                    "rule": "=",
+                                    "value": ":true"
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "pushl :else"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "bytecode": [
+                        "pushl :if"
+                    ]
+                },
+                {
+                    "index": 2,
+                    "bytecode": [
+                        "pushl :none"
+                    ]
+                },
+                {
+                    "index": 3,
+                    "bytecode": [
+                        "push result"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Sumls",
+            "definitions": [
+                {
+                    "args": [
+                        "ls"
+                    ],
+                    "arglength": 1,
+                    "similar": [
+                        [
+                            0
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "ls",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "push ls",
+                        "pushl :sumHelper",
+                        "pushl 0",
+                        "call foreachspec 3"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Sum",
+            "definitions": [
+                {
+                    "args": [
+                        "j",
+                        "n",
+                        "f"
+                    ],
+                    "arglength": 3,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ],
+                        [
+                            2
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "j",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "n",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "f",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "push j",
+                        "push n",
+                        "pushl 2",
+                        "operation +",
+                        "call range 2",
+                        "push f",
+                        "call foreachls 2",
+                        "call Sumls 1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "sumHelper",
+            "definitions": [
+                {
+                    "args": [
+                        "elem",
+                        "index",
+                        "array",
+                        "result"
+                    ],
+                    "arglength": 4,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ],
+                        [
+                            2
+                        ],
+                        [
+                            3
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "elem",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "index",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "array",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 3,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "push elem",
+                        "push result",
+                        "operation +"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Productls",
+            "definitions": [
+                {
+                    "args": [
+                        "ls"
+                    ],
+                    "arglength": 1,
+                    "similar": [
+                        [
+                            0
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "ls",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "push ls",
+                        "pushl :productHelper",
+                        "pushl 1",
+                        "call foreachspec 3"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Product",
+            "definitions": [
+                {
+                    "args": [
+                        "j",
+                        "n",
+                        "f"
+                    ],
+                    "arglength": 3,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ],
+                        [
+                            2
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "j",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "n",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "f",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "push j",
+                        "push n",
+                        "pushl 1",
+                        "operation +",
+                        "call range 2",
+                        "push f",
+                        "call foreachls 2",
+                        "call Productls 1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "productHelper",
+            "definitions": [
+                {
+                    "args": [
+                        "elem",
+                        "index",
+                        "array",
+                        "result"
+                    ],
+                    "arglength": 4,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ],
+                        [
+                            2
+                        ],
+                        [
+                            3
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "elem",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "index",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "array",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 3,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "push elem",
+                        "push result",
+                        "operation *"
+                    ]
+                }
+            ]
+        }
+    ]
+}

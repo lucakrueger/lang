@@ -1,0 +1,88 @@
+{
+    "descriptions": [
+        {
+            "name": "main",
+            "definitions": [
+                {
+                    "args": ["args"],
+                    "arglength": 1,
+                    "similar": [[0]],
+                    "rules": [
+                       {
+                           "implementation": 0,
+                           "args": []
+                       } 
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "label main",
+                        "pushl 8",
+                        "call fib 1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "fib",
+            "definitions": [
+                {
+                    "args": ["num"],
+                    "arglength": 1,
+                    "similar": [[-1, 0]],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "num",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        },
+                        {
+                            "implementation": 1,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "num",
+                                    "rule": "<",
+                                    "value": "2"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "label fib0",
+                        "push num",
+                        "pushl 1",
+                        "subtract",
+                        "call fib 1",
+                        "push num",
+                        "pushl 2",
+                        "subtract",
+                        "call fib 1",
+                        "add"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "bytecode": [
+                        "label fib1",
+                        "push num"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+module: Std
+
+if -> cond (= :false) result else => else
+if -> cond (= :true) result else => result
+if -> cond (= :false) result => :none
+if -> cond (= :true) result => result

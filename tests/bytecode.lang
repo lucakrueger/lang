@@ -1,0 +1,13 @@
+label fib0
+push num
+pushl 1
+subtract
+call fib
+push num
+pushl 2
+subtract
+call fib
+add
+
+label fib1
+push num

@@ -1,0 +1,78 @@
+Date : 2022-01-10 15:49:57
+Directory : /Users/lucakruger/Documents/Projekte/lang
+Total : 36 files,  9860 codes, 420 comments, 664 blanks, all 10944 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         17 |      7,958 |        175 |        440 |      8,573 |
+| TypeScript |         14 |      1,153 |        164 |        213 |      1,530 |
+| JSON       |          5 |        749 |         81 |         11 |        841 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                       | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                          |         36 |      9,860 |        420 |        664 |     10,944 |
+| dist                                                                       |         14 |      1,215 |        160 |         14 |      1,389 |
+| dist/bytecodes                                                             |          3 |        120 |         14 |          3 |        137 |
+| dist/core                                                                  |          1 |         36 |          1 |          1 |         38 |
+| dist/internal                                                              |          1 |         27 |          1 |          1 |         29 |
+| dist/logger                                                                |          1 |         42 |          4 |          1 |         47 |
+| dist/parser                                                                |          2 |        343 |         43 |          2 |        388 |
+| dist/vm                                                                    |          5 |        637 |         95 |          5 |        737 |
+| parser                                                                     |          3 |      6,743 |         15 |        426 |      7,184 |
+| src                                                                        |         14 |      1,153 |        164 |        213 |      1,530 |
+| src/bytecodes                                                              |          3 |        113 |         14 |         25 |        152 |
+| src/core                                                                   |          1 |         35 |          1 |          8 |         44 |
+| src/internal                                                               |          1 |         21 |          1 |          7 |         29 |
+| src/logger                                                                 |          1 |         29 |          4 |          6 |         39 |
+| src/parser                                                                 |          2 |        340 |         43 |         75 |        458 |
+| src/vm                                                                     |          5 |        602 |         99 |         91 |        792 |
+| tests                                                                      |          2 |        629 |          0 |          0 |        629 |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                   | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/lucakruger/Documents/Projekte/lang/dist/bytecodes/bytecode.js       | JavaScript |         16 |          5 |          1 |         22 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/bytecodes/parser.js         | JavaScript |         27 |          0 |          1 |         28 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/bytecodes/readable.js       | JavaScript |         77 |          9 |          1 |         87 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/core/bytecode.js            | JavaScript |         36 |          1 |          1 |         38 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/index.js                    | JavaScript |         10 |          2 |          1 |         13 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/internal/stack.js           | JavaScript |         27 |          1 |          1 |         29 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/logger/logger.js            | JavaScript |         42 |          4 |          1 |         47 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/parser/ast.js               | JavaScript |         17 |          0 |          1 |         18 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/parser/bytecodeGenerator.js | JavaScript |        326 |         43 |          1 |        370 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/builtin.js               | JavaScript |        181 |         24 |          1 |        206 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/builtinHelper.js         | JavaScript |         14 |          0 |          1 |         15 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/process.js               | JavaScript |        390 |         54 |          1 |        445 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/processManager.js        | JavaScript |         31 |         10 |          1 |         42 |
+| /Users/lucakruger/Documents/Projekte/lang/dist/vm/structs.js               | JavaScript |         21 |          7 |          1 |         29 |
+| /Users/lucakruger/Documents/Projekte/lang/package-lock.json                | JSON       |         89 |          0 |          1 |         90 |
+| /Users/lucakruger/Documents/Projekte/lang/package.json                     | JSON       |         18 |          0 |          1 |         19 |
+| /Users/lucakruger/Documents/Projekte/lang/parser/parser.js                 | JavaScript |      2,329 |          5 |        142 |      2,476 |
+| /Users/lucakruger/Documents/Projekte/lang/parser/parser_old.js             | JavaScript |      2,105 |          5 |        142 |      2,252 |
+| /Users/lucakruger/Documents/Projekte/lang/parser/parser_old2.js            | JavaScript |      2,309 |          5 |        142 |      2,456 |
+| /Users/lucakruger/Documents/Projekte/lang/src/bytecodes/bytecode.ts        | TypeScript |         37 |          5 |          3 |         45 |
+| /Users/lucakruger/Documents/Projekte/lang/src/bytecodes/parser.ts          | TypeScript |         23 |          0 |          6 |         29 |
+| /Users/lucakruger/Documents/Projekte/lang/src/bytecodes/readable.ts        | TypeScript |         53 |          9 |         16 |         78 |
+| /Users/lucakruger/Documents/Projekte/lang/src/core/bytecode.ts             | TypeScript |         35 |          1 |          8 |         44 |
+| /Users/lucakruger/Documents/Projekte/lang/src/index.ts                     | TypeScript |         13 |          2 |          1 |         16 |
+| /Users/lucakruger/Documents/Projekte/lang/src/internal/stack.ts            | TypeScript |         21 |          1 |          7 |         29 |
+| /Users/lucakruger/Documents/Projekte/lang/src/logger/logger.ts             | TypeScript |         29 |          4 |          6 |         39 |
+| /Users/lucakruger/Documents/Projekte/lang/src/parser/ast.ts                | TypeScript |          9 |          0 |          2 |         11 |
+| /Users/lucakruger/Documents/Projekte/lang/src/parser/bytecodeGenerator.ts  | TypeScript |        331 |         43 |         73 |        447 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/builtin.ts                | TypeScript |        177 |         24 |         42 |        243 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/builtinHelper.ts          | TypeScript |          9 |          0 |          1 |         10 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/process.ts                | TypeScript |        371 |         57 |         35 |        463 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/processManager.ts         | TypeScript |         27 |         10 |          8 |         45 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/structs.ts                | TypeScript |         18 |          8 |          5 |         31 |
+| /Users/lucakruger/Documents/Projekte/lang/tests/dump.json                  | JSON       |        541 |          0 |          0 |        541 |
+| /Users/lucakruger/Documents/Projekte/lang/tests/test.json                  | JSON       |         88 |          0 |          0 |         88 |
+| /Users/lucakruger/Documents/Projekte/lang/tsconfig.json                    | JSON       |         13 |         81 |          9 |        103 |
+| Total                                                                      |            |      9,860 |        420 |        664 |     10,944 |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+

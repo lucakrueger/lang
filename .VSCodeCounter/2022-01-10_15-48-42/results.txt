@@ -1,0 +1,44 @@
+Date : 2022-01-10 15:48:42
+Directory : /Users/lucakruger/Documents/Projekte/lang/src
+Total : 14 files,  1153 codes, 164 comments, 213 blanks, all 1530 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| TypeScript |         14 |      1,153 |        164 |        213 |      1,530 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                      | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                         |         14 |      1,153 |        164 |        213 |      1,530 |
+| bytecodes                                                                 |          3 |        113 |         14 |         25 |        152 |
+| core                                                                      |          1 |         35 |          1 |          8 |         44 |
+| internal                                                                  |          1 |         21 |          1 |          7 |         29 |
+| logger                                                                    |          1 |         29 |          4 |          6 |         39 |
+| parser                                                                    |          2 |        340 |         43 |         75 |        458 |
+| vm                                                                        |          5 |        602 |         99 |         91 |        792 |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                  | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/lucakruger/Documents/Projekte/lang/src/bytecodes/bytecode.ts       | TypeScript |         37 |          5 |          3 |         45 |
+| /Users/lucakruger/Documents/Projekte/lang/src/bytecodes/parser.ts         | TypeScript |         23 |          0 |          6 |         29 |
+| /Users/lucakruger/Documents/Projekte/lang/src/bytecodes/readable.ts       | TypeScript |         53 |          9 |         16 |         78 |
+| /Users/lucakruger/Documents/Projekte/lang/src/core/bytecode.ts            | TypeScript |         35 |          1 |          8 |         44 |
+| /Users/lucakruger/Documents/Projekte/lang/src/index.ts                    | TypeScript |         13 |          2 |          1 |         16 |
+| /Users/lucakruger/Documents/Projekte/lang/src/internal/stack.ts           | TypeScript |         21 |          1 |          7 |         29 |
+| /Users/lucakruger/Documents/Projekte/lang/src/logger/logger.ts            | TypeScript |         29 |          4 |          6 |         39 |
+| /Users/lucakruger/Documents/Projekte/lang/src/parser/ast.ts               | TypeScript |          9 |          0 |          2 |         11 |
+| /Users/lucakruger/Documents/Projekte/lang/src/parser/bytecodeGenerator.ts | TypeScript |        331 |         43 |         73 |        447 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/builtin.ts               | TypeScript |        177 |         24 |         42 |        243 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/builtinHelper.ts         | TypeScript |          9 |          0 |          1 |         10 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/process.ts               | TypeScript |        371 |         57 |         35 |        463 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/processManager.ts        | TypeScript |         27 |         10 |          8 |         45 |
+| /Users/lucakruger/Documents/Projekte/lang/src/vm/structs.ts               | TypeScript |         18 |          8 |          5 |         31 |
+| Total                                                                     |            |      1,153 |        164 |        213 |      1,530 |
++---------------------------------------------------------------------------+------------+------------+------------+------------+------------+

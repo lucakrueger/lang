@@ -1,0 +1,27 @@
+module Maths
+
+// Functions
+Sum -> j n => y  // j min, n max
+SumList -> ls => y   // ls list
+Product -> j n => y
+ProductList -> ls => y
+
+// Number spaces
+Real -> x => bool
+Natural -> x => bool
+Complex -> x => bool
+Imaginary -> x => bool
+
+// Complex Numbers
+Complex -> real imag => [:complex, real, imag]
+Real -> complex (head :complex) => complex[1]
+Imaginary -> complex (head :complex) => complex[2]
+
+// Sets
+Set -> ls => ((Maths.SumList: ls) = (Arr.len: ls))
+// Usuage: elem -> x => (Set: [(Real: x), (x < 100), (x = x**2)])
+
+// Number spaces
+Rule(min, max, stepSize)
+Natural -> / => (rule: 0, inifity, 1)
+Real -> / => (rule: -inifity, inifity, 0)
