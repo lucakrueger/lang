@@ -109,14 +109,14 @@ const Call = (args: any[], processManager: ProcessManager): (any | VMError) => {
 }
 
 // redefines result
-// takes: array, function(elem, index, array, result) -> array
+// takes: array, function(elem, index, array, result) -> value
 const ForEach = (args: any[], processManager: ProcessManager): (any | VMError) => {
     var err = CheckParameterCount('foreach', args.length, 2)
     if(err != undefined) {
         return err
     }
     
-    var result: any
+    var result: any = new Atom('none')
     var array: any[] = args[0]
     var fun: Atom = args[1]
     var funName: string = fun.getValue()
@@ -131,7 +131,7 @@ const ForEach = (args: any[], processManager: ProcessManager): (any | VMError) =
 }
 
 // redefines result
-// takes: array, function(elem, index, array, result), firstResult -> array
+// takes: array, function(elem, index, array, result), firstResult -> value
 const ForEachSpec = (args: any[], processManager: ProcessManager): (any | VMError) => {
     var err = CheckParameterCount('foreach', args.length, 3)
     if(err != undefined) {
@@ -249,6 +249,12 @@ const Identical = (args: any[], processManager: ProcessManager): (any | VMError)
         index++
     }
 
+    switch(result){
+        case true:
+            return new Atom('true')
+        case false:
+            return new Atom('false')
+    }
     return result
 }
 
