@@ -53,6 +53,9 @@ class ReadableBytecode extends bytecode_2.Bytecode {
     getImports() {
         return this.imports;
     }
+    importModules(preprocessor) {
+        return;
+    }
 }
 exports.ReadableBytecode = ReadableBytecode;
 function MapInstructions(data) {

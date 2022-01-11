@@ -1,4 +1,7 @@
 import { Bytecode, FunctionDescription } from "./bytecode";
+import { AST } from "../parser/ast";
+import { BytecodeGenerator } from "../parser/bytecodeGenerator";
+import { Preprocessor } from "./preprocessor";
 
 export class ParserBytecode extends Bytecode {
     
@@ -16,6 +19,10 @@ export class ParserBytecode extends Bytecode {
         this.descriptions.descriptions.push(value)
     }
 
+    public addDescriptions(values: FunctionDescription[]) {
+        this.descriptions.descriptions.push(...values)
+    }
+
     getDescriptions(): { descriptions: FunctionDescription[]; } {
         return this.descriptions
     }
@@ -24,6 +31,27 @@ export class ParserBytecode extends Bytecode {
     }
     getImports(): string[] {
         return this.imports
+    }
+
+    importModules(preprocessor: Preprocessor) {
+        /*
+            Get imports
+            Check if imports are already imported
+            Add their definitions to definitions
+                If they imported modules, add them to imported
+        */
+
+        for(var elem of this.imports) {
+            if(preprocessor.import(elem) == false) {
+                // not imported yet
+                var ast = new AST(elem)
+                var generator = new BytecodeGenerator(ast)
+                var bytecode = generator.generateBytecode()
+                preprocessor.descr.push(...bytecode.getDescriptions().descriptions)
+                bytecode.importModules(preprocessor)
+            }
+        }
+       
     }
 
 }

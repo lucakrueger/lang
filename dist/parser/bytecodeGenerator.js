@@ -337,6 +337,37 @@ class BytecodeGenerator {
                 }
                 break;
             case 'import':
+                /*
+                    Either array or name
+                    Name -> search in libs
+                    [Name, Name, ...] -> search in libs
+                    [Path, Name, Name, ...] -> search in path
+                */
+                if (expr.value[1].ident == 'array') {
+                    var arr = this.getArray(expr.value[1]);
+                    // format path
+                    var prefix = '';
+                    var start = 0;
+                    if (arr[0][0] == '.' || arr[0][0] == '/') {
+                        // path is first
+                        start = 1;
+                        var path = arr[0];
+                        prefix = path;
+                        if (path[path.length - 1] != '/') {
+                            prefix += '/';
+                        }
+                    }
+                    else {
+                        // standard path for libs
+                        prefix = './lib/';
+                    }
+                    for (var i = start; i < arr.length; i++) {
+                        this.imports.push(prefix + arr[i] + '.lang');
+                    }
+                }
+                else {
+                    this.imports.push('./lib/' + this.getValue(expr.value[1]) + '.lang');
+                }
                 break;
         }
     }
@@ -364,6 +395,19 @@ class BytecodeGenerator {
                 return `${expr.value.value}`;
         }
         return this.getValue(expr);
+    }
+    getArray(expr) {
+        var result = [];
+        var empty = (expr.value[0] == null);
+        if (empty) {
+            return [];
+        }
+        // not empty
+        result.push(this.getValue(expr.value[0]));
+        for (var child of expr.value[1][1]) {
+            result.push(this.getValue(child[2]));
+        }
+        return result;
     }
 }
 exports.BytecodeGenerator = BytecodeGenerator;

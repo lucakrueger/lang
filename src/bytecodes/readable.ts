@@ -2,6 +2,7 @@ import { Instruction, InstructionsMapper, Instruct } from "../core/bytecode";
 import * as fs from 'fs'
 import { json } from "stream/consumers";
 import { Bytecode, FunctionDescription } from "./bytecode";
+import { Preprocessor } from "./preprocessor";
 
 export class ReadableBytecode extends Bytecode{
 
@@ -40,6 +41,9 @@ export class ReadableBytecode extends Bytecode{
         return this.imports
     }
 
+    public importModules(preprocessor: Preprocessor) {
+        return
+    }
     
 }
 

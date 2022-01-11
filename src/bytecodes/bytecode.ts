@@ -1,7 +1,10 @@
+import { Preprocessor } from "./preprocessor"
+
 export abstract class Bytecode {
     abstract getDescriptions(): {descriptions: FunctionDescription[]}
     abstract getModule(): string
     abstract getImports(): string[]
+    abstract importModules(preprocessor: Preprocessor): any
     
     /**
      * Search for specific function by name

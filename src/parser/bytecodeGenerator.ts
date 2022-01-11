@@ -32,7 +32,7 @@ export class BytecodeGenerator {
 
     public convertIntermediate(funs: IntermediateFunction[]): ParserBytecode {
         var bytecode = new ParserBytecode(this.module, this.imports)
-
+        
         /*
             Group and sort all functions by name 
             Go over all functions -> create their own description
@@ -391,14 +391,43 @@ export class BytecodeGenerator {
 
     processDefinition(expr: any) {
         switch(this.getName(expr.value[0])) {
-            case 'module':
+            case 'module':  
                 var value = this.getName(expr.value[1])
                 if(value !== undefined) {
                     this.module = value
                 }
                 break
             case 'import':
-                break
+                /*
+                    Either array or name
+                    Name -> search in libs
+                    [Name, Name, ...] -> search in libs
+                    [Path, Name, Name, ...] -> search in path
+                */
+               if(expr.value[1].ident == 'array') {
+                    var arr = this.getArray(expr.value[1])
+                    // format path
+                    var prefix = ''
+                    var start = 0
+                    if(arr[0][0] == '.' || arr[0][0] == '/') {
+                        // path is first
+                        start = 1
+                        var path: string = arr[0]
+                        prefix = path
+                        if(path[path.length-1] != '/') {
+                            prefix += '/'
+                        }
+                    } else {
+                        // standard path for libs
+                        prefix = './lib/'
+                    }
+                    for(var i = start; i < arr.length; i++){
+                        this.imports.push(prefix+arr[i]+'.lang')
+                    }
+               } else {
+                   this.imports.push('./lib/'+this.getValue(expr.value[1])+'.lang')
+               }
+               break
         }
     }
 
@@ -431,6 +460,24 @@ export class BytecodeGenerator {
                 return `${expr.value.value}`
         }
         return this.getValue(expr)
+    }
+
+    getArray(expr: any): any[] {
+        var result: any[] = []
+
+        var empty = (expr.value[0] == null)
+        if(empty) {
+            return []
+        }
+
+        // not empty
+        result.push(this.getValue(expr.value[0]))
+
+        for(var child of expr.value[1][1]) {
+            result.push(this.getValue(child[2]))
+        }
+
+        return result
     }
 }
 
