@@ -34,7 +34,7 @@ const BuiltinPrint = (args: any[], processManager: ProcessManager): (any | VMErr
     // print value
     console.log(printedValue)
     // return :ok atom
-    return new Atom('ok')
+    return value
 }
 
 const ArrayNew = (args: any[], processManager: ProcessManager): (any | VMError) => {
