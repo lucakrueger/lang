@@ -5,7 +5,7 @@ A general purpose programming language to simplify the transition into functiona
 ## Getting Started
 
 1. Download and install the language
-2. Learn about the language in the wiki
+2. Learn about the language. [Wiki](https://github.com/lucakrueger/lang/wiki)
 3. Write your scripts
 
 ## Download and Install
