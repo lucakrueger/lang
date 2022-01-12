@@ -32,7 +32,7 @@ const BuiltinPrint = (args, processManager) => {
     // print value
     console.log(printedValue);
     // return :ok atom
-    return new structs_1.Atom('ok');
+    return value;
 };
 const ArrayNew = (args, processManager) => {
     var err = (0, builtinHelper_1.CheckParameterCount)('array_new', args.length, 0);
@@ -91,13 +91,13 @@ const Call = (args, processManager) => {
     return processManager.executeFunction(args[0], args[1]);
 };
 // redefines result
-// takes: array, function(elem, index, array, result) -> array
+// takes: array, function(elem, index, array, result) -> value
 const ForEach = (args, processManager) => {
     var err = (0, builtinHelper_1.CheckParameterCount)('foreach', args.length, 2);
     if (err != undefined) {
         return err;
     }
-    var result;
+    var result = new structs_1.Atom('none');
     var array = args[0];
     var fun = args[1];
     var funName = fun.getValue();
@@ -109,7 +109,7 @@ const ForEach = (args, processManager) => {
     return result;
 };
 // redefines result
-// takes: array, function(elem, index, array, result), firstResult -> array
+// takes: array, function(elem, index, array, result), firstResult -> value
 const ForEachSpec = (args, processManager) => {
     var err = (0, builtinHelper_1.CheckParameterCount)('foreach', args.length, 3);
     if (err != undefined) {
@@ -207,6 +207,12 @@ const Identical = (args, processManager) => {
         }
         last = elem;
         index++;
+    }
+    switch (result) {
+        case true:
+            return new structs_1.Atom('true');
+        case false:
+            return new structs_1.Atom('false');
     }
     return result;
 };
