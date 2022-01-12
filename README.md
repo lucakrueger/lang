@@ -1,4 +1,4 @@
-# Lang
+# Leibniz
 
 A general purpose programming language to simplify the transition into functional programming.
 
@@ -10,7 +10,7 @@ A general purpose programming language to simplify the transition into functiona
 
 ## Download and Install
 
-Due to the language being in an early stage of developement, there is no distribution available.
+Due to the language being in an early stage of developement, there is no distribution available at his point.
 
 ### Building
 
