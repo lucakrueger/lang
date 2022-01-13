@@ -6,3 +6,6 @@ Search -> list target => (foreach: ([target] ++ list), :search)
 search -> elem index array result => result
 search -> elem index (> 0) array result (= :none) => (if: (elem = (Head: array)), (index - 1), :none)
 search -> elem index (= 0) array result => :none
+
+Length -> ls => (len: ls)
+Length -> ls (= []) => 0
