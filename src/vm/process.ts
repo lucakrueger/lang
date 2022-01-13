@@ -236,7 +236,7 @@ export class VMProcess extends Process {
         return this.stack.pop()
     }
 
-    private convertLiteral(value: string): string | number | boolean | Atom {
+    private convertLiteral(value: any): string | number | boolean | Atom | any[] | VMDatatype {
         // check for atom
         /*if(value.indexOf(':')) {
             return new Atom(value.replace(':', ''))
@@ -246,6 +246,17 @@ export class VMProcess extends Process {
         /*if(value == 'true' || value == 'false') {
             return Boolean(value)
         }*/
+
+        if(value instanceof VMDatatype) {
+            return value
+        }
+
+        // check if is array
+        if(Array.isArray(value)) {
+            return value
+        }
+
+        value = String(value)
 
         // check for number
         if(isNaN(Number(value)) == false) {
@@ -324,7 +335,7 @@ export class VMProcess extends Process {
         })
 
         if(matches.length == 0) {
-            console.log(this.description.definitions)
+            //console.log(this.description.definitions)
             return ThrowError(NativeErrors.INTERNAL, `No matching implementations for '${this.description.name}'. Datatype rules not matching`)
         }
 
@@ -369,7 +380,7 @@ export class VMProcess extends Process {
         return undefined
     }
 
-    private evaluateArgument(arg: any, rule: string, value: string): boolean {
+    private evaluateArgument(arg: any, rule: string, value: any): boolean {
         if(rule == '') {
             return true
         }
@@ -386,6 +397,10 @@ export class VMProcess extends Process {
                 var converted: VMDatatype | any = this.convertLiteral(value)
                 if(arg instanceof VMDatatype && converted instanceof VMDatatype) {
                     return (arg.getValue() == converted.getValue())
+                } else if(Array.isArray(arg) && Array.isArray(converted)) {
+                    // both arrays
+                    //console.log(arg, converted)
+                    return this.arraysEqual(arg, converted)
                 }
                 return (arg == value)
             case '/=':
@@ -477,6 +492,31 @@ export class VMProcess extends Process {
             index++
         }
     }
+
+    private arraysEqual(a: any[], b: any[]) {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length !== b.length) return false;
+      
+        // If you don't care about the order of the elements inside
+        // the array, you should sort both arrays here.
+        // Please note that calling sort on an array will modify that array.
+        // you might want to clone your array first.
+
+        for (var i = 0; i < a.length; ++i) {
+            var alit = this.convertLiteral(a[i])
+            var blit = this.convertLiteral(b[i])
+            if(alit instanceof VMDatatype) {
+                alit = alit.getValue()
+            }
+            if(blit instanceof VMDatatype) {
+                blit = blit.getValue()
+            }
+          //if (this.convertLiteral(a[i]) != this.convertLiteral(b[i])) return false;
+            if(alit != blit) return false
+        }
+        return true;
+      }
 }
 
 /*
@@ -490,4 +530,5 @@ export class BuiltinProcess extends Process {
     public start(): any {
         return this.functionImplementation(this.args, this.processManager)
     }
-}
+} 
+  

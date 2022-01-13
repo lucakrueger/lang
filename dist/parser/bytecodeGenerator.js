@@ -381,6 +381,9 @@ class BytecodeGenerator {
         if (expr.ident == 'atom') {
             return `:${expr.value.value}`;
         }
+        else if (expr.ident == 'array') {
+            return this.getArray(expr);
+        }
         return `${expr.value}`;
     }
     getName(expr) {

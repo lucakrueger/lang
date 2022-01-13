@@ -1,0 +1,5 @@
+main -> args => (test: ["Hello", 1, :ok])
+
+test -> val => (val ++ " Err")
+test -> val (= ["Hello", 1, :test]) => (val ++ " ???")
+test -> val (= ["World"]) => (val ++ " !!!")

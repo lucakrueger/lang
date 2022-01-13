@@ -3,7 +3,6 @@ start
 
 expr
   = Definition
-  / FunctionTypeDefinition
   / FunctionDefinition
   / comment
 
@@ -33,7 +32,7 @@ FunctionTypeDefinition
   = TypeDef: (Name _ "->" _ (_ Type " ")* _ "=>" _ Type _) {return {ident: 'function_type', name: TypeDef[0], types: TypeDef[4]}}
 
 ParameterRule
-  = Rule: ("(" _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "type" / "head" / "tail" / "url") _ (Name / atom / string / Number) ")") {return {ident: 'rule', rule: Rule[2], value: Rule[4]}}
+  = Rule: ("(" _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "type" / "head" / "tail" / "url") _ (Name / atom / string / Number / Array) ")") {return {ident: 'rule', rule: Rule[2], value: Rule[4]}}
 
 Name
   = text: (([a-z] / [A-Z] / [/.'])+) {return {ident: 'name', value: text.join("")}}

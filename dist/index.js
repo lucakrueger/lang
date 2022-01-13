@@ -10,7 +10,6 @@ var bytecode = generator.generateBytecode();
 var preprocessor = new preprocessor_1.Preprocessor();
 bytecode.importModules(preprocessor);
 bytecode.addDescriptions(preprocessor.descr);
-//console.log(bytecode.getDescriptions())
 //fs.writeFileSync('./tests/dump.json', JSON.stringify(bytecode.getDescriptions(), null, 4))
 //var bytecode = new ReadableBytecode('tests/dump.json')
 var processManager = new processManager_1.ProcessManager(bytecode);

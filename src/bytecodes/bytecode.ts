@@ -43,6 +43,6 @@ export interface FunctionArgumentRule {
         index: number, // argument index
         name: string, // argument name
         rule: string,  // value rule -> <,>,<=,>=,=,/=,less,greater,less-than,greater-than,equals,unequal
-        value: string,
+        value: any,
     }[]
 }

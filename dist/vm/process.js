@@ -247,6 +247,14 @@ class VMProcess extends Process {
         /*if(value == 'true' || value == 'false') {
             return Boolean(value)
         }*/
+        if (value instanceof structs_1.VMDatatype) {
+            return value;
+        }
+        // check if is array
+        if (Array.isArray(value)) {
+            return value;
+        }
+        value = String(value);
         // check for number
         if (isNaN(Number(value)) == false) {
             return Number(value);
@@ -314,7 +322,7 @@ class VMProcess extends Process {
             }
         });
         if (matches.length == 0) {
-            console.log(this.description.definitions);
+            //console.log(this.description.definitions)
             return (0, logger_1.ThrowError)(logger_1.NativeErrors.INTERNAL, `No matching implementations for '${this.description.name}'. Datatype rules not matching`);
         }
         // step 3: evaluate rules
@@ -370,6 +378,11 @@ class VMProcess extends Process {
                 var converted = this.convertLiteral(value);
                 if (arg instanceof structs_1.VMDatatype && converted instanceof structs_1.VMDatatype) {
                     return (arg.getValue() == converted.getValue());
+                }
+                else if (Array.isArray(arg) && Array.isArray(converted)) {
+                    // both arrays
+                    //console.log(arg, converted)
+                    return this.arraysEqual(arg, converted);
                 }
                 return (arg == value);
             case '/=':
@@ -454,6 +467,32 @@ class VMProcess extends Process {
             this.addLocal(name, args[index]);
             index++;
         }
+    }
+    arraysEqual(a, b) {
+        if (a === b)
+            return true;
+        if (a == null || b == null)
+            return false;
+        if (a.length !== b.length)
+            return false;
+        // If you don't care about the order of the elements inside
+        // the array, you should sort both arrays here.
+        // Please note that calling sort on an array will modify that array.
+        // you might want to clone your array first.
+        for (var i = 0; i < a.length; ++i) {
+            var alit = this.convertLiteral(a[i]);
+            var blit = this.convertLiteral(b[i]);
+            if (alit instanceof structs_1.VMDatatype) {
+                alit = alit.getValue();
+            }
+            if (blit instanceof structs_1.VMDatatype) {
+                blit = blit.getValue();
+            }
+            //if (this.convertLiteral(a[i]) != this.convertLiteral(b[i])) return false;
+            if (alit != blit)
+                return false;
+        }
+        return true;
     }
 }
 exports.VMProcess = VMProcess;

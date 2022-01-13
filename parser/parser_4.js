@@ -493,9 +493,12 @@ module.exports = /*
 
       s0 = peg$parseDefinition();
       if (s0 === peg$FAILED) {
-        s0 = peg$parseFunctionDefinition();
+        s0 = peg$parseFunctionTypeDefinition();
         if (s0 === peg$FAILED) {
-          s0 = peg$parsecomment();
+          s0 = peg$parseFunctionDefinition();
+          if (s0 === peg$FAILED) {
+            s0 = peg$parsecomment();
+          }
         }
       }
 
@@ -1456,9 +1459,6 @@ module.exports = /*
                   s6 = peg$parsestring();
                   if (s6 === peg$FAILED) {
                     s6 = peg$parseNumber();
-                    if (s6 === peg$FAILED) {
-                      s6 = peg$parseArray();
-                    }
                   }
                 }
               }

@@ -440,9 +440,11 @@ export class BytecodeGenerator {
         return {rule: expr.rule, value: this.getValue(expr.value)}
     }
 
-    getValue(expr: any): string {
+    getValue(expr: any): any {
         if(expr.ident == 'atom') {
             return `:${expr.value.value}`
+        } else if(expr.ident == 'array') {
+            return this.getArray(expr)
         }
         return `${expr.value}`
     }
@@ -490,5 +492,5 @@ export interface IntermediateFunction {
 
 export interface IntermediateRule {
     rule: string,
-    value: string
+    value: any
 }
