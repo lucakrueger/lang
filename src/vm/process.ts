@@ -386,12 +386,40 @@ export class VMProcess extends Process {
         }
         switch(rule) {
             case '<':
+                if(Array.isArray(arg) && Array.isArray(value)) {
+                    // both arrays
+                    return (arg.length < value.length)
+                } else if(Array.isArray(arg) && !Array.isArray(value)) {
+                    // only arg is array
+                    return (arg.length < value)
+                }
                 return (Number(arg) < Number(value))
             case '>':
+                if(Array.isArray(arg) && Array.isArray(value)) {
+                    // both arrays
+                    return (arg.length > value.length)
+                } else if(Array.isArray(arg) && !Array.isArray(value)) {
+                    // only arg is array
+                    return (arg.length > value)
+                }
                 return (Number(arg) > Number(value))
             case '<=':
+                if(Array.isArray(arg) && Array.isArray(value)) {
+                    // both arrays
+                    return (arg.length <= value.length)
+                } else if(Array.isArray(arg) && !Array.isArray(value)) {
+                    // only arg is array
+                    return (arg.length <= value)
+                }
                 return (Number(arg) <= Number(value))
             case '>=':
+                if(Array.isArray(arg) && Array.isArray(value)) {
+                    // both arrays
+                    return (arg.length >= value.length)
+                } else if(Array.isArray(arg) && !Array.isArray(value)) {
+                    // only arg is array
+                    return (arg.length >= value)
+                }
                 return (Number(arg) >= Number(value))
             case '=':
                 var converted: VMDatatype | any = this.convertLiteral(value)
@@ -401,6 +429,9 @@ export class VMProcess extends Process {
                     // both arrays
                     //console.log(arg, converted)
                     return this.arraysEqual(arg, converted)
+                } else if(Array.isArray(arg) && typeof converted == 'number') {
+                    // arg is array, value is number
+                    return (arg.length == converted)
                 }
                 return (arg == value)
             case '/=':

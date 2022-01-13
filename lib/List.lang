@@ -1,5 +1,6 @@
 /* List Module */
-Head -> ls => (if: ((len: ls) > 0), ls[0], :none)
+Head -> ls => ls[0]
+Head -> ls (= []) => :none
 Tail -> ls => (if: ((len: ls) > 1), (splice: ls, 1, 15))
 
 Search -> list target => (foreach: ([target] ++ list), :search)
