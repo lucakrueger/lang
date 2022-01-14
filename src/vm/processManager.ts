@@ -7,13 +7,13 @@ import { BuiltinProcess, Process, VMProcess } from "./process";
 export class ProcessManager {
     constructor(public bytecode: Bytecode) {}
 
-    public start() {
+    public start(fun: string) {
         /*
             Execute main function
                 Initialize main process
             Print returning value
         */
-       var returning = this.executeFunction('main', ['args'])
+       var returning = this.executeFunction(fun, [''])
        console.log(returning)
     }
 

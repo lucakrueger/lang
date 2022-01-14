@@ -8,13 +8,13 @@ class ProcessManager {
     constructor(bytecode) {
         this.bytecode = bytecode;
     }
-    start() {
+    start(fun) {
         /*
             Execute main function
                 Initialize main process
             Print returning value
         */
-        var returning = this.executeFunction('main', ['args']);
+        var returning = this.executeFunction(fun, ['']);
         console.log(returning);
     }
     executeFunction(name, args) {
