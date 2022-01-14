@@ -1,0 +1,109 @@
+start
+  = (expr _ comment? _)*
+
+expr
+  = Definition
+  / FunctionDefinition
+  / comment
+
+Expression
+  = Call
+  / Operation
+  / Set
+  / ArrayIndex
+  / Name
+  / Array
+  / atom
+  / string
+  / Number
+
+Definition
+  = Def: (Name ":" _ (Name / Array)) {return {ident: 'definition', value: [Def[0], Def[3]]}}
+
+Operation
+  = Operation: ("(" _ Expression _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "++" / "--" / "**" / "/" / "*" / "%" / "<<" / ">>" / "#" / "root" / "+" / "-" / "$" / "&" / "?" / "!" / "e" / "\\") _ Expression ")") {return {ident: 'operation', op: Operation[4], value: [Operation[2], Operation[6]]}}
+  / Operation: ("(" _ Expression _ (("<=" / ">=" / "/=" / "<" / ">" / "=" / "++" / "--" / "**" / "/" / "*" / "%" / "<<" / ">>" / "#" / "root" / "+" / "-" / "$" / "&" / "?" / "!" / "e" / "\\") _ Expression _)+ ")") {return {ident: 'operation_chained', values: [Operation[2], Operation[4]]}}
+
+Call
+  = Call: ("(" Name ":" _ Expression? _ ("," _ Expression)* _ ")") {return {ident: 'call', name: Call[1], args: [[["", "", Call[4]], Call[6]]]}}
+  / Call: ("(" Name ")") {return {ident: 'call_empty', name: Call[1], args: []}}
+
+FunctionDefinition
+  = Def: (Name _ "->" _ (_ Name _ ParameterRule? " "?)* _ "=>" _ Expression _) {return {ident: 'function_def', name: Def[0], args: Def[4], result: Def[8]}}
+  / Def: (Name _ "=>" _ Expression _) {return {ident: 'function_def_empty', name: Def[0], args: [], result: Def[4]}}
+  / Def: (Name _ "->" _ (_ Name _ ParameterRule? " "?)* _ "|" _ Name _ "=>" _ Expression _ ("=>" _ Expression _)+) {return {ident: 'function_def_chained', name: Def[0], args: Def[4], result: Def[12], following: Def[14]}}
+  / Def: (Name _ "|" _ Name _ "=>" _ Expression _ ("=>" _ Expression _)+) {return {ident: 'function_def_empty_chained', name: Def[0], args: [], result: Def[8], following: Def[10]}}
+
+FunctionTypeDefinition
+  = TypeDef: (Name _ "->" _ (_ Type " ")* _ "=>" _ Type _) {return {ident: 'function_type', name: TypeDef[0], types: TypeDef[4]}}
+
+ParameterRule
+  = Rule: ("(" _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "type" / "head" / "tail" / "url") _ (Name / atom / string / Number / Array) ")") {return {ident: 'rule', rule: Rule[2], value: Rule[4]}}
+
+Set
+  = Set: ("{" _ (Name _)+ _ "|" _ (","?_ Name _ ("<-" / "=>") _ Expression _)* _ (","? _ Operation)+ _ "}") {return {ident: 'set', args: Set[2], ops: Set[6], rules: Set[8]}}
+
+Name
+  = text: (([a-z] / [A-Z] / [/.'])+) {return {ident: 'name', value: text.join("")}}
+
+Type
+  = Type: ([a-z] / [A-Z]) {return {ident: 'type', value: Type[0]}}
+
+Words
+  = QuotedString
+  / Text
+
+QuotedString
+  = "'" quote: NotQuote* "'" {return quote.join("")}
+
+NotQuote
+  = !'"' char: . {return char}
+
+Text
+  = text: NotQuote+ {return text.join("")}
+
+atom "atom"
+  = Atom: (":" Name) {return {ident: 'atom', value: Atom[1]}}
+
+ArrayIndex
+  = ArrIndex: (Name "[" Expression "]") {return {ident: 'array_index', array: ArrIndex[0], value: ArrIndex[2]}}
+
+Array
+  = Array: ("[" (Expression)? _ ("," _ (Expression))* "]") {return {ident: 'array', value: [Array[1], Array.slice(2, Array.length-1)]}}
+
+string "string"
+  = quotation_mark chars:char* quotation_mark { return {ident: 'string', value: chars.join("")} }
+
+char
+  = unescaped
+  / escape
+    sequence:(
+        "'"
+      / "\\"
+      / "/"
+      / "b" { return "\b"; }
+      / "f" { return "\f"; }
+      / "n" { return "\n"; }
+      / "r" { return "\r"; }
+      / "t" { return "\t"; }
+    )
+    { return sequence; }
+
+escape         = "\\"
+quotation_mark = '"'
+unescaped      = [\x20-\x21\x23-\x5B\x5D-\u10FFFF]
+
+Number "number"
+  = left:[0-9]+ "." right:[0-9]+ { return {ident: 'number', value: parseFloat(left.join("") + "." +   right.join(""))}}
+	/ left:[0-9]+ {return {ident: 'number', value: parseFloat(left.join(""))}}
+  / "-" left:[0-9]+ "." right:[0-9]+ { return {ident: 'number', value: -parseFloat(left.join("") + "." +   right.join(""))}}
+	/ "-" left:[0-9]+ {return {ident: 'number', value: -parseFloat(left.join(""))}}
+
+Integer "integer"
+  = _ [0-9]+ { return parseInt(text(), 10); }
+  
+comment
+ = Comment: ("/*" (!"*/" .)* "*/") {return {ident: 'comment', value: Comment.join("")}}
+
+_ "whitespace"
+  = [ \t\n\r]*
