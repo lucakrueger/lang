@@ -477,9 +477,7 @@ class BytecodeGenerator {
         };
         // add helperfun and helperfun' to helpers
         this.helperFunctions.push(helperfun);
-        if (transferred.length != 0) {
-            this.helperFunctions.push(helperfun2);
-        }
+        this.helperFunctions.push(helperfun2);
         return lines;
     }
     handleCall(expr) {

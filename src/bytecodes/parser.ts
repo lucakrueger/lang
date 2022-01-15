@@ -23,6 +23,22 @@ export class ParserBytecode extends Bytecode {
         this.descriptions.descriptions.push(...values)
     }
 
+    public print(name: string) {
+        for(var elem of this.descriptions.descriptions) {
+            if(elem.name == name) {
+                console.log(name)
+                for(var e of elem.implementations) {
+                    console.log(e.index)
+                    for(var line of e.bytecode) {
+                        console.log(line)
+                    }
+                    console.log('')
+                }
+                console.log('')
+            }
+        }
+    }
+
     getDescriptions(): { descriptions: FunctionDescription[]; } {
         return this.descriptions
     }
