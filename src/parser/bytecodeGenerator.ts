@@ -3,6 +3,7 @@ import { Bytecode, FunctionArgumentRule, FunctionDescription } from '../bytecode
 import { ReadableBytecode } from "../bytecodes/readable";
 import { NativeErrors, ThrowError } from "../logger/logger";
 import { ParserBytecode } from "../bytecodes/parser";
+import { makeid } from "../vm/builtinHelper";
 const groupBy = require('group-by')
 
 export class BytecodeGenerator {
@@ -451,7 +452,7 @@ export class BytecodeGenerator {
         lines.push('operation ++')
 
         // generate helper function name
-        var helperid: string = this.makeid(8)
+        var helperid: string = makeid(8)
 
         // push helper function name
         lines.push(`pushl :${helperid}`)
@@ -822,16 +823,6 @@ export class BytecodeGenerator {
         return result
     }
 
-    makeid(length: number) {
-        var result           = '';
-        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
-          result += characters.charAt(Math.floor(Math.random() * 
-     charactersLength));
-       }
-       return result;
-    }
 }
 
 export interface IntermediateFunction {

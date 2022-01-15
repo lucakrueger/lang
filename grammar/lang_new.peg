@@ -22,8 +22,8 @@ Definition
   = Def: (Name ":" _ (Name / Array)) {return {ident: 'definition', value: [Def[0], Def[3]]}}
 
 Operation
-  = Operation: ("(" _ Expression _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "++" / "--" / "**" / "/" / "*" / "%" / "<<" / ">>" / "#" / "root" / "+" / "-" / "$" / "&" / "?" / "!" / "e" / "\\") _ Expression ")") {return {ident: 'operation', op: Operation[4], value: [Operation[2], Operation[6]]}}
-  / Operation: ("(" _ Expression _ (("<=" / ">=" / "/=" / "<" / ">" / "=" / "++" / "--" / "**" / "/" / "*" / "%" / "<<" / ">>" / "#" / "root" / "+" / "-" / "$" / "&" / "?" / "!" / "e" / "\\") _ Expression _)+ ")") {return {ident: 'operation_chained', values: [Operation[2], Operation[4]]}}
+  = Operation: ("(" _ Expression _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "++" / "--" / "**" / "/" / "*" / "%" / "<<" / ">>" / "#" / "root" / "+" / "-" / "$" / "&" / "?" / "!" / "e" / "\\" / "≈" / "±") _ Expression ")") {return {ident: 'operation', op: Operation[4], value: [Operation[2], Operation[6]]}}
+  / Operation: ("(" _ Expression _ (("<=" / ">=" / "/=" / "<" / ">" / "=" / "++" / "--" / "**" / "/" / "*" / "%" / "<<" / ">>" / "#" / "root" / "+" / "-" / "$" / "&" / "?" / "!" / "e" / "\\" / "≈" / "±") _ Expression _)+ ")") {return {ident: 'operation_chained', values: [Operation[2], Operation[4]]}}
 
 SpecialOperation
   = Operation: ("("_ (ArraySplit / Name) _ ("=>") _ Expression _ ")") {return {ident: "special_op", value: Operation[6], result: Operation[2], op: Operation[4]}}

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BytecodeGenerator = void 0;
 const logger_1 = require("../logger/logger");
 const parser_1 = require("../bytecodes/parser");
+const builtinHelper_1 = require("../vm/builtinHelper");
 const groupBy = require('group-by');
 class BytecodeGenerator {
     /*
@@ -388,7 +389,7 @@ class BytecodeGenerator {
         //lines.push('call array_push 2')
         lines.push('operation ++');
         // generate helper function name
-        var helperid = this.makeid(8);
+        var helperid = (0, builtinHelper_1.makeid)(8);
         // push helper function name
         lines.push(`pushl :${helperid}`);
         lines.push(`call foreachls 2`);
@@ -705,16 +706,6 @@ class BytecodeGenerator {
         result.push(this.getValue(expr.value[0]));
         for (var child of expr.value[1][1]) {
             result.push(this.getValue(child[2]));
-        }
-        return result;
-    }
-    makeid(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() *
-                charactersLength));
         }
         return result;
     }

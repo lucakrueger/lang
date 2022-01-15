@@ -1,5 +1,5 @@
 import { NativeErrors, ThrowError, VMError } from "../logger/logger"
-import { CheckParameterCount } from "./builtinHelper"
+import { CheckParameterCount, makeid } from "./builtinHelper"
 import { ProcessManager } from "./processManager"
 import { Atom, VMDatatype } from "./structs"
 
@@ -331,6 +331,26 @@ const route = (args: any[], processManager: ProcessManager): (any | VMError) => 
     return processManager.executeFunction(f.getValue(), [url, url.split('/')])
 }
 
+// takes: function (args) array -> array
+const Performance = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('name', args.length, 2)
+    if(err != undefined) {
+        return err
+    }
+
+    var fun: Atom = args[0]
+    var arr: any[] = args[1]
+
+    var id = fun.getValue()
+    console.time(id)
+
+    processManager.executeFunction(fun.getValue(), arr)
+
+    console.timeEnd(id)
+
+    return []
+}
+
 export const Builtin = new Map<string, (args: any[], processManager: ProcessManager) => any>([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
@@ -346,5 +366,6 @@ export const Builtin = new Map<string, (args: any[], processManager: ProcessMana
     ['range', Range],
     ['len', Len],
     ['identical', Identical],
-    ['route', route]
+    ['route', route],
+    ['performance', Performance]
 ])

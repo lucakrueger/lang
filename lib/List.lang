@@ -17,6 +17,8 @@ searchleg -> elem index array result => result
 searchleg -> elem index (> 0) array result (= :none) => (if: (elem = (Head: array)), (index - 1), :none)
 searchleg -> elem index (= 0) array result => :none
 
+for -> ls start end f => { x fun | x <- (splice: ls, (start - 1), end), fun => f, (:true = :true) | (call: fun, [x]) }
+
 Length -> ls => (len: ls)
 Length -> ls (= []) => 0
 

@@ -210,6 +210,18 @@ class VMProcess extends Process {
                         case '%':
                             this.stack.push(a % b);
                             break;
+                        case '≈':
+                            const tolerance = 0.01;
+                            if ((a <= (b + tolerance)) && (a >= (b - tolerance))) {
+                                this.stack.push(new structs_1.Atom('true'));
+                            }
+                            else {
+                                this.stack.push(new structs_1.Atom('false'));
+                            }
+                            break;
+                        case '±':
+                            this.stack.push([a + b, a - b]);
+                            break;
                         default:
                             (0, logger_1.ThrowError)(logger_1.NativeErrors.INTERNAL, `Unknown operator ${args[0]}`);
                             break;

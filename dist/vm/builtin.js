@@ -273,6 +273,20 @@ const route = (args, processManager) => {
     var f = args[1];
     return processManager.executeFunction(f.getValue(), [url, url.split('/')]);
 };
+// takes: function (args) array -> array
+const Performance = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 2);
+    if (err != undefined) {
+        return err;
+    }
+    var fun = args[0];
+    var arr = args[1];
+    var id = fun.getValue();
+    console.time(id);
+    processManager.executeFunction(fun.getValue(), arr);
+    console.timeEnd(id);
+    return [];
+};
 exports.Builtin = new Map([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
@@ -288,5 +302,6 @@ exports.Builtin = new Map([
     ['range', Range],
     ['len', Len],
     ['identical', Identical],
-    ['route', route]
+    ['route', route],
+    ['performance', Performance]
 ]);

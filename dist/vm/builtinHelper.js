@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckParameterCount = void 0;
+exports.makeid = exports.CheckParameterCount = void 0;
 const logger_1 = require("../logger/logger");
 function CheckParameterCount(functionName, paramCount, requiredCount) {
     if (paramCount > requiredCount) { // check for too many args
@@ -12,3 +12,14 @@ function CheckParameterCount(functionName, paramCount, requiredCount) {
     return undefined; // no error
 }
 exports.CheckParameterCount = CheckParameterCount;
+function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
+}
+exports.makeid = makeid;
