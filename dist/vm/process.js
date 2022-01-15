@@ -207,6 +207,12 @@ class VMProcess extends Process {
                         case 'root':
                             this.stack.push(Math.pow(a, 1 / b));
                             break;
+                        case '%':
+                            this.stack.push(a % b);
+                            break;
+                        default:
+                            (0, logger_1.ThrowError)(logger_1.NativeErrors.INTERNAL, `Unknown operator ${args[0]}`);
+                            break;
                     }
                     break;
                 case bytecode_1.Instruction.ADD:

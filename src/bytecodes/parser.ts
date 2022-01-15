@@ -23,6 +23,10 @@ export class ParserBytecode extends Bytecode {
         this.descriptions.descriptions.push(...values)
     }
 
+    public addImports(values: string[]) {
+        this.imports.push(...values)
+    }
+
     public print(name: string) {
         for(var elem of this.descriptions.descriptions) {
             if(elem.name == name) {

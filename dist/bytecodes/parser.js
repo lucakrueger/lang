@@ -19,6 +19,9 @@ class ParserBytecode extends bytecode_1.Bytecode {
     addDescriptions(values) {
         this.descriptions.descriptions.push(...values);
     }
+    addImports(values) {
+        this.imports.push(...values);
+    }
     print(name) {
         for (var elem of this.descriptions.descriptions) {
             if (elem.name == name) {

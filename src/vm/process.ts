@@ -201,6 +201,12 @@ export class VMProcess extends Process {
                         case 'root':
                             this.stack.push(Math.pow(a, 1/b))
                             break
+                        case '%':
+                            this.stack.push(a % b)
+                            break
+                        default:
+                            ThrowError(NativeErrors.INTERNAL, `Unknown operator ${args[0]}`)
+                            break
                     }
                     break
                 case Instruction.ADD:
