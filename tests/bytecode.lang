@@ -1,13 +1,22 @@
-label fib0
-push num
-pushl 1
-subtract
-call fib
-push num
-pushl 2
-subtract
-call fib
-add
+{x y | x <- ls, y => args, (x % 2 = 0), (x > 0)}
 
-label fib1
-push num
+same as
+(foreachls: ([args] ++ ls), :helper)
+helper -> elem index list result => (if: (identical: [:true, (x % 2 = 0), (x < 10)]), x)
+helper -> elem index (> 1) list result => :none
+
+x <- ls compiles to x => elem
+y => args compiles to y => (Head: list)[0]
+...
+
+label helper
+local x
+push elem
+pull x
+local y
+push list
+call Head
+item 0
+pull y
+
+push

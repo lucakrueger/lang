@@ -60,6 +60,10 @@ const ArrayGet = (args, processManager) => {
     }
     var arr = args[0];
     var index = Number(args[1]);
+    if (!Array.isArray(arr)) { // check if is array, if not, return the value
+        return arr;
+    }
+    //console.log(arr[index])
     return arr[index];
 };
 // takes: array, start, end -> array
@@ -74,13 +78,51 @@ const ArraySplice = (args, processManager) => {
     var arr = args[0];
     var start = args[1];
     var end = args[2];
+    if (!Array.isArray(arr)) { // check if it is array
+        // not an array
+        return arr;
+    }
     if (end >= arr.length) {
         end = arr.length;
     }
     else if (end == -1) {
         end = arr.length;
     }
-    return arr.splice(start, end - start);
+    //return arr.splice(start, end - start)
+    return arr.slice(start, end);
+};
+// takes: array -> array
+const ArrayClean = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('array_clean', args.length, 1);
+    if (err != undefined) {
+        return err;
+    }
+    var arr = args[0];
+    if (!Array.isArray(arr)) {
+        return arr;
+    }
+    if (arr.length == 1) {
+        return arr[0];
+    }
+    return arr;
+};
+// takes: array -> array
+const ArrayShuffle = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('shuffle', args.length, 1);
+    if (err != undefined) {
+        return err;
+    }
+    var arr = args[0];
+    if (!Array.isArray(arr)) {
+        return arr;
+    }
+    for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    return arr;
 };
 // takes: function, array -> any
 const Call = (args, processManager) => {
@@ -139,7 +181,11 @@ const ForEachLs = (args, processManager) => {
     var funName = fun.getValue();
     var index = 0;
     for (var elem of array) {
-        result.push(processManager.executeFunction(funName, [elem, index, array]));
+        //result.push(processManager.executeFunction(funName, [elem, index, array]))
+        var res = processManager.executeFunction(funName, [elem, index, array, result]);
+        if ((res instanceof structs_1.Atom && res.getValue() == 'none') == false) {
+            result.push(res);
+        }
         index++;
     }
     return result;
@@ -175,6 +221,7 @@ const Len = (args, processManager) => {
     return arr.length;
 };
 // takes: array -> boolean
+// also: by doing (:true ++ array), you can check if all elements are equal to this specific value
 const Identical = (args, processManager) => {
     var err = (0, builtinHelper_1.CheckParameterCount)('identical', args.length, 1);
     if (err != undefined) {
@@ -231,7 +278,9 @@ exports.Builtin = new Map([
     ['array_new', ArrayNew],
     ['array_push', ArrayPush],
     ['array_get', ArrayGet],
+    ['array_clean', ArrayClean],
     ['splice', ArraySplice],
+    ['shuffle', ArrayShuffle],
     ['call', Call],
     ['foreach', ForEach],
     ['foreachls', ForEachLs],

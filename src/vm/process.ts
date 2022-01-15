@@ -94,7 +94,14 @@ export class VMProcess extends Process {
                             this.stack.push(new Atom(a >= b))
                             break
                         case '/=':
-                            this.stack.push(new Atom(a != b))
+                            //this.stack.push(new Atom(a != b))
+                            if(a instanceof VMDatatype && b instanceof VMDatatype) {
+                                this.stack.push(new Atom(a.getValue() != b.getValue()))
+                            } else if(Array.isArray(a) && Array.isArray(b)) {
+                                this.stack.push(new Atom(!this.arraysEqual(a, b)))
+                            } else {
+                                this.stack.push(new Atom(a != b))
+                            }
                             break
                         case '<':
                             this.stack.push(new Atom(a < b))
@@ -103,7 +110,14 @@ export class VMProcess extends Process {
                             this.stack.push(new Atom(a > b))
                             break
                         case '=':
-                            this.stack.push(new Atom(a == b))
+                            //this.stack.push(new Atom(a == b))
+                            if(a instanceof VMDatatype && b instanceof VMDatatype) {
+                                this.stack.push(new Atom(a.getValue() == b.getValue()))
+                            } else if(Array.isArray(a) && Array.isArray(b)) {
+                                this.stack.push(new Atom(this.arraysEqual(a, b)))
+                            } else {
+                                this.stack.push(new Atom(a == b))
+                            }
                             break
                         case 'e':
                             if(Array.isArray(b) && !Array.isArray(a)) {

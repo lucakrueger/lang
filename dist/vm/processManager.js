@@ -8,13 +8,13 @@ class ProcessManager {
     constructor(bytecode) {
         this.bytecode = bytecode;
     }
-    start(fun) {
+    start(fun, args) {
         /*
             Execute main function
                 Initialize main process
             Print returning value
         */
-        var returning = this.executeFunction(fun, ['']);
+        var returning = this.executeFunction(fun, args);
         console.log(returning);
     }
     executeFunction(name, args) {
@@ -27,7 +27,7 @@ class ProcessManager {
         }
         // check if function exists in definitions
         if (func === undefined) {
-            return new logger_1.VMError(logger_1.NativeErrors.REFERENCE, `Function '${name}' not found`); // throw error if it doesnt exist
+            return (0, logger_1.ThrowError)(logger_1.NativeErrors.REFERENCE, `Function '${name}' not found`); // throw error if it doesnt exist
         }
         // function is not builtin and exists in definition
         const description = this.bytecode.getDescriptions().descriptions[func]; // get function description

@@ -7,13 +7,13 @@ import { BuiltinProcess, Process, VMProcess } from "./process";
 export class ProcessManager {
     constructor(public bytecode: Bytecode) {}
 
-    public start(fun: string) {
+    public start(fun: string, args: string[]) {
         /*
             Execute main function
                 Initialize main process
             Print returning value
         */
-       var returning = this.executeFunction(fun, [''])
+       var returning = this.executeFunction(fun, args)
        console.log(returning)
     }
 
@@ -29,7 +29,7 @@ export class ProcessManager {
 
         // check if function exists in definitions
         if(func === undefined) {
-            return new VMError(NativeErrors.REFERENCE, `Function '${name}' not found`) // throw error if it doesnt exist
+            return ThrowError(NativeErrors.REFERENCE, `Function '${name}' not found`) // throw error if it doesnt exist
         }
 
         // function is not builtin and exists in definition

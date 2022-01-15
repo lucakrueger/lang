@@ -68,8 +68,14 @@ const ArrayGet = (args: any[], processManager: ProcessManager): (any | VMError) 
         return err
     }
 
-    var arr: any[] = args[0]
+    var arr: any[] | any = args[0]
     var index: number = Number(args[1])
+
+    if(!Array.isArray(arr)) { // check if is array, if not, return the value
+        return arr
+    }
+
+    //console.log(arr[index])
 
     return arr[index]
 }
@@ -85,9 +91,14 @@ const ArraySplice = (args: any[], processManager: ProcessManager): (any | VMErro
     // array[1:5] -> 1, 2, 3, 4
     // array[10:(86-10+1)] -> 10, ..., 
 
-    var arr: any[] = args[0]
+    var arr: any[] | any = args[0]
     var start: number = args[1]
     var end: number = args[2]
+
+    if(!Array.isArray(arr)) { // check if it is array
+        // not an array
+        return arr
+    }
 
     if(end >= arr.length) {
         end = arr.length
@@ -95,7 +106,51 @@ const ArraySplice = (args: any[], processManager: ProcessManager): (any | VMErro
         end = arr.length
     }
 
-    return arr.splice(start, end - start)
+    //return arr.splice(start, end - start)
+    return arr.slice(start, end)
+}
+
+// takes: array -> array
+const ArrayClean = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('array_clean', args.length, 1)
+    if(err != undefined) {
+        return err
+    }
+
+    var arr: any[] | any = args[0]
+
+    if(!Array.isArray(arr)) {
+        return arr
+    }
+
+    if(arr.length == 1) {
+        return arr[0]
+    }
+
+    return arr
+}
+
+// takes: array -> array
+const ArrayShuffle = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('shuffle', args.length, 1)
+    if(err != undefined) {
+        return err
+    }
+
+    var arr: any[] | any = args[0]
+
+    if(!Array.isArray(arr)) {
+        return arr
+    }
+
+    for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    return arr
 }
 
 // takes: function, array -> any
@@ -167,7 +222,11 @@ const ForEachLs = (args: any[], processManager: ProcessManager): (any | VMError)
 
     var index = 0
     for(var elem of array) {
-        result.push(processManager.executeFunction(funName, [elem, index, array]))
+        //result.push(processManager.executeFunction(funName, [elem, index, array]))
+        var res = processManager.executeFunction(funName, [elem, index, array, result])
+        if((res instanceof Atom && res.getValue() == 'none') == false) {
+            result.push(res)
+        }
         index++
     }
 
@@ -212,6 +271,7 @@ const Len = (args: any[], processManager: ProcessManager): (any | VMError) => {
 }
 
 // takes: array -> boolean
+// also: by doing (:true ++ array), you can check if all elements are equal to this specific value
 const Identical = (args: any[], processManager: ProcessManager): (any | VMError) => {
     var err = CheckParameterCount('identical', args.length, 1)
     if(err != undefined) {
@@ -276,7 +336,9 @@ export const Builtin = new Map<string, (args: any[], processManager: ProcessMana
     ['array_new', ArrayNew],
     ['array_push', ArrayPush],
     ['array_get', ArrayGet],
+    ['array_clean', ArrayClean],    
     ['splice', ArraySplice],
+    ['shuffle', ArrayShuffle],
     ['call', Call],
     ['foreach', ForEach],
     ['foreachls', ForEachLs],

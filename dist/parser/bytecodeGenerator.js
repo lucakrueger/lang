@@ -14,6 +14,7 @@ class BytecodeGenerator {
         this.ast = ast;
         this.module = "";
         this.imports = [];
+        this.helperFunctions = [];
     }
     generateBytecode() {
         var funs = [];
@@ -25,6 +26,9 @@ class BytecodeGenerator {
                 }
             });
         });
+        // add helper functions
+        funs.push(...this.helperFunctions);
+        // return funs
         return this.convertIntermediate(funs);
     }
     convertIntermediate(funs) {
@@ -170,6 +174,15 @@ class BytecodeGenerator {
             case 'function_def':
                 fun = this.processFunction(expr);
                 break;
+            case 'function_def_empty':
+                fun = this.processFunction(expr);
+                break;
+            case 'function_def_chained':
+                fun = this.processFunctionChained(expr);
+                break;
+            case 'function_def_empty_chained':
+                fun = this.processFunctionChained(expr);
+                break;
             case 'function_type':
                 fun = this.processFunctionType(expr);
                 break;
@@ -201,8 +214,20 @@ class BytecodeGenerator {
             case 'call':
                 bytecode.push(...this.handleCall(expr));
                 break;
+            case 'call_empty':
+                bytecode.push(...this.handleCall(expr));
+                break;
             case 'operation':
                 bytecode.push(...this.handleOperation(expr));
+                break;
+            case 'operation_chained':
+                bytecode.push(...this.handleOperationChained(expr));
+                break;
+            case 'set':
+                bytecode.push(...this.handleSet(expr));
+                break;
+            case 'special_op':
+                bytecode.push(...this.handleSpecialOperation(expr));
                 break;
         }
         return bytecode;
@@ -256,6 +281,207 @@ class BytecodeGenerator {
         lines.push(`operation ${op}`);
         return lines;
     }
+    handleOperationChained(expr) {
+        var lines = [];
+        // process first
+        lines.push(...this.handleExpr(expr.values[0]));
+        // process following
+        for (var elem of expr.values[1]) {
+            // handle each individual op
+            // handle value
+            lines.push(...this.handleExpr(elem[2]));
+            // call operation
+            lines.push(`operation ${elem[0]}`);
+        }
+        return lines;
+    }
+    handleSpecialOperation(expr) {
+        var lines = [];
+        // get arg names
+        var args = this.getNames(expr.result);
+        //lines.push(...this.handleExpr(expr.value)) // get value
+        var value = this.handleExpr(expr.value); // lines of value data
+        // go over args -> initialize, set their values => value[i]
+        var index = 0;
+        for (var arg of args) {
+            if (index == (args.length - 1)) {
+                // last element
+                lines.push(...[
+                    `local ${arg}`,
+                    ...value,
+                    `pushl ${index}`,
+                    `pushl -1`,
+                    `call splice 3`,
+                    `call array_clean 1`,
+                    `pull ${arg}`
+                ]);
+                continue;
+            }
+            lines.push(...[
+                `local ${arg}`,
+                ...value,
+                `pushl ${index}`,
+                `call array_get 2`,
+                `pull ${arg}`
+            ]);
+            index++;
+        }
+        lines.push(...value); // push value
+        return lines;
+    }
+    handleSet(expr) {
+        var lines = [];
+        var args = []; // collect all arg names
+        for (var elem of expr.args) {
+            args.push(this.getValue(elem[0]));
+        }
+        var ops = []; // operations
+        var transferred = [];
+        // get ops
+        var index = 0;
+        for (var elem of expr.ops) {
+            var op = elem[4];
+            if ((index > 0 && op == '<-') || (index == 0 && op != '<-')) {
+                (0, logger_1.ThrowError)(logger_1.NativeErrors.INTERNAL, 'Iteration operator has to be first');
+                process.exit(1);
+            }
+            // check if value is name, if it is, check if its an arg, if not, add it to transfered args
+            if (elem[6].ident == 'name') {
+                var val = this.getValue(elem[6]);
+                var found = false;
+                for (var el of args) {
+                    if (el == val)
+                        found = true; // if found in args
+                }
+                if (found == false) {
+                    transferred.push(val);
+                    ops.push({
+                        arg: this.getValue(elem[2]),
+                        value: this.handleExpr(elem[6]),
+                        op: `ext=>:${transferred.length - 1}` // external assignment, important
+                    });
+                    index++;
+                    continue;
+                }
+            }
+            ops.push({
+                arg: this.getValue(elem[2]),
+                value: this.handleExpr(elem[6]),
+                op: elem[4]
+            });
+            index++;
+        }
+        // we have ops, transferred
+        if (ops.length == 0) {
+            return lines;
+        }
+        lines.push('call array_new 0');
+        // get transferred values
+        lines.push('call array_new 0'); // create new array
+        for (var trans of transferred) { // fill array with values that should be transferred
+            lines.push(`push ${trans}`);
+            lines.push('call array_push 2');
+        }
+        lines.push('call array_push 2');
+        // add this array to iterator array
+        lines.push(...ops[0].value);
+        //lines.push('call array_push 2')
+        lines.push('operation ++');
+        // generate helper function name
+        var helperid = this.makeid(8);
+        // push helper function name
+        lines.push(`pushl :${helperid}`);
+        lines.push(`call foreachls 2`);
+        // Helper functions //
+        // create helper function
+        var helperfun = {
+            name: helperid,
+            typedef: false,
+            args: [
+                ['elem', { rule: '', value: '' }],
+                ['index', { rule: '', value: '' }],
+                ['list', { rule: '', value: '' }],
+                ['result', { rule: '', value: '' }]
+            ],
+            bytecode: []
+        };
+        var bytecode = [];
+        // bytecode
+        // initialize args
+        // if -> identical | elem/:none
+        // init iterator
+        bytecode.push(...[
+            `local ${ops[0].arg}`,
+            `push elem`,
+            `pull ${ops[0].arg}`
+        ]);
+        // initialize args
+        for (var i = 1; i < ops.length; i++) {
+            var o = ops[i]; //op
+            var b = o.op.split(':');
+            if (b.length > 1) {
+                // external
+                bytecode.push(`local ${o.arg}`);
+                bytecode.push(...[
+                    `push list`,
+                    `call Head 1`,
+                    `pushl ${b[1]}`,
+                    `call array_get 2`,
+                    `pull ${o.arg}`
+                ]);
+            }
+            else {
+                // normal
+                bytecode.push(`local ${o.arg}`);
+                bytecode.push(...o.value),
+                    bytecode.push(`pull ${o.arg}`);
+            }
+        }
+        // if -> identical
+        // create array -> fill: :true, ...rules
+        // call identical 1
+        // push elem
+        // call if 2
+        bytecode.push(...[
+            `call array_new 0`,
+            `pushl :true`,
+            `call array_push 2`
+        ]);
+        // go over rules, push them
+        for (var rule of expr.rules) {
+            var bc = this.handleExpr(rule[2]); // get specific bytecode
+            bytecode.push(...bc);
+            bytecode.push(`call array_push 2`); // push onto array
+        }
+        bytecode.push(...[
+            `call identical 1`,
+            `push elem`,
+            `call if 2`
+        ]);
+        // add function specific bytecode (done)
+        // add bytecode to helperfun
+        helperfun.bytecode = bytecode;
+        // create second helper function, index = 0 => :none
+        var helperfun2 = {
+            name: helperid,
+            typedef: false,
+            args: [
+                ['elem', { rule: '', value: '' }],
+                ['index', { rule: '=', value: '0' }],
+                ['list', { rule: '', value: '' }],
+                ['result', { rule: '', value: '' }]
+            ],
+            bytecode: [
+                `pushl :none`
+            ]
+        };
+        // add helperfun and helperfun' to helpers
+        this.helperFunctions.push(helperfun);
+        if (transferred.length != 0) {
+            this.helperFunctions.push(helperfun2);
+        }
+        return lines;
+    }
     handleCall(expr) {
         var callName = this.getName(expr.name);
         if (callName == undefined) {
@@ -289,6 +515,12 @@ class BytecodeGenerator {
             }
         }
         return [lines, length];
+    }
+    handleFollowing(expr, varname) {
+        var lines = [];
+        lines.push(`pull ${varname}`);
+        lines.push(...this.handleExpr(expr[2]));
+        return lines;
     }
     /*
         Process
@@ -326,6 +558,35 @@ class BytecodeGenerator {
         }
         // define bytecode
         im.bytecode = this.handleExpr(expr.result);
+        return im;
+    }
+    processFunctionChained(expr) {
+        var im = {
+            name: this.getName(expr.name),
+            typedef: false,
+            args: [],
+            bytecode: []
+        };
+        // define args
+        for (var arg of expr.args) {
+            var temp = [undefined, { rule: "", value: "" }];
+            temp[0] = this.getName(arg[1]);
+            if (arg[3] != null) {
+                // rule exists
+                temp[1] = this.getRule(arg[3]);
+            }
+            im.args.push(temp);
+        }
+        var followup = this.getName(expr.followup);
+        if (followup == undefined) {
+            (0, logger_1.ThrowError)(logger_1.NativeErrors.INTERNAL, 'An unexpected error occurred');
+            process.exit(1);
+        }
+        // define bytecode
+        im.bytecode = this.handleExpr(expr.result);
+        for (var elem of expr.following) {
+            im.bytecode.push(...this.handleFollowing(elem, followup));
+        }
         return im;
     }
     processDefinition(expr) {
@@ -392,6 +653,22 @@ class BytecodeGenerator {
         }
         return expr.value;
     }
+    getNames(expr) {
+        var names = [];
+        switch (expr.ident) { // collect names
+            case 'name':
+                names.push(this.getValue(expr));
+                break;
+            case 'array_split':
+                names.push(this.getValue(expr.values[0]));
+                // get additional names
+                for (var elem of expr.values[1]) {
+                    names.push(this.getValue(elem[3])); // get name
+                }
+                break;
+        }
+        return names;
+    }
     getType(expr) {
         switch (expr.ident) {
             case 'atom':
@@ -409,6 +686,16 @@ class BytecodeGenerator {
         result.push(this.getValue(expr.value[0]));
         for (var child of expr.value[1][1]) {
             result.push(this.getValue(child[2]));
+        }
+        return result;
+    }
+    makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
         }
         return result;
     }

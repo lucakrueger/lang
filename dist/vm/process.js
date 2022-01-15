@@ -89,7 +89,16 @@ class VMProcess extends Process {
                             this.stack.push(new structs_1.Atom(a >= b));
                             break;
                         case '/=':
-                            this.stack.push(new structs_1.Atom(a != b));
+                            //this.stack.push(new Atom(a != b))
+                            if (a instanceof structs_1.VMDatatype && b instanceof structs_1.VMDatatype) {
+                                this.stack.push(new structs_1.Atom(a.getValue() != b.getValue()));
+                            }
+                            else if (Array.isArray(a) && Array.isArray(b)) {
+                                this.stack.push(new structs_1.Atom(!this.arraysEqual(a, b)));
+                            }
+                            else {
+                                this.stack.push(new structs_1.Atom(a != b));
+                            }
                             break;
                         case '<':
                             this.stack.push(new structs_1.Atom(a < b));
@@ -98,7 +107,16 @@ class VMProcess extends Process {
                             this.stack.push(new structs_1.Atom(a > b));
                             break;
                         case '=':
-                            this.stack.push(new structs_1.Atom(a == b));
+                            //this.stack.push(new Atom(a == b))
+                            if (a instanceof structs_1.VMDatatype && b instanceof structs_1.VMDatatype) {
+                                this.stack.push(new structs_1.Atom(a.getValue() == b.getValue()));
+                            }
+                            else if (Array.isArray(a) && Array.isArray(b)) {
+                                this.stack.push(new structs_1.Atom(this.arraysEqual(a, b)));
+                            }
+                            else {
+                                this.stack.push(new structs_1.Atom(a == b));
+                            }
                             break;
                         case 'e':
                             if (Array.isArray(b) && !Array.isArray(a)) {

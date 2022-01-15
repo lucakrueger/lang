@@ -1,7 +1,10 @@
+import: Std
+
 /* List Module */
 Head -> ls => ls[0]
 Head -> ls (= []) => :none
-Tail -> ls => (if: ((len: ls) > 1), (splice: ls, 1, 15))
+Tail -> ls => (splice: ls, 1, 15)
+Tail -> ls (<= 1) => []
 
 Search -> list target => (foreach: ([target] ++ list), :search)
 search -> elem index array result => result
@@ -10,3 +13,8 @@ search -> elem index (= 0) array result => :none
 
 Length -> ls => (len: ls)
 Length -> ls (= []) => 0
+
+qsort -> ls | a => ([x | xs] => ls) => ((qsort: {Y X | Y <- xs, X => x, (Y < X)}) ++ x ++ (qsort: {Y X | Y <- xs, X => x, (Y >= X)}))
+qsort -> ls (= []) => []
+qsort -> ls (= 1) => ls
+qsort -> ls (= 2) => (if: (ls[0] > ls[1]), [ls[1], ls[0]], ls)

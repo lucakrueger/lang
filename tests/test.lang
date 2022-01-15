@@ -1,1 +1,4 @@
-main -> args => "Hello World"
+import: [Std, List] 
+
+main => (qsort: (shuffle: (range: 1, 10000)))
+
