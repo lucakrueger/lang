@@ -3,13 +3,19 @@ import: Std
 /* List Module */
 Head -> ls => ls[0]
 Head -> ls (= []) => :none
-Tail -> ls => (splice: ls, 1, 15)
+Tail -> ls => (splice: ls, 1, -1)
 Tail -> ls (<= 1) => []
 
-Search -> list target => (foreach: ([target] ++ list), :search)
-search -> elem index array result => result
-search -> elem index (> 0) array result (= :none) => (if: (elem = (Head: array)), (index - 1), :none)
-search -> elem index (= 0) array result => :none
+Search -> ls target => (search': (search: ls, target))
+search' -> ls => (Head: ls)
+search' -> ls (= []) => :none
+search -> ls target => {x y | x <- ls, y => target, (x = y) | index}
+
+/* Legacy */
+SearchLeg -> list target => (foreach: ([target] ++ list), :searchleg)
+searchleg -> elem index array result => result
+searchleg -> elem index (> 0) array result (= :none) => (if: (elem = (Head: array)), (index - 1), :none)
+searchleg -> elem index (= 0) array result => :none
 
 Length -> ls => (len: ls)
 Length -> ls (= []) => 0

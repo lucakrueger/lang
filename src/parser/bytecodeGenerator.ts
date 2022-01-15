@@ -486,6 +486,14 @@ export class BytecodeGenerator {
             `pull ${ops[0].arg}`
         ])
 
+        // decrement index
+        bytecode.push(...[
+            `push index`,
+            `pushl 1`,
+            `operation -`,
+            `pull index`
+        ])
+
         // initialize args
         for(var i = 1; i < ops.length; i++) {
             var o = ops[i] //op
@@ -526,11 +534,25 @@ export class BytecodeGenerator {
             bytecode.push(`call array_push 2`) // push onto array
         }
 
-        bytecode.push(...[
+        if(expr.result == null) {
+            bytecode.push(...[
+                `call identical 1`,
+                `push elem`,
+                `call if 2`
+            ])
+        } else {
+            bytecode.push(...[
+                `call identical 1`,
+                ...this.handleExpr(expr.result[2]),
+                `call if 2`
+            ])
+        }
+
+        /*bytecode.push(...[
             `call identical 1`,
             `push elem`,
             `call if 2`
-        ])
+        ])*/
 
         // add function specific bytecode (done)
         // add bytecode to helperfun
