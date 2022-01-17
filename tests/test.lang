@@ -1,3 +1,2 @@
-main => (for: (range: 0, 10), 3, 5, :test)
+main => (Get: (Set: (Set: (Map), :author, "luca"), :age, 19), :author)
 
-test -> elem => elem

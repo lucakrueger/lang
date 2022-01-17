@@ -1,0 +1,5 @@
+Map => [:map]
+Set -> map (head :map) key value => (map ++ [(Pair: key, value)])
+Get -> map (head :map) key => {x k | x <- map, k => key, (index > 0), ((Head: x) = :pair), ((Index: (Tail: x), 0) = k) | (Index: (Tail: x), 1) }
+
+Pair -> key value => [:pair, key, value]
