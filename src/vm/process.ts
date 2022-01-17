@@ -205,7 +205,7 @@ export class VMProcess extends Process {
                             this.stack.push(a % b)
                             break
                         case '≈':
-                            const tolerance = 0.01
+                            const tolerance = 0.1
                             if((a <= (b + tolerance)) && (a >= (b - tolerance))) {
                                 this.stack.push(new Atom('true'))
                             } else {

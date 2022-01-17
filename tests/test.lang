@@ -1,2 +1,7 @@
-main => (Get: (Set: (Set: (Map), :author, "luca"), :age, 19), :author)
+main => (Roots: :f)
 
+f -> x => (x**2 - 2)
+f' -> x => (2*x)
+f'' -> x => 2
+
+Roots -> fun => { x f | x <- (Range: -100, 100, 0.01), f => fun, ((call: f, [x]) ≈ 0.1) }

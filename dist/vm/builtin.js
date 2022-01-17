@@ -287,6 +287,16 @@ const Performance = (args, processManager) => {
     console.timeEnd(id);
     return [];
 };
+// takes: min, max -> number
+const Random = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 2);
+    if (err != undefined) {
+        return err;
+    }
+    var min = Math.floor(args[0]);
+    var max = Math.ceil(args[1]);
+    return Math.floor(Math.random() * (max - min) + min);
+};
 exports.Builtin = new Map([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
@@ -303,5 +313,6 @@ exports.Builtin = new Map([
     ['len', Len],
     ['identical', Identical],
     ['route', route],
-    ['performance', Performance]
+    ['performance', Performance],
+    ['random', Random]
 ]);

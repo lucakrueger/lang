@@ -351,6 +351,19 @@ const Performance = (args: any[], processManager: ProcessManager): (any | VMErro
     return []
 }
 
+// takes: min, max -> number
+const Random = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('name', args.length, 2)
+    if(err != undefined) {
+        return err
+    }
+
+    var min: number = Math.floor(args[0])
+    var max: number = Math.ceil(args[1])
+
+    return Math.floor(Math.random() * (max - min) + min)
+}
+
 export const Builtin = new Map<string, (args: any[], processManager: ProcessManager) => any>([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
@@ -367,5 +380,6 @@ export const Builtin = new Map<string, (args: any[], processManager: ProcessMana
     ['len', Len],
     ['identical', Identical],
     ['route', route],
-    ['performance', Performance]
+    ['performance', Performance],
+    ['random', Random]
 ])

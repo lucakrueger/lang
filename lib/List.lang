@@ -28,6 +28,7 @@ qsort -> ls (= 1) => ls
 qsort -> ls (= 2) => (if: (ls[0] > ls[1]), [ls[1], ls[0]], ls)
 
 Reverse -> ls | x => ([head | tail] => ls) => ((Reverse: tail) ++ head)
+Reverse -> ls (= 1) => ls
 Reverse -> ls (= 2) => [ls[1], ls[0]]
 
 Shift -> ls | x => ([head | tail] => ls) => (tail ++ head)

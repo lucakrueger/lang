@@ -31,12 +31,7 @@ var generator = new bytecodeGenerator_1.BytecodeGenerator(ast);
 var bytecode = generator.generateBytecode();
 var preprocessor = new preprocessor_1.Preprocessor();
 bytecode.addImports([
-    'lib/Api.lang',
-    'lib/List.lang',
-    'lib/Maths.lang',
-    'lib/Std.lang',
-    'lib/Test.lang',
-    'lib/Vector.lang'
+    'lib/Std.lang'
 ]);
 bytecode.importModules(preprocessor);
 bytecode.addDescriptions(preprocessor.descr);
