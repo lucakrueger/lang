@@ -1,0 +1,4 @@
+enum -> values => ([:enum] ++ values)
+
+isEnum -> value enum (head :enum) => (Search: enum, value)
+isEnum -> value (= :enum) enum => :none

@@ -1,0 +1,2 @@
+Roots -> fun => (Equals: fun, 0)
+Equals -> fun other => {x f b | x <- (Range: -100, 100, 0.01), f => fun, b => other, ((call: f, [x]) ≈ b)}

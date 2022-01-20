@@ -459,6 +459,13 @@ class VMProcess extends Process {
                 return (arg == value);
             case '/=':
                 return (arg != value);
+            case 'tail':
+                if (!Array.isArray(arg)) {
+                    return false;
+                }
+                var arr = arg;
+                var tail = value;
+                return this.arraysEqual(arr.slice(1), tail);
             case 'head':
                 if (!Array.isArray(arg)) {
                     return false;

@@ -1,7 +1,4 @@
-main => (Roots: :f)
+main => (isEnum: :tuesday, (days))
 
-f -> x => (x**2 - 2)
-f' -> x => (2*x)
-f'' -> x => 2
+days => (enum: [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday])
 
-Roots -> fun => { x f | x <- (Range: -100, 100, 0.01), f => fun, ((call: f, [x]) ≈ 0) }
