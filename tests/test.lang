@@ -1,4 +1,1 @@
-main => (isEnum: :enum', (daysNames))
-
-days => (enum: [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday])
-daysNames => (enum: [[:monday, "Monday"], [:tuesday, "Tuesday"], [:wednesday, "Wednesday"], [:thursday, "Thursday"], [:friday, "Friday"], [:saturday, "Saturday"], [:sunday, "Sunday"]])
+main => 

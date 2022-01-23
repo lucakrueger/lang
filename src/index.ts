@@ -8,20 +8,19 @@ import * as fs from 'fs'
 import { Atom } from "./vm/structs";
 import { Preprocessor } from "./bytecodes/preprocessor";
 import { NativeErrors, ThrowError } from "./logger/logger";
+import { ThreadManager } from "./thread/threadtest";
 
-/*
-    TODO:
-    - implement empty calls (completed)
-    - implement empty definitions (completed)
-    - implement chained definitions (completed)
-    - implement empty chained definitions (completed)
-    - implement sets
-    - implement chained operations (completed)
-*/
+var threadManager = new ThreadManager()
+threadManager.start((arg: any) => {
+    return (arg*2)
+}, [1, 2, 3, 4, 5, 6, 7], -1)
+
+process.exit()
 
 var file: string = ''
 var fun: string = 'main'
 var args: string[] = []
+
 
 if(process.argv.length >= 3) {
     // only file is given
