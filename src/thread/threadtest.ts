@@ -5,7 +5,7 @@ import { Atom } from "../vm/structs";
 export class ThreadManager {
     constructor() {}
 
-    public async start(f: (arg: any) => any, values: any[], threads: number) {
+    public start(f: (arg: any) => any, values: any[], threads: number) {
 
         if(threads == -1) {
             // dynamically choose threads
@@ -30,35 +30,15 @@ export class ThreadManager {
         // create chunks
         var chunks = this.sliceIntoChunks(values, values.length/threads)
 
-        this.executeThreads(f, chunks).then((value) => {
-            console.log(value)
-            return value
-        })
-
-        return null
-
+        
     }
 
-    private async executeThreads(f: (arg: any) => any, chunks: any[][]) {
-        const resultPool: Promise<any>[] = []
-        for(var chunk of chunks) {
-            resultPool.push(this.processChunk(f, chunk))
-        }
-
-        try {
-            const result = await Promise.all(resultPool)
-            return Promise.resolve(result)
-        } catch(err) {
-            ThrowError(NativeErrors.INTERNAL, `Threading error. ${err}`)
-        }
-    }
-
-    private async processChunk(f: (arg: any) => any, chunk: any[]): Promise<any> {
+    private processChunk(f: (arg: any) => any, chunk: any[]) {
         var results: any[] = []
         for(var elem of chunk) {
             results.push(f(elem))
         }
-        return Promise.resolve(results)
+        return results
     }
 
     private sliceIntoChunks(arr: any[], chunkSize: number): any[][] {

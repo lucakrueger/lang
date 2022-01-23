@@ -11,7 +11,7 @@ import { NativeErrors, ThrowError } from "./logger/logger";
 import { ThreadManager } from "./thread/threadtest";
 
 var threadManager = new ThreadManager()
-threadManager.start((arg: any) => {
+var res = threadManager.start((arg: any) => {
     return (arg*2)
 }, [1, 2, 3, 4, 5, 6, 7], -1)
 
