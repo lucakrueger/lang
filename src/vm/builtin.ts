@@ -320,7 +320,7 @@ const Identical = (args: any[], processManager: ProcessManager): (any | VMError)
 
 // takes: string, function -> function(url, args)
 const route = (args: any[], processManager: ProcessManager): (any | VMError) => {
-    var err = CheckParameterCount('name', args.length, 2)
+    var err = CheckParameterCount('route', args.length, 2)
     if(err != undefined) {
         return err
     }
@@ -333,7 +333,7 @@ const route = (args: any[], processManager: ProcessManager): (any | VMError) => 
 
 // takes: function (args) array -> array
 const Performance = (args: any[], processManager: ProcessManager): (any | VMError) => {
-    var err = CheckParameterCount('name', args.length, 2)
+    var err = CheckParameterCount('performance', args.length, 2)
     if(err != undefined) {
         return err
     }
@@ -353,7 +353,7 @@ const Performance = (args: any[], processManager: ProcessManager): (any | VMErro
 
 // takes: min, max -> number
 const Random = (args: any[], processManager: ProcessManager): (any | VMError) => {
-    var err = CheckParameterCount('name', args.length, 2)
+    var err = CheckParameterCount('random', args.length, 2)
     if(err != undefined) {
         return err
     }
@@ -362,6 +362,59 @@ const Random = (args: any[], processManager: ProcessManager): (any | VMError) =>
     var max: number = Math.ceil(args[1])
 
     return Math.floor(Math.random() * (max - min) + min)
+}
+
+// takes: array (2d) -> [array, array]
+const separate = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('separate', args.length, 1)
+    if(err != undefined) {
+        return err
+    }
+
+    var arr: any[] = args[0]
+
+    // go over arr
+    // check if 2 dimensional, if not, second value is :none
+    // split into two seperate arrays
+    // return new array containing both
+
+    var arr0: any[] = []
+    var arr1: any[] = []
+
+    for(var elem of arr) {
+        var first: any = ''
+        var second: any = ''
+        if(Array.isArray(elem) && elem.length > 2) {
+            // length is at least two
+            first = elem[0]
+            second = elem.slice(1)
+            arr0.push(first)
+            arr1.push(second)
+            continue
+        } else if(Array.isArray(elem) && elem.length == 2) {
+            // length is at least two
+            first = elem[0]
+            second = elem[1]
+            arr0.push(first)
+            arr1.push(second)
+            continue
+        } else if(Array.isArray(elem) && elem.length == 1) {
+            // length is one
+            first = elem[0]
+            second = new Atom('none')
+            arr0.push(first)
+            arr1.push(second)
+            continue
+        } else {
+            first = elem
+            second = new Atom('none')
+            arr0.push(first)
+            arr1.push(second)
+            continue
+        }
+    }
+
+    return [arr0, arr1]
 }
 
 export const Builtin = new Map<string, (args: any[], processManager: ProcessManager) => any>([
@@ -381,5 +434,6 @@ export const Builtin = new Map<string, (args: any[], processManager: ProcessMana
     ['identical', Identical],
     ['route', route],
     ['performance', Performance],
-    ['random', Random]
+    ['random', Random],
+    ['separate', separate]
 ])

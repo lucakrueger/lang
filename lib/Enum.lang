@@ -1,4 +1,10 @@
-enum -> values => ([:enum] ++ values)
-
+/* Simple enums */
 isEnum -> value enum (head :enum) => (Search: enum, value)
 isEnum -> value (= :enum) enum => :none
+
+/* Complex enums */
+isEnum -> value enum (head :enum') => (isEnum': (Search: enum[1], value), enum)
+isEnum' -> index enum (head :enum') => (Index: enum[2], index)
+isEnum' -> index (= :none) enum => :none
+
+enum -> values | xs => (separate: values) => (if: (identical: xs[1]), (:enum ++ values), (:enum' ++ xs))

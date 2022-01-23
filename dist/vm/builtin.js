@@ -265,7 +265,7 @@ const Identical = (args, processManager) => {
 };
 // takes: string, function -> function(url, args)
 const route = (args, processManager) => {
-    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 2);
+    var err = (0, builtinHelper_1.CheckParameterCount)('route', args.length, 2);
     if (err != undefined) {
         return err;
     }
@@ -275,7 +275,7 @@ const route = (args, processManager) => {
 };
 // takes: function (args) array -> array
 const Performance = (args, processManager) => {
-    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 2);
+    var err = (0, builtinHelper_1.CheckParameterCount)('performance', args.length, 2);
     if (err != undefined) {
         return err;
     }
@@ -289,13 +289,63 @@ const Performance = (args, processManager) => {
 };
 // takes: min, max -> number
 const Random = (args, processManager) => {
-    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 2);
+    var err = (0, builtinHelper_1.CheckParameterCount)('random', args.length, 2);
     if (err != undefined) {
         return err;
     }
     var min = Math.floor(args[0]);
     var max = Math.ceil(args[1]);
     return Math.floor(Math.random() * (max - min) + min);
+};
+// takes: array (2d) -> [array, array]
+const separate = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('separate', args.length, 1);
+    if (err != undefined) {
+        return err;
+    }
+    var arr = args[0];
+    // go over arr
+    // check if 2 dimensional, if not, second value is :none
+    // split into two seperate arrays
+    // return new array containing both
+    var arr0 = [];
+    var arr1 = [];
+    for (var elem of arr) {
+        var first = '';
+        var second = '';
+        if (Array.isArray(elem) && elem.length > 2) {
+            // length is at least two
+            first = elem[0];
+            second = elem.slice(1);
+            arr0.push(first);
+            arr1.push(second);
+            continue;
+        }
+        else if (Array.isArray(elem) && elem.length == 2) {
+            // length is at least two
+            first = elem[0];
+            second = elem[1];
+            arr0.push(first);
+            arr1.push(second);
+            continue;
+        }
+        else if (Array.isArray(elem) && elem.length == 1) {
+            // length is one
+            first = elem[0];
+            second = new structs_1.Atom('none');
+            arr0.push(first);
+            arr1.push(second);
+            continue;
+        }
+        else {
+            first = elem;
+            second = new structs_1.Atom('none');
+            arr0.push(first);
+            arr1.push(second);
+            continue;
+        }
+    }
+    return [arr0, arr1];
 };
 exports.Builtin = new Map([
     ['print', BuiltinPrint],
@@ -314,5 +364,6 @@ exports.Builtin = new Map([
     ['identical', Identical],
     ['route', route],
     ['performance', Performance],
-    ['random', Random]
+    ['random', Random],
+    ['separate', separate]
 ]);
