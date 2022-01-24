@@ -1,0 +1,16 @@
+/* Degree */
+sind -> x => ((4 * x * (180 - x)) / (40500 - (x * (180 - x))))
+sind -> x (> 225) => (sind: (x - 180))
+sind -> x (< 0) => (-1 * (sind: (-1 * x)))
+cosd -> x => (sind: (x + 90))
+tand -> x => ((sind: x) / (cosd: x))
+
+/* Rad */
+sinr -> x => (sind: (radToDegree: x))
+cosr -> x => (cosd: (radToDegree: x))
+tanr -> x => (tand: (radToDegree: x))
+
+arcsin -> x => (arctan: (x / ((1 - (x ** 2)) root 2)))
+
+degreeToRad -> x => (x * (3.1415926 / 180))
+radToDegree -> x => (x * (180 / 3.1415926))

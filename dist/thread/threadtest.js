@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ThreadManager = void 0;
 const structs_1 = require("../vm/structs");
-const threadpool = require('threadpool-js/dist/threadpool.js');
 class ThreadManager {
     constructor() { }
     start(f, values, threads) {
@@ -27,20 +26,6 @@ class ThreadManager {
         //console.log(this.sliceIntoChunks(values, values.length/threads))
         // create chunks
         var chunks = this.sliceIntoChunks(values, values.length / threads);
-        var results = [];
-        var pool = new threadpool.ThreadPool();
-        for (var chunk of chunks) {
-            pool.run(this.processChunk, [f, chunk]).done((result) => {
-                results.push(...result);
-            });
-        }
-        pool.allDone(() => {
-            return results;
-        });
-        return results;
-    }
-    process(param, done) {
-        done(this.processChunk(param[0], param[1]));
     }
     processChunk(f, chunk) {
         var results = [];

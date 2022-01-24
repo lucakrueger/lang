@@ -1,0 +1,8 @@
+/* if */
+if -> cond (= :false) result else => else
+if -> cond (= :true) result else => result
+if -> cond (= :false) result => :none
+if -> cond (= :true) result => result
+
+/* for */
+for -> max fun => { x f | x <- (range: 0, max), f => fun, (1 = 1) | (call: f, [index]) }

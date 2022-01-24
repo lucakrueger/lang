@@ -4,12 +4,6 @@ const processManager_1 = require("./vm/processManager");
 const ast_1 = require("./parser/ast");
 const bytecodeGenerator_1 = require("./parser/bytecodeGenerator");
 const preprocessor_1 = require("./bytecodes/preprocessor");
-const threadtest_1 = require("./thread/threadtest");
-var threadManager = new threadtest_1.ThreadManager();
-var res = threadManager.start((arg) => {
-    return (arg * 2);
-}, [1, 2, 3, 4, 5, 6, 7], -1);
-process.exit();
 var file = '';
 var fun = 'main';
 var args = [];

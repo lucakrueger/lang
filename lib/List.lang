@@ -32,3 +32,6 @@ Reverse -> ls (= 2) => [ls[1], ls[0]]
 Shift -> ls | x => ([head | tail] => ls) => (tail ++ head)
 
 Index -> ls i => ls[i]
+
+Last -> ls => (Index: ls, ((len: ls) - 1))
+Last -> ls (= []) => :none

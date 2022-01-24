@@ -347,6 +347,14 @@ const separate = (args, processManager) => {
     }
     return [arr0, arr1];
 };
+const arctan = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 1);
+    if (err != undefined) {
+        return err;
+    }
+    var a = args[0];
+    return Math.atan(a);
+};
 exports.Builtin = new Map([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
@@ -365,5 +373,6 @@ exports.Builtin = new Map([
     ['route', route],
     ['performance', Performance],
     ['random', Random],
-    ['separate', separate]
+    ['separate', separate],
+    ['arctan', arctan]
 ]);

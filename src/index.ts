@@ -10,13 +10,6 @@ import { Preprocessor } from "./bytecodes/preprocessor";
 import { NativeErrors, ThrowError } from "./logger/logger";
 import { ThreadManager } from "./thread/threadtest";
 
-var threadManager = new ThreadManager()
-var res = threadManager.start((arg: any) => {
-    return (arg*2)
-}, [1, 2, 3, 4, 5, 6, 7], -1)
-
-process.exit()
-
 var file: string = ''
 var fun: string = 'main'
 var args: string[] = []

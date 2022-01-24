@@ -417,6 +417,16 @@ const separate = (args: any[], processManager: ProcessManager): (any | VMError) 
     return [arr0, arr1]
 }
 
+const arctan = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('name', args.length, 1)
+    if(err != undefined) {
+        return err
+    }
+
+    var a: number = args[0]
+    return Math.atan(a)
+}
+
 export const Builtin = new Map<string, (args: any[], processManager: ProcessManager) => any>([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
@@ -435,5 +445,6 @@ export const Builtin = new Map<string, (args: any[], processManager: ProcessMana
     ['route', route],
     ['performance', Performance],
     ['random', Random],
-    ['separate', separate]
+    ['separate', separate],
+    ['arctan', arctan]
 ])
