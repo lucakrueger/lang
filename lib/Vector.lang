@@ -2,5 +2,11 @@
 
 /* TODO: add mathematical operations, add, sub, mul */
 
-Vec -> x y z => [:vec.t, x, y, z]
-Vec -> x y z w => [:vec.f, x, y, z, w]
+Vec -> x y z => [:vec, x, y, z]
+Vec -> x y z w => [:vec, x, y, z, w]
+
+Add -> a (head :vec) b (head :vec) | bs => (b ++ 0) => (:vec ++ { a as bs | a <- a, as => a, bs => b, (a /= :vec) | (as[index] + bs[index]) })
+Sub -> a (head :vec) b (head :vec) | bs => (b ++ 0) => (:vec ++ { a as bs | a <- a, as => a, bs => b, (a /= :vec) | (as[index] - bs[index]) })
+
+Mul -> a b (head :vec) => (Join: { x af bs | x <- b, af => a, bs => b, (x /= :vec) | (elem * af) })
+Mul -> a (head :vec) b => (Mul: b, a)
