@@ -5,3 +5,8 @@ split' -> str target => { x t | x <- (Chars: str), t => target, (x = t) | index 
 split'' -> strls ls => { x str y | x <- ls, str => strls, y => ls, (1 = 1) | (Join: (Tail: (splice: str, x, y[(index + 1)]))) }
 split''' -> ls => ls
 split''' -> ls (head 0) => (Tail: ls)
+
+Remove -> str target => (Join: { x t | x <- (Chars: str), t => target, (x /= t) })
+
+Find -> str target => (Search: (Chars: str), target)
+Findls -> str target => (Searchls: (Chars: str), target)
