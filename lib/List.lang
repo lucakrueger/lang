@@ -9,6 +9,8 @@ search' -> ls => (Head: ls)
 search' -> ls (= []) => :none
 search -> ls target => {x y | x <- ls, y => target, (x = y) | index}
 
+Searchls -> ls target => { x t | x <- ls, t => target, (x = t) | index }
+
 /* Legacy */
 SearchLeg -> list target => (foreach: ([target] ++ list), :searchleg)
 searchleg -> elem index array result => result
@@ -35,3 +37,7 @@ Index -> ls i => ls[i]
 
 Last -> ls => (Index: ls, ((len: ls) - 1))
 Last -> ls (= []) => :none
+
+Join -> ls => (foreachspec: ls, :Join', "")
+Join' -> elem index list result => (result + elem)
+Join' -> elem index (= 0) list result => elem

@@ -348,12 +348,22 @@ const separate = (args, processManager) => {
     return [arr0, arr1];
 };
 const arctan = (args, processManager) => {
-    var err = (0, builtinHelper_1.CheckParameterCount)('name', args.length, 1);
+    var err = (0, builtinHelper_1.CheckParameterCount)('arctan', args.length, 1);
     if (err != undefined) {
         return err;
     }
     var a = args[0];
     return Math.atan(a);
+};
+// takes: target, any -> any
+const Assign = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('assign', args.length, 2);
+    if (err != undefined) {
+        return err;
+    }
+    var target = args[0];
+    var source = args[1];
+    return Object.assign(target, source);
 };
 exports.Builtin = new Map([
     ['print', BuiltinPrint],
@@ -374,5 +384,6 @@ exports.Builtin = new Map([
     ['performance', Performance],
     ['random', Random],
     ['separate', separate],
-    ['arctan', arctan]
+    ['arctan', arctan],
+    ['assign', Assign]
 ]);

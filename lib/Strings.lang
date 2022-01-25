@@ -1,0 +1,7 @@
+Chars -> s => (assign: [], s)
+
+Split -> st target | str => (str => ("a" + st)) => (split''': (split'': (Chars: str), (0 ++ (split': str, target))))
+split' -> str target => { x t | x <- (Chars: str), t => target, (x = t) | index }
+split'' -> strls ls => { x str y | x <- ls, str => strls, y => ls, (1 = 1) | (Join: (Tail: (splice: str, x, y[(index + 1)]))) }
+split''' -> ls => ls
+split''' -> ls (head 0) => (Tail: ls)
