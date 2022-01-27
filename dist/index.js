@@ -4,6 +4,7 @@ const processManager_1 = require("./vm/processManager");
 const ast_1 = require("./parser/ast");
 const bytecodeGenerator_1 = require("./parser/bytecodeGenerator");
 const preprocessor_1 = require("./bytecodes/preprocessor");
+const autocombine_1 = require("./autodoc/autocombine");
 var file = '';
 var fun = 'main';
 var args = [];
@@ -31,5 +32,7 @@ bytecode.addDescriptions(preprocessor.descr);
 }*/
 //fs.writeFileSync('./tests/dump.json', JSON.stringify(bytecode.getDescriptions(), null, 4))
 //var bytecode = new ReadableBytecode('tests/dump.json')
+(0, autocombine_1.AutodocCombine)();
+(0, autocombine_1.AutodocFormat)();
 var processManager = new processManager_1.ProcessManager(bytecode);
 processManager.start(fun, args);

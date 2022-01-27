@@ -1,0 +1,9 @@
+{
+    "path": "./autodoc/",
+    "active": true,
+    "combine": true,
+    "out": {
+        "format": "wiki",
+        "name": "wiki.md"
+    }
+}

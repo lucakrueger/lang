@@ -4,6 +4,8 @@ exports.BytecodeGenerator = void 0;
 const logger_1 = require("../logger/logger");
 const parser_1 = require("../bytecodes/parser");
 const builtinHelper_1 = require("../vm/builtinHelper");
+const parserExtension_1 = require("./parserExtension");
+const autodoc_1 = require("../autodoc/autodoc");
 const groupBy = require('group-by');
 class BytecodeGenerator {
     /*
@@ -16,6 +18,8 @@ class BytecodeGenerator {
         this.module = "";
         this.imports = [];
         this.helperFunctions = [];
+        this.parserExtensionManager = new parserExtension_1.ParserExtensionManager('');
+        this.parserExtensionManager.register(new autodoc_1.Autodoc());
     }
     generateBytecode() {
         var funs = [];
@@ -29,6 +33,7 @@ class BytecodeGenerator {
         });
         // add helper functions
         funs.push(...this.helperFunctions);
+        this.parserExtensionManager.end();
         // return funs
         return this.convertIntermediate(funs);
     }
@@ -186,6 +191,9 @@ class BytecodeGenerator {
                 break;
             case 'function_type':
                 fun = this.processFunctionType(expr);
+                break;
+            case 'comment':
+                this.parserExtensionManager.invoke(expr.value.split(',').join(''));
                 break;
         }
         return fun;
@@ -615,6 +623,7 @@ class BytecodeGenerator {
                 var value = this.getName(expr.value[1]);
                 if (value !== undefined) {
                     this.module = value;
+                    this.parserExtensionManager.module = this.module;
                 }
                 break;
             case 'import':

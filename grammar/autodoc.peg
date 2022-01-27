@@ -1,0 +1,34 @@
+start
+	= ex: (_ expr* _) {return ex[1]}
+
+expr
+	= Field
+
+Field
+	= field: (_ "@" Name _ (_ Name _)* _) {
+    	var words = []
+    	for(var elem of field[4]) {
+        	words.push(elem[1])
+        }
+    
+    	return {name: field[2], values: words, joined: words.join(" ")}
+    }
+
+Name
+  	= text: (([a-z] / [A-Z] / [/.'])+) {return text.join("")}
+
+Words
+  	= QuotedString
+  	/ Text
+
+QuotedString
+  	= "'" quote: NotQuote* "'" {return quote.join("")}
+
+NotQuote
+  	= !'"' char: . {return char}
+
+Text
+  	= text: NotQuote+ {return text.join("")}
+
+_ "whitespace"
+  	= [ \t\n\r]*

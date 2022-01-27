@@ -4,6 +4,8 @@ import { ReadableBytecode } from "../bytecodes/readable";
 import { NativeErrors, ThrowError } from "../logger/logger";
 import { ParserBytecode } from "../bytecodes/parser";
 import { makeid } from "../vm/builtinHelper";
+import { ParserExtensionManager } from "./parserExtension";
+import { Autodoc } from "../autodoc/autodoc";
 const groupBy = require('group-by')
 
 export class BytecodeGenerator {
@@ -12,13 +14,17 @@ export class BytecodeGenerator {
 
     private helperFunctions: IntermediateFunction[] = []
 
+    private parserExtensionManager: ParserExtensionManager = new ParserExtensionManager('')
+
     /*
         Process Functions change the classes fields, no return
         Handle Functions return bytecode
         Get Functions return values or structs
     */
 
-    constructor(public ast: AST) {}
+    constructor(public ast: AST) {
+        this.parserExtensionManager.register(new Autodoc())
+    }
 
     public generateBytecode(): ParserBytecode {
         var funs: IntermediateFunction[] = []
@@ -32,6 +38,8 @@ export class BytecodeGenerator {
         })
         // add helper functions
         funs.push(...this.helperFunctions)
+
+        this.parserExtensionManager.end()
 
         // return funs
         return this.convertIntermediate(funs)
@@ -216,6 +224,9 @@ export class BytecodeGenerator {
                 break
             case 'function_type':
                 fun = this.processFunctionType(expr)
+                break
+            case 'comment':
+                this.parserExtensionManager.invoke(expr.value.split(',').join(''))
                 break
         }
 
@@ -718,6 +729,7 @@ export class BytecodeGenerator {
                 var value = this.getName(expr.value[1])
                 if(value !== undefined) {
                     this.module = value
+                    this.parserExtensionManager.module = this.module
                 }
                 break
             case 'import':

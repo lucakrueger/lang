@@ -9,6 +9,9 @@ import { Atom } from "./vm/structs";
 import { Preprocessor } from "./bytecodes/preprocessor";
 import { NativeErrors, ThrowError } from "./logger/logger";
 import { ThreadManager } from "./thread/threadtest";
+import { testParserExt } from "./test/parserExtTest";
+import { AutodocCombine, AutodocFormat } from "./autodoc/autocombine";
+import { Autodoc } from "./autodoc/autodoc";
 
 var file: string = ''
 var fun: string = 'main'
@@ -39,5 +42,7 @@ bytecode.addDescriptions(preprocessor.descr)
 }*/
 //fs.writeFileSync('./tests/dump.json', JSON.stringify(bytecode.getDescriptions(), null, 4))
 //var bytecode = new ReadableBytecode('tests/dump.json')
+AutodocCombine()
+AutodocFormat()
 var processManager = new ProcessManager(bytecode)
 processManager.start(fun, args)
