@@ -1,6 +1,6 @@
 {
     "path": "./autodoc/",
-    "active": true,
+    "active": false,
     "combine": true,
     "out": {
         "format": "wiki",
