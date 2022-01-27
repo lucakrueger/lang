@@ -1,16 +1,84 @@
 /* Degree */
+/* @autodoc
+    @module Trig
+    @name sind
+    @description Sine in degrees
+    @arg x Number
+    @returns number
+*/
 sind -> x => ((4 * x * (180 - x)) / (40500 - (x * (180 - x))))
 sind -> x (> 225) => (sind: (x - 180))
 sind -> x (< 0) => (-1 * (sind: (-1 * x)))
+
+/* @autodoc
+    @module Trig
+    @name cosd
+    @description Cosine in degrees
+    @arg x Number
+    @returns number
+*/
 cosd -> x => (sind: (x + 90))
+
+/* @autodoc
+    @module Trig
+    @name tand
+    @description Tan in degrees
+    @arg x Number
+    @returns number
+*/
 tand -> x => ((sind: x) / (cosd: x))
 
 /* Rad */
+/* @autodoc
+    @module Trig
+    @name sinr
+    @description Sine in rad
+    @arg x Number
+    @returns number
+*/
 sinr -> x => (sind: (radToDegree: x))
+
+/* @autodoc
+    @module Trig
+    @name cosr
+    @description Cosine in rad
+    @arg x Number
+    @returns number
+*/
 cosr -> x => (cosd: (radToDegree: x))
+
+/* @autodoc
+    @module Trig
+    @name tanr
+    @description Tan in rad
+    @arg x Number
+    @returns number
+*/
 tanr -> x => (tand: (radToDegree: x))
 
+/* @autodoc
+    @module Trig
+    @name arsin
+    @description Arcsine in rad
+    @arg x Number
+    @returns number
+*/
 arcsin -> x => (arctan: (x / ((1 - (x ** 2)) root 2)))
 
+/* @autodoc
+    @module Trig
+    @name degreeToRad
+    @description Converts degrees to rad
+    @arg x Number
+    @returns number
+*/
 degreeToRad -> x => (x * (3.1415926 / 180))
+
+/* @autodoc
+    @module Trig
+    @name degreeToRad
+    @description Converts rad to degrees
+    @arg x Number
+    @returns number
+*/
 radToDegree -> x => (x * (180 / 3.1415926))

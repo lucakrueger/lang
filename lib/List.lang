@@ -1,14 +1,48 @@
 /* List Module */
+
+/* @autodoc
+    @module List
+    @name Head
+    @description Get head of a list
+    @arg ls A list
+    @returns any none
+*/
 Head -> ls => ls[0]
 Head -> ls (= []) => :none
+
+/* @autodoc
+    @module List
+    @name Tail
+    @description Get tail of a list
+    @arg ls A list
+    @returns list
+*/
 Tail -> ls => (splice: ls, 1, -1)
 Tail -> ls (<= 1) => []
 
+/* @autodoc
+    @module List
+    @name Search
+    @description Searches list for a target
+    @description Returns index where target is found
+    @arg ls A list
+    @arg target Any value
+    @returns number none
+*/
 Search -> ls target => (search': (search: ls, target))
 search' -> ls => (Head: ls)
 search' -> ls (= []) => :none
 search -> ls target => {x y | x <- ls, y => target, (x = y) | index}
 
+/* @autodoc
+    @module List
+    @name Searchls
+    @description Searches list for a target
+    @description Returns all indices where target is found
+    @arg ls A list
+    @arg target Any value
+    @returns list
+*/
 Searchls -> ls target => { x t | x <- ls, t => target, (x = t) | index }
 
 /* Legacy */
@@ -17,27 +51,88 @@ searchleg -> elem index array result => result
 searchleg -> elem index (> 0) array result (= :none) => (if: (elem = (Head: array)), (index - 1), :none)
 searchleg -> elem index (= 0) array result => :none
 
+/* @autodoc
+    @module List
+    @name for
+    @description Go over list
+    @description Executes a function with the current element
+    @arg ls A list
+    @arg start Start index
+    @arg end End index
+    @arg f Function. takes elem index list result
+    @returns list
+*/
 for -> ls start end f => { x fun | x <- (splice: ls, (start - 1), end), fun => f, (:true = :true) | (call: fun, [x]) }
 
+/* @autodoc
+    @module List
+    @name Length
+    @description Get length of a list
+    @arg ls A list
+    @returns number
+*/
 Length -> ls => (len: ls)
 Length -> ls (= []) => 0
 
+/* @autodoc
+    @module List
+    @name qsort
+    @description Sorts a list using quicksort
+    @arg ls A list
+    @returns list
+*/
 qsort -> ls | a => ([x | xs] => ls) => ((qsort: {Y X | Y <- xs, X => x, (Y < X)}) ++ x ++ (qsort: {Y X | Y <- xs, X => x, (Y >= X)}))
 qsort -> ls (= []) => []
 qsort -> ls (= 1) => ls
 qsort -> ls (= 2) => (if: (ls[0] > ls[1]), [ls[1], ls[0]], ls)
 
+/* @autodoc
+    @module List
+    @name Reverse
+    @description Reverses a list
+    @arg ls A list
+    @returns list
+*/
 Reverse -> ls | x => ([head | tail] => ls) => ((Reverse: tail) ++ head)
 Reverse -> ls (= 1) => ls
 Reverse -> ls (= 2) => [ls[1], ls[0]]
 
+/* @autodoc
+    @module List
+    @name Shift
+    @description Shifts a list to the left by one
+    @arg ls A list
+    @returns list
+*/
 Shift -> ls | x => ([head | tail] => ls) => (tail ++ head)
 
+/* @autodoc
+    @module List
+    @name Index
+    @description Get value of element in list by index
+    @arg ls A list
+    @arg i Index
+    @returns any
+*/
 Index -> ls i => ls[i]
 
+/* @autodoc
+    @module List
+    @name Last
+    @description Get last element of a list
+    @arg ls A list
+    @returns any none
+*/
 Last -> ls => (Index: ls, ((len: ls) - 1))
 Last -> ls (= []) => :none
 
+/* @autodoc
+    @module List
+    @name Join
+    @description Joins all elements of a list
+    @arg ls A list
+    @returns any
+*/
 Join -> ls => (foreachspec: ls, :Join', "")
 Join' -> elem index list result => (result + elem)
 Join' -> elem index (= 0) list result => elem

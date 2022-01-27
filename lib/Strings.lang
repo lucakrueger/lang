@@ -7,13 +7,49 @@
 */
 Chars -> s => (assign: [], s)
 
+/* @autodoc
+    @module Strings
+    @name Split
+    @description Splits a string into multiple parts
+    @description The division is done by searching for a specific target
+    @arg st Any string
+    @arg target Target at which the string should be splitted
+    @returns list
+*/
 Split -> st target | str => (str => ("a" + st)) => (split''': (split'': (Chars: str), (0 ++ (split': str, target))))
 split' -> str target => { x t | x <- (Chars: str), t => target, (x = t) | index }
 split'' -> strls ls => { x str y | x <- ls, str => strls, y => ls, (1 = 1) | (Join: (Tail: (splice: str, x, y[(index + 1)]))) }
 split''' -> ls => ls
 split''' -> ls (head 0) => (Tail: ls)
 
+/* @autodoc
+    @module Strings
+    @name Remove
+    @description Removes any instance of a specific character from a string
+    @arg str Any string
+    @arg target Any character
+    @returns string
+*/
 Remove -> str target => (Join: { x t | x <- (Chars: str), t => target, (x /= t) })
 
+/* @autodoc
+    @module Strings
+    @name Find
+    @description Finds a specific character in a string
+    @description Returns the index of the first instace found
+    @arg str Any string
+    @arg target Any character
+    @returns number none
+*/
 Find -> str target => (Search: (Chars: str), target)
+
+/* @autodoc
+    @module Strings
+    @name Findls
+    @description Finds a specific character in a string
+    @description Returns all indices where an instance was found
+    @arg str Any string
+    @arg target Any character
+    @returns list
+*/
 Findls -> str target => (Searchls: (Chars: str), target)

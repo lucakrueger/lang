@@ -49,6 +49,7 @@ function AutodocFormat() {
                 ]);
                 for (var fun of entry) {
                     lines.push(...[
+                        '',
                         `### ${fun.name}`,
                         ``,
                         '> ```',
@@ -75,7 +76,7 @@ function AutodocFormat() {
                     }
                     lines.push('>');
                     for (var paramVal of fun.args) {
-                        lines.push(`>- ${paramVal[0]} ${paramVal[1]}`);
+                        lines.push(`>- \`${paramVal[0]}\` ${paramVal[1]}`);
                     }
                     lines.push('>');
                     lines.push(`> **Returns** \`${returns}\``);

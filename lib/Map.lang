@@ -1,5 +1,30 @@
+/* @autodoc
+    @module Map
+    @name Map
+    @description Creates a Map
+    @returns map
+*/
 Map => [:map]
+
+/* @autodoc
+    @module Map
+    @name Set
+    @description Set a key from a map to a value
+    @arg map A map
+    @arg key Key name
+    @arg value Any value
+    @returns map
+*/
 Set -> map (head :map) key value => (map ++ [(Pair: key, value)])
+
+/* @autodoc
+    @module Map
+    @name Get
+    @description Get a value from map by key name
+    @arg map A map
+    @arg key Key name
+    @returns any
+*/
 Get -> map (head :map) key => {x k | x <- map, k => key, (index > 0), ((Head: x) = :pair), ((Index: (Tail: x), 0) = k) | (Index: (Tail: x), 1) }
 
 Pair -> key value => [:pair, key, value]

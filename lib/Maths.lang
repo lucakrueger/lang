@@ -3,15 +3,56 @@ module: Maths
 import: [Trig]
 
 /* Sets */
+/* @autodoc
+    @module Maths
+    @name Set
+    @description Check if a set is valid
+    @arg ls List
+    @returns true false
+*/
 Set -> ls => (identical: ls)
 
 /* Functions */
-Sumls -> ls => (foreachspec: ls, :sumHelper, 0)
+/* @autodoc
+    @module Maths
+    @name Sum
+    @description Goes over range and sums all results by function
+    @arg j Starting number
+    @arg n Ending number
+    @arg f Function takes elem index array result
+    @returns number
+*/
 Sum -> j n f => (Sumls: (foreachls: (range: j, (n+2)), f))
+
+/* @autodoc
+    @module Maths
+    @name Sumls
+    @description Goes over a list and sums all values
+    @arg ls A list
+    @returns number
+*/
+Sumls -> ls => (foreachspec: ls, :sumHelper, 0)
 sumHelper -> elem index array result => (elem + result)
 
-Productls -> ls => (foreachspec: ls, :productHelper, 1)
+/* @autodoc
+    @module Maths
+    @name Product
+    @description Goes over range and multiplies all results by function
+    @arg j Starting number
+    @arg n Ending number
+    @arg f Function takes elem index array result
+    @returns number
+*/
 Product -> j n f => (Productls: (foreachls: (range: j, (n+1)), f))
+
+/* @autodoc
+    @module Maths
+    @name Prodcutls
+    @description Goes over a list and multiplies all values
+    @arg ls A list
+    @returns number
+*/
+Productls -> ls => (foreachspec: ls, :productHelper, 1)
 productHelper -> elem index array result => (elem * result)
 
 /* Complex Numbers */

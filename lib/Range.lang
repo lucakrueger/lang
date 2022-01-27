@@ -1,2 +1,20 @@
-Range -> start end step | / => (delta => (end - start)) => { x s st | x <- (range: 0, (delta / step)), s => step, st => start, (x = x) | (s * x + st) }
+/* @autodoc
+    @module Range
+    @name Range
+    @description Generates a range between two values with a step size of one
+    @arg start Starting number
+    @arg end Ending number
+    @returns list
+*/
 Range -> start end => (range: start, end)
+
+/* @autodoc
+    @module Range
+    @name Range
+    @description Generates a range between two values using a specific step size
+    @arg start Starting number
+    @arg end Ending number
+    @arg step Step size
+    @returns list
+*/
+Range -> start end step | / => (delta => (end - start)) => { x s st | x <- (range: 0, (delta / step)), s => step, st => start, (x = x) | (s * x + st) }

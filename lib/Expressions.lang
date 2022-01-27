@@ -1,8 +1,34 @@
+/* @autodoc
+    @module Expressions
+    @name if
+    @description Checks if value is true or false
+    @arg cond Boolean
+    @arg result Return value if cond is true
+    @arg else Return value if cond is false
+    @returns any
+*/
 /* if */
 if -> cond (= :false) result else => else
 if -> cond (= :true) result else => result
+
+/* @autodoc
+    @module Expressions
+    @name if
+    @description Checks if value is true or false
+    @arg cond Boolean
+    @arg result Return value if cond is true
+    @returns any none
+*/
 if -> cond (= :false) result => :none
 if -> cond (= :true) result => result
 
+/* @autodoc
+    @module Expressions
+    @name for
+    @description A functional for loop starting at index zero
+    @arg max Max value for index
+    @arg fun Function takes elem index list result
+    @returns list
+*/
 /* for */
 for -> max fun => { x f | x <- (range: 0, max), f => fun, (1 = 1) | (call: f, [index]) }

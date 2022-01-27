@@ -1,2 +1,20 @@
+/* @autodoc
+    @module Random
+    @name Random
+    @description Generates random number from a range
+    @arg min Minimum
+    @arg max Maximum
+    @returns number
+*/
 Random -> min max => (random: min, max)
+
+/* @autodoc
+    @module Random
+    @name Randomls
+    @description Generates a list random number from a range
+    @arg length List length
+    @arg min Minimum
+    @arg max Maximum
+    @returns list
+*/
 Randomls -> length min max => {x mn mx | x <- (range: 0, length), mn => min, mx => max, (x = x) | (random: mn, mx)}
