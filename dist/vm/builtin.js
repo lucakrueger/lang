@@ -380,6 +380,15 @@ const APIListen = (args, processManager) => {
     app.get('*', (req, res) => {
         res.send(processManager.executeFunction(requestFun.getValue(), [new structs_1.Atom('get'), req.originalUrl]));
     });
+    app.post('*', (req, res) => {
+        res.send(processManager.executeFunction(requestFun.getValue(), [new structs_1.Atom('post'), req.originalUrl]));
+    });
+    app.put('*', (req, res) => {
+        res.send(processManager.executeFunction(requestFun.getValue(), [new structs_1.Atom('put'), req.originalUrl]));
+    });
+    app.delete('*', (req, res) => {
+        res.send(processManager.executeFunction(requestFun.getValue(), [new structs_1.Atom('delete'), req.originalUrl]));
+    });
     app.listen(port, () => {
         processManager.executeFunction(fun.getValue(), [port]);
     });

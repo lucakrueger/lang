@@ -10,40 +10,40 @@ import: [Trig]
     @arg ls List
     @returns true false
 */
-Set -> ls => (identical: ls)
+set -> ls => (identical: ls)
 
 /* Functions */
 /* @autodoc
     @module Maths
-    @name Sum
+    @name sum
     @description Goes over range and sums all results by function
     @arg j Starting number
     @arg n Ending number
     @arg f Function takes elem index array result
     @returns number
 */
-Sum -> j n f => (Sumls: (foreachls: (range: j, (n+2)), f))
+sum -> j n f => (sum: (foreachls: (range: j, (n+2)), f))
 
 /* @autodoc
     @module Maths
-    @name Sumls
+    @name sumls
     @description Goes over a list and sums all values
     @arg ls A list
     @returns number
 */
-Sumls -> ls => (foreachspec: ls, :sumHelper, 0)
+sum -> ls => (foreachspec: ls, :sumHelper, 0)
 sumHelper -> elem index array result => (elem + result)
 
 /* @autodoc
     @module Maths
-    @name Product
+    @name product
     @description Goes over range and multiplies all results by function
     @arg j Starting number
     @arg n Ending number
     @arg f Function takes elem index array result
     @returns number
 */
-Product -> j n f => (Productls: (foreachls: (range: j, (n+1)), f))
+product -> j n f => (product: (foreachls: (range: j, (n+1)), f))
 
 /* @autodoc
     @module Maths
@@ -52,7 +52,7 @@ Product -> j n f => (Productls: (foreachls: (range: j, (n+1)), f))
     @arg ls A list
     @returns number
 */
-Productls -> ls => (foreachspec: ls, :productHelper, 1)
+product -> ls => (foreachspec: ls, :productHelper, 1)
 productHelper -> elem index array result => (elem * result)
 
 /* Complex Numbers */
@@ -61,3 +61,5 @@ Real -> complex (head :complex) => complex[1]
 Imaginary -> complex (head :complex) => complex[2]
 
 sqrt -> x => (x root 2)
+
+factorial -> n => (Product: (1..n))

@@ -206,7 +206,9 @@ export class VMProcess extends Process {
                             break
                         case '≈':
                             const tolerance = 0.015
-                            if((a <= (b + tolerance)) && (a >= (b - tolerance))) {
+                            var aa = Math.round((a + Number.EPSILON) * 100) / 100
+                            var bb = Math.round((b + Number.EPSILON) * 100) / 100
+                            if((aa <= (bb + tolerance)) && (aa >= (bb - tolerance))) {
                                 this.stack.push(new Atom('true'))
                             } else {
                                 this.stack.push(new Atom('false'))
@@ -214,6 +216,28 @@ export class VMProcess extends Process {
                             break
                         case '±':
                             this.stack.push([a + b, a - b])
+                            break
+                        case '..':
+                            var ls: number[] = []
+                            if(a < b) {
+                                var stepSize = (b % 1)
+                                if(stepSize == 0) stepSize = 1
+                                var ih = a
+                                while(ih <= b) {
+                                    ls.push(Math.round((ih + Number.EPSILON) * 100) / 100)
+                                    ih += stepSize
+                                }
+                            } else if(a > b) {
+                                var stepSize = (b % 1)
+                                if(stepSize == 0) stepSize = 1
+                                if(stepSize < 0) stepSize = stepSize * -1
+                                var ih = a
+                                while(ih >= b) {
+                                    ls.push(Math.round((ih + Number.EPSILON) * 100) / 100)
+                                    ih -= stepSize
+                                }
+                            }
+                            this.stack.push(ls)
                             break
                         default:
                             ThrowError(NativeErrors.INTERNAL, `Unknown operator ${args[0]}`)
@@ -466,6 +490,17 @@ export class VMProcess extends Process {
                 }
                 return (arg == value)
             case '/=':
+                var converted: VMDatatype | any = this.convertLiteral(value)
+                if(arg instanceof VMDatatype && converted instanceof VMDatatype) {
+                    return (arg.getValue() != converted.getValue())
+                } else if(Array.isArray(arg) && Array.isArray(converted)) {
+                    // both arrays
+                    //console.log(arg, converted)
+                    return !this.arraysEqual(arg, converted)
+                } else if(Array.isArray(arg) && typeof converted == 'number') {
+                    // arg is array, value is number
+                    return (arg.length != converted)
+                }
                 return (arg != value)
             case 'tail':
                 if(!Array.isArray(arg)) {
