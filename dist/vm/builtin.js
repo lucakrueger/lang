@@ -365,6 +365,26 @@ const Assign = (args, processManager) => {
     var source = args[1];
     return Object.assign(target, source);
 };
+// API Framework //
+// takes: port, listen_function (port), http_request_function (method, url) -> :ok | :err
+const APIListen = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('api_listen', args.length, 3);
+    if (err != undefined) {
+        return err;
+    }
+    const express = require('express');
+    var port = args[0];
+    var fun = args[1];
+    var requestFun = args[2];
+    var app = express();
+    app.get('*', (req, res) => {
+        res.send(processManager.executeFunction(requestFun.getValue(), [new structs_1.Atom('get'), req.originalUrl]));
+    });
+    app.listen(port, () => {
+        processManager.executeFunction(fun.getValue(), [port]);
+    });
+    return new structs_1.Atom('ok');
+};
 exports.Builtin = new Map([
     ['print', BuiltinPrint],
     ['array_new', ArrayNew],
@@ -385,5 +405,6 @@ exports.Builtin = new Map([
     ['random', Random],
     ['separate', separate],
     ['arctan', arctan],
-    ['assign', Assign]
+    ['assign', Assign],
+    ['apilisten', APIListen]
 ]);

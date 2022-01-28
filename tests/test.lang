@@ -1,1 +1,9 @@
-main =>
+main => (apilisten: 3000, :apiinternal, :apirequest)
+
+apiinternal -> port => (print: ("Listenting on " + port))
+
+apirequest -> method url => "404 Not found"
+apirequest -> method (= :get) url => (route: url, :apiget)
+
+apiget -> url args => "404 Not found"
+apiget -> url (url "/index/:id") args => args
