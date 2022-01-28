@@ -1,6 +1,7 @@
 /* @autodoc
     @module Range
     @name Range
+    @description Deprecated
     @description Generates a range between two values with a step size of one
     @arg start Starting number
     @arg end Ending number
@@ -11,6 +12,7 @@ Range -> start end => (range: start, end)
 /* @autodoc
     @module Range
     @name Range
+    @description Deprecated
     @description Generates a range between two values using a specific step size
     @arg start Starting number
     @arg end Ending number
