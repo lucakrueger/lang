@@ -1,0 +1,135 @@
+/* Documentation for builtin functions */
+
+/* @autodoc
+    @module Builtin
+    @name print
+    @description Prints value and return supplied value
+    @arg value Any value
+    @returns any
+*/
+
+/* @autodoc
+    @module Builtin
+    @name call
+    @description Calls function
+    @arg name Function name
+    @arg args Supplied arguments as a list
+    @returns any
+*/
+
+/* @autodoc
+    @module Builtin
+    @name foreach
+    @description Goes over list and executes function
+    @arg ls Any list
+    @arg f Function taking elem index list result
+    @returns any none
+*/
+
+/* @autodoc
+    @module Builtin
+    @name foreachspec
+    @description Goes over list and executes function
+    @description First value can be specified and will not be automatically none
+    @arg ls Any list
+    @arg f Function taking elem index list result
+    @arg first First value result takes
+    @returns any
+*/
+
+/* @autodoc
+    @module Builtin
+    @name foreach
+    @description Goes over list and executes function
+    @description Collects all result in a list
+    @arg ls Any list
+    @arg f Function taking elem index list result
+    @returns list
+*/
+
+/* @autodoc
+    @module Builtin
+    @name range
+    @description Generates a range between two values with a step size of one
+    @arg min Minimum value
+    @arg max Maximum value
+    @returns list
+*/
+
+/* @autodoc
+    @module Builtin
+    @name splice
+    @description Splices a list
+    @arg ls Any list
+    @arg start Start index
+    @arg end End index
+    @returns list any
+*/
+
+/* @autodoc
+    @module Builtin
+    @name shuffle
+    @description Shuffles list
+    @arg ls Any list
+    @returns list
+*/
+
+/* @autodoc
+    @module Builtin
+    @name separate
+    @description Separates a two dimensional list into two seperate lists
+    @arg ls A two dimensional list
+    @returns list
+*/
+
+/* @autodoc
+    @module Builtin
+    @name len
+    @description gets length of a list
+    @arg ls Any list
+    @returns number
+*/
+
+/* @autodoc
+    @module Builtin
+    @name identical
+    @description Checks if all values in list are identical
+    @arg ls Any list
+    @returns true false
+*/
+
+/* @autodoc
+    @module Builtin
+    @name route
+    @description Resolves a route
+    @description See api
+    @arg path Any string
+    @arg f Function taking url args
+    @returns any
+*/
+
+/* @autodoc
+    @module Builtin
+    @name performance
+    @description Measures performance of a function in ms
+    @arg f Function taking args
+    @arg args Supplied arguments
+    @returns any
+*/
+
+/* @autodoc
+    @module Builtin
+    @name arctan
+    @description Arctan
+    @arg x Any Number
+    @returns number
+*/
+
+/* @autodoc
+    @module Builtin
+    @name assign
+    @description Assignes source to target
+    @arg target Any value
+    @arg source Any value
+    @returns any
+*/

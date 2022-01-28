@@ -36,6 +36,17 @@ search -> ls target => {x y | x <- ls, y => target, (x = y) | index}
 
 /* @autodoc
     @module List
+    @name Contains
+    @description Checks if list contains target
+    @arg ls A list
+    @arg target Any value
+    @returns true false
+*/
+Contains -> ls target | mid => (mid => ((len: ls) / 2)) => (if: ((Contains: (splice: ls, 0, mid), target) = :false), (Contains: (splice: ls, mid, -1), target), :true)
+Contains -> ls (= 1) target => (if: (ls[0] = target), :true, :false)
+
+/* @autodoc
+    @module List
     @name Searchls
     @description Searches list for a target
     @description Returns all indices where target is found

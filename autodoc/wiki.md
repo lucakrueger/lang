@@ -29,6 +29,144 @@
 >
 > **Returns** `list`
 
+## Enum
+
+
+### enum
+
+> ```
+> enum -> values => enum
+> ```
+>
+> Create an enum
+>
+>- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
+>
+> **Returns** `enum`
+
+### isEnum
+
+> ```
+> isEnum -> value enum => any | none
+> ```
+>
+> Checks if value is part of an Enum
+>
+>- `value` Any value
+>- `enum` An Enum
+>
+> **Returns** `any | none`
+
+## Expressions
+
+
+### if
+
+> ```
+> if -> cond result else => any
+> ```
+>
+> Checks if value is true or false
+>
+>- `cond` Boolean
+>- `result` Return value if cond is true
+>- `else` Return value if cond is false
+>
+> **Returns** `any`
+
+### if
+
+> ```
+> if -> cond result => any | none
+> ```
+>
+> Checks if value is true or false
+>
+>- `cond` Boolean
+>- `result` Return value if cond is true
+>
+> **Returns** `any | none`
+
+### for
+
+> ```
+> for -> max fun => list
+> ```
+>
+> A functional for loop starting at index zero
+>
+>- `max` Max value for index
+>- `fun` Function takes elem index list result
+>
+> **Returns** `list`
+
+## Maths
+
+
+### Set
+
+> ```
+> Set -> ls => true | false
+> ```
+>
+> Check if a set is valid
+>
+>- `ls` List
+>
+> **Returns** `true | false`
+
+### Sum
+
+> ```
+> Sum -> j n f => number
+> ```
+>
+> Goes over range and sums all results by function
+>
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
+>
+> **Returns** `number`
+
+### Sumls
+
+> ```
+> Sumls -> ls => number
+> ```
+>
+> Goes over a list and sums all values
+>
+>- `ls` A list
+>
+> **Returns** `number`
+
+### Product
+
+> ```
+> Product -> j n f => number
+> ```
+>
+> Goes over range and multiplies all results by function
+>
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
+>
+> **Returns** `number`
+
+### Prodcutls
+
+> ```
+> Prodcutls -> ls => number
+> ```
+>
+> Goes over a list and multiplies all values
+>
+>- `ls` A list
+>
+> **Returns** `number`
+
 ## Strings
 
 
@@ -96,49 +234,6 @@
 >
 >- `str` Any string
 >- `target` Any character
->
-> **Returns** `list`
-
-## Expressions
-
-
-### if
-
-> ```
-> if -> cond result else => any
-> ```
->
-> Checks if value is true or false
->
->- `cond` Boolean
->- `result` Return value if cond is true
->- `else` Return value if cond is false
->
-> **Returns** `any`
-
-### if
-
-> ```
-> if -> cond result => any | none
-> ```
->
-> Checks if value is true or false
->
->- `cond` Boolean
->- `result` Return value if cond is true
->
-> **Returns** `any | none`
-
-### for
-
-> ```
-> for -> max fun => list
-> ```
->
-> A functional for loop starting at index zero
->
->- `max` Max value for index
->- `fun` Function takes elem index list result
 >
 > **Returns** `list`
 
@@ -298,6 +393,77 @@
 >
 > **Returns** `any`
 
+## Map
+
+
+### Map
+
+> ```
+> Map => map
+> ```
+>
+> Creates a Map
+>
+>
+> **Returns** `map`
+
+### Set
+
+> ```
+> Set -> map key value => map
+> ```
+>
+> Set a key from a map to a value
+>
+>- `map` A map
+>- `key` Key name
+>- `value` Any value
+>
+> **Returns** `map`
+
+### Get
+
+> ```
+> Get -> map key => any
+> ```
+>
+> Get a value from map by key name
+>
+>- `map` A map
+>- `key` Key name
+>
+> **Returns** `any`
+
+## Random
+
+
+### Random
+
+> ```
+> Random -> min max => number
+> ```
+>
+> Generates random number from a range
+>
+>- `min` Minimum
+>- `max` Maximum
+>
+> **Returns** `number`
+
+### Randomls
+
+> ```
+> Randomls -> length min max => list
+> ```
+>
+> Generates a list random number from a range
+>
+>- `length` List length
+>- `min` Minimum
+>- `max` Maximum
+>
+> **Returns** `list`
+
 ## Trig
 
 
@@ -409,168 +575,199 @@
 >
 > **Returns** `number`
 
-## Maths
+## Builtin
 
 
-### Set
-
-> ```
-> Set -> ls => true | false
-> ```
->
-> Check if a set is valid
->
->- `ls` List
->
-> **Returns** `true | false`
-
-### Sum
+### print
 
 > ```
-> Sum -> j n f => number
+> print -> value => any
 > ```
 >
-> Goes over range and sums all results by function
+> Prints value and return supplied value
 >
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
->
-> **Returns** `number`
-
-### Sumls
-
-> ```
-> Sumls -> ls => number
-> ```
->
-> Goes over a list and sums all values
->
->- `ls` A list
->
-> **Returns** `number`
-
-### Product
-
-> ```
-> Product -> j n f => number
-> ```
->
-> Goes over range and multiplies all results by function
->
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
->
-> **Returns** `number`
-
-### Prodcutls
-
-> ```
-> Prodcutls -> ls => number
-> ```
->
-> Goes over a list and multiplies all values
->
->- `ls` A list
->
-> **Returns** `number`
-
-## Map
-
-
-### Map
-
-> ```
-> Map => map
-> ```
->
-> Creates a Map
->
->
-> **Returns** `map`
-
-### Set
-
-> ```
-> Set -> map key value => map
-> ```
->
-> Set a key from a map to a value
->
->- `map` A map
->- `key` Key name
 >- `value` Any value
->
-> **Returns** `map`
-
-### Get
-
-> ```
-> Get -> map key => any
-> ```
->
-> Get a value from map by key name
->
->- `map` A map
->- `key` Key name
 >
 > **Returns** `any`
 
-## Random
-
-
-### Random
+### call
 
 > ```
-> Random -> min max => number
+> call -> name args => any
 > ```
 >
-> Generates random number from a range
+> Calls function
 >
->- `min` Minimum
->- `max` Maximum
+>- `name` Function name
+>- `args` Supplied arguments as a list
 >
-> **Returns** `number`
+> **Returns** `any`
 
-### Randomls
+### foreach
 
 > ```
-> Randomls -> length min max => list
+> foreach -> ls f => any | none
 > ```
 >
-> Generates a list random number from a range
+> Goes over list and executes function
 >
->- `length` List length
->- `min` Minimum
->- `max` Maximum
+>- `ls` Any list
+>- `f` Function taking elem index list result
+>
+> **Returns** `any | none`
+
+### foreachspec
+
+> ```
+> foreachspec -> ls f first => any
+> ```
+>
+> Goes over list and executes function
+> First value can be specified and will not be automatically none
+>
+>- `ls` Any list
+>- `f` Function taking elem index list result
+>- `first` First value result takes
+>
+> **Returns** `any`
+
+### foreach
+
+> ```
+> foreach -> ls f => list
+> ```
+>
+> Goes over list and executes function
+> Collects all result in a list
+>
+>- `ls` Any list
+>- `f` Function taking elem index list result
 >
 > **Returns** `list`
 
-## Enum
-
-
-### enum
+### range
 
 > ```
-> enum -> values => enum
+> range -> min max => list
 > ```
 >
-> Create an enum
+> Generates a range between two values with a step size of one
 >
->- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
+>- `min` Minimum value
+>- `max` Maximum value
 >
-> **Returns** `enum`
+> **Returns** `list`
 
-### isEnum
+### splice
 
 > ```
-> isEnum -> value enum => any | none
+> splice -> ls start end => list | any
 > ```
 >
-> Checks if value is part of an Enum
+> Splices a list
 >
->- `value` Any value
->- `enum` An Enum
+>- `ls` Any list
+>- `start` Start index
+>- `end` End index
 >
-> **Returns** `any | none`
+> **Returns** `list | any`
+
+### shuffle
+
+> ```
+> shuffle -> ls => list
+> ```
+>
+> Shuffles list
+>
+>- `ls` Any list
+>
+> **Returns** `list`
+
+### separate
+
+> ```
+> separate -> ls => list
+> ```
+>
+> Separates a two dimensional list into two seperate lists
+>
+>- `ls` A two dimensional list
+>
+> **Returns** `list`
+
+### len
+
+> ```
+> len -> ls => number
+> ```
+>
+> gets length of a list
+>
+>- `ls` Any list
+>
+> **Returns** `number`
+
+### identical
+
+> ```
+> identical -> ls => true | false
+> ```
+>
+> Checks if all values in list are identical
+>
+>- `ls` Any list
+>
+> **Returns** `true | false`
+
+### route
+
+> ```
+> route -> path f => any
+> ```
+>
+> Resolves a route
+> See api
+>
+>- `path` Any string
+>- `f` Function taking url args
+>
+> **Returns** `any`
+
+### performance
+
+> ```
+> performance -> f args => any
+> ```
+>
+> Measures performance of a function in ms
+>
+>- `f` Function taking args
+>- `args` Supplied arguments
+>
+> **Returns** `any`
+
+### arctan
+
+> ```
+> arctan -> x => number
+> ```
+>
+> Arctan
+>
+>- `x` Any Number
+>
+> **Returns** `number`
+
+### assign
+
+> ```
+> assign -> target source => any
+> ```
+>
+> Assignes source to target
+>
+>- `target` Any value
+>- `source` Any value
+>
+> **Returns** `any`

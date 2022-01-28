@@ -9,6 +9,7 @@ var NativeErrors;
 })(NativeErrors = exports.NativeErrors || (exports.NativeErrors = {}));
 function ThrowError(area, message) {
     console.log(`${area} error. ${message}.`);
+    process.exit(1);
     return new VMError(area, message);
 }
 exports.ThrowError = ThrowError;

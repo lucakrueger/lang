@@ -6,6 +6,7 @@ export enum NativeErrors {
 
 export function ThrowError(area: string, message: string): VMError {
     console.log(`${area} error. ${message}.`)
+    process.exit(1)
     return new VMError(area, message)
 }
 
