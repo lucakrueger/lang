@@ -5,6 +5,7 @@ import { Stack } from "../internal/stack";
 import { NativeErrors, ThrowError, VMError } from "../logger/logger";
 import { ProcessManager } from "./processManager";
 import { Atom, VMDatatype } from "./structs";
+import * as crypto from 'crypto'
 
 export abstract class Process {
     constructor(public processManager: ProcessManager, public args: any[]) {}
@@ -216,6 +217,55 @@ export class VMProcess extends Process {
                             break
                         case '±':
                             this.stack.push([a + b, a - b])
+                            break
+                        case '<<':
+                            this.stack.push(a << b)
+                            break
+                        case '>>':
+                            this.stack.push(a >> b)
+                            break
+                        case '#':
+                            // hash operator
+                            // a # 'sha256'
+                            var hashed: string = ''
+                            var algo: string = ''
+                            if(a instanceof VMDatatype) {
+                                hashed = a.getValue()
+                            } else {
+                                hashed = a
+                            }
+                            if(b instanceof VMDatatype) {
+                                algo = b.getValue()
+                            } else {
+                                algo = b
+                            }
+                            this.stack.push(crypto.createHash(algo).update(hashed).digest('hex'))
+                            break
+                        case '$':
+                            break
+                        case '&':
+                            if(a instanceof VMDatatype && b instanceof VMDatatype) {
+                                this.stack.push(a.getValue() && b.getValue())
+                            } else if(a instanceof VMDatatype && !(b instanceof VMDatatype)) {
+                                this.stack.push(a.getValue() && b)
+                            } else if(b instanceof VMDatatype && !(a instanceof VMDatatype)) {
+                                this.stack.push(b.getValue() && a)
+                            } else {
+                                this.stack.push(a && b)
+                            }
+                            break
+                        case '!':
+                            if(a instanceof VMDatatype && b instanceof VMDatatype) {
+                                this.stack.push(a.getValue() || b.getValue())
+                            } else if(a instanceof VMDatatype && !(b instanceof VMDatatype)) {
+                                this.stack.push(a.getValue() || b)
+                            } else if(b instanceof VMDatatype && !(a instanceof VMDatatype)) {
+                                this.stack.push(b.getValue() || a)
+                            } else {
+                                this.stack.push(a || b)
+                            }
+                            break
+                        case '?':
                             break
                         case '..':
                             var ls: number[] = []

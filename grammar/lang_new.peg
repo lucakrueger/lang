@@ -12,11 +12,11 @@ Expression
   / SpecialOperation
   / Set
   / ArrayIndex
+  / Number
   / Name
   / Array
   / atom
   / string
-  / Number
 
 Definition
   = Def: (Name ":" _ (Name / Array)) {return {ident: 'definition', value: [Def[0], Def[3]]}}
@@ -51,7 +51,7 @@ Set
   = Set: ("{" _ (Name _)+ _ "|" _ (","?_ Name _ ("<-" / "=>") _ Expression _)* _ (","? _ Operation)+ _ ("|" _ Expression _)? "}") {return {ident: 'set', args: Set[2], ops: Set[6], rules: Set[8], result: Set[10]}}
 
 Name
-  = text: (([a-z] / [A-Z] / [/.'])+) {return {ident: 'name', value: text.join("")}}
+  = text: (([a-z] / [A-Z] / [0-9] / [/.'])+) {return {ident: 'name', value: text.join("")}}
 
 Type
   = Type: ([a-z] / [A-Z]) {return {ident: 'type', value: Type[0]}}

@@ -1,242 +1,4 @@
 
-## Range
-
-
-### Range
-
-> ```
-> Range -> start end => list
-> ```
->
-> Generates a range between two values with a step size of one
->
->- `start` Starting number
->- `end` Ending number
->
-> **Returns** `list`
-
-### Range
-
-> ```
-> Range -> start end step => list
-> ```
->
-> Generates a range between two values using a specific step size
->
->- `start` Starting number
->- `end` Ending number
->- `step` Step size
->
-> **Returns** `list`
-
-## Enum
-
-
-### enum
-
-> ```
-> enum -> values => enum
-> ```
->
-> Create an enum
->
->- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
->
-> **Returns** `enum`
-
-### isEnum
-
-> ```
-> isEnum -> value enum => any | none
-> ```
->
-> Checks if value is part of an Enum
->
->- `value` Any value
->- `enum` An Enum
->
-> **Returns** `any | none`
-
-## Expressions
-
-
-### if
-
-> ```
-> if -> cond result else => any
-> ```
->
-> Checks if value is true or false
->
->- `cond` Boolean
->- `result` Return value if cond is true
->- `else` Return value if cond is false
->
-> **Returns** `any`
-
-### if
-
-> ```
-> if -> cond result => any | none
-> ```
->
-> Checks if value is true or false
->
->- `cond` Boolean
->- `result` Return value if cond is true
->
-> **Returns** `any | none`
-
-### for
-
-> ```
-> for -> max fun => list
-> ```
->
-> A functional for loop starting at index zero
->
->- `max` Max value for index
->- `fun` Function takes elem index list result
->
-> **Returns** `list`
-
-## Maths
-
-
-### Set
-
-> ```
-> Set -> ls => true | false
-> ```
->
-> Check if a set is valid
->
->- `ls` List
->
-> **Returns** `true | false`
-
-### Sum
-
-> ```
-> Sum -> j n f => number
-> ```
->
-> Goes over range and sums all results by function
->
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
->
-> **Returns** `number`
-
-### Sumls
-
-> ```
-> Sumls -> ls => number
-> ```
->
-> Goes over a list and sums all values
->
->- `ls` A list
->
-> **Returns** `number`
-
-### Product
-
-> ```
-> Product -> j n f => number
-> ```
->
-> Goes over range and multiplies all results by function
->
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
->
-> **Returns** `number`
-
-### Prodcutls
-
-> ```
-> Prodcutls -> ls => number
-> ```
->
-> Goes over a list and multiplies all values
->
->- `ls` A list
->
-> **Returns** `number`
-
-## Strings
-
-
-### Chars
-
-> ```
-> Chars -> s => list
-> ```
->
-> Splits a string into its characters
->
->- `s` Any string
->
-> **Returns** `list`
-
-### Split
-
-> ```
-> Split -> st target => list
-> ```
->
-> Splits a string into multiple parts
-> The division is done by searching for a specific target
->
->- `st` Any string
->- `target` Target at which the string should be splitted
->
-> **Returns** `list`
-
-### Remove
-
-> ```
-> Remove -> str target => string
-> ```
->
-> Removes any instance of a specific character from a string
->
->- `str` Any string
->- `target` Any character
->
-> **Returns** `string`
-
-### Find
-
-> ```
-> Find -> str target => number | none
-> ```
->
-> Finds a specific character in a string
-> Returns the index of the first instace found
->
->- `str` Any string
->- `target` Any character
->
-> **Returns** `number | none`
-
-### Findls
-
-> ```
-> Findls -> str target => list
-> ```
->
-> Finds a specific character in a string
-> Returns all indices where an instance was found
->
->- `str` Any string
->- `target` Any character
->
-> **Returns** `list`
-
 ## List
 
 
@@ -277,6 +39,19 @@
 >- `target` Any value
 >
 > **Returns** `number | none`
+
+### Contains
+
+> ```
+> Contains -> ls target => true | false
+> ```
+>
+> Checks if list contains target
+>
+>- `ls` A list
+>- `target` Any value
+>
+> **Returns** `true | false`
 
 ### Searchls
 
@@ -393,76 +168,170 @@
 >
 > **Returns** `any`
 
-## Map
+## Strings
 
 
-### Map
+### Chars
 
 > ```
-> Map => map
+> Chars -> s => list
 > ```
 >
-> Creates a Map
+> Splits a string into its characters
 >
+>- `s` Any string
 >
-> **Returns** `map`
+> **Returns** `list`
+
+### Split
+
+> ```
+> Split -> st target => list
+> ```
+>
+> Splits a string into multiple parts
+> The division is done by searching for a specific target
+>
+>- `st` Any string
+>- `target` Target at which the string should be splitted
+>
+> **Returns** `list`
+
+### Remove
+
+> ```
+> Remove -> str target => string
+> ```
+>
+> Removes any instance of a specific character from a string
+>
+>- `str` Any string
+>- `target` Any character
+>
+> **Returns** `string`
+
+### Find
+
+> ```
+> Find -> str target => number | none
+> ```
+>
+> Finds a specific character in a string
+> Returns the index of the first instace found
+>
+>- `str` Any string
+>- `target` Any character
+>
+> **Returns** `number | none`
+
+### Findls
+
+> ```
+> Findls -> str target => list
+> ```
+>
+> Finds a specific character in a string
+> Returns all indices where an instance was found
+>
+>- `str` Any string
+>- `target` Any character
+>
+> **Returns** `list`
+
+## Maths
+
 
 ### Set
 
 > ```
-> Set -> map key value => map
+> Set -> ls => true | false
 > ```
 >
-> Set a key from a map to a value
+> Check if a set is valid
 >
->- `map` A map
->- `key` Key name
->- `value` Any value
+>- `ls` List
 >
-> **Returns** `map`
+> **Returns** `true | false`
 
-### Get
+### sum
 
 > ```
-> Get -> map key => any
+> sum -> j n f => number
 > ```
 >
-> Get a value from map by key name
+> Goes over range and sums all results by function
 >
->- `map` A map
->- `key` Key name
->
-> **Returns** `any`
-
-## Random
-
-
-### Random
-
-> ```
-> Random -> min max => number
-> ```
->
-> Generates random number from a range
->
->- `min` Minimum
->- `max` Maximum
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
 >
 > **Returns** `number`
 
-### Randomls
+### sumls
 
 > ```
-> Randomls -> length min max => list
+> sumls -> ls => number
 > ```
 >
-> Generates a list random number from a range
+> Goes over a list and sums all values
 >
->- `length` List length
->- `min` Minimum
->- `max` Maximum
+>- `ls` A list
 >
-> **Returns** `list`
+> **Returns** `number`
+
+### product
+
+> ```
+> product -> j n f => number
+> ```
+>
+> Goes over range and multiplies all results by function
+>
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
+>
+> **Returns** `number`
+
+### Prodcutls
+
+> ```
+> Prodcutls -> ls => number
+> ```
+>
+> Goes over a list and multiplies all values
+>
+>- `ls` A list
+>
+> **Returns** `number`
+
+## Enum
+
+
+### enum
+
+> ```
+> enum -> values => enum
+> ```
+>
+> Create an enum
+>
+>- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
+>
+> **Returns** `enum`
+
+### isEnum
+
+> ```
+> isEnum -> value enum => any | none
+> ```
+>
+> Checks if value is part of an Enum
+>
+>- `value` Any value
+>- `enum` An Enum
+>
+> **Returns** `any | none`
 
 ## Trig
 
@@ -771,3 +640,149 @@
 >- `source` Any value
 >
 > **Returns** `any`
+
+## Range
+
+
+### Range
+
+> ```
+> Range -> start end => list
+> ```
+>
+> Deprecated
+> Generates a range between two values with a step size of one
+>
+>- `start` Starting number
+>- `end` Ending number
+>
+> **Returns** `list`
+
+### Range
+
+> ```
+> Range -> start end step => list
+> ```
+>
+> Deprecated
+> Generates a range between two values using a specific step size
+>
+>- `start` Starting number
+>- `end` Ending number
+>- `step` Step size
+>
+> **Returns** `list`
+
+## Map
+
+
+### Map
+
+> ```
+> Map => map
+> ```
+>
+> Creates a Map
+>
+>
+> **Returns** `map`
+
+### Set
+
+> ```
+> Set -> map key value => map
+> ```
+>
+> Set a key from a map to a value
+>
+>- `map` A map
+>- `key` Key name
+>- `value` Any value
+>
+> **Returns** `map`
+
+### Get
+
+> ```
+> Get -> map key => any
+> ```
+>
+> Get a value from map by key name
+>
+>- `map` A map
+>- `key` Key name
+>
+> **Returns** `any`
+
+## Random
+
+
+### Random
+
+> ```
+> Random -> min max => number
+> ```
+>
+> Generates random number from a range
+>
+>- `min` Minimum
+>- `max` Maximum
+>
+> **Returns** `number`
+
+### Randomls
+
+> ```
+> Randomls -> length min max => list
+> ```
+>
+> Generates a list random number from a range
+>
+>- `length` List length
+>- `min` Minimum
+>- `max` Maximum
+>
+> **Returns** `list`
+
+## Expressions
+
+
+### if
+
+> ```
+> if -> cond result else => any
+> ```
+>
+> Checks if value is true or false
+>
+>- `cond` Boolean
+>- `result` Return value if cond is true
+>- `else` Return value if cond is false
+>
+> **Returns** `any`
+
+### if
+
+> ```
+> if -> cond result => any | none
+> ```
+>
+> Checks if value is true or false
+>
+>- `cond` Boolean
+>- `result` Return value if cond is true
+>
+> **Returns** `any | none`
+
+### for
+
+> ```
+> for -> max fun => list
+> ```
+>
+> A functional for loop starting at index zero
+>
+>- `max` Max value for index
+>- `fun` Function takes elem index list result
+>
+> **Returns** `list`

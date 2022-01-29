@@ -22,7 +22,7 @@ export class Autodoc extends ParserExtension {
 
     public onStart(): void {
         // check for autodoc config
-        if(this.checkFileExistsSync('autodoc.json')) {
+        if(checkFileExistsSync('autodoc.json')) {
             this.config = JSON.parse(fs.readFileSync('autodoc.json', {encoding: 'utf-8'}))
         }
     }
@@ -83,16 +83,6 @@ export class Autodoc extends ParserExtension {
         this.functions.push(temp)
     }
 
-    checkFileExistsSync(filepath: string){
-        let flag = true;
-        try{
-          fs.accessSync(filepath, fs.constants.F_OK);
-        }catch(e){
-          flag = false;
-        }
-        return flag;
-      }
-
       makeid(length: number) {
         var result           = '';
         var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -106,6 +96,16 @@ export class Autodoc extends ParserExtension {
     
 
 }
+
+export function checkFileExistsSync(filepath: string){
+    let flag = true;
+    try{
+      fs.accessSync(filepath, fs.constants.F_OK);
+    }catch(e){
+      flag = false;
+    }
+    return flag;
+  }
 
 export interface AutodocFunction {
     name: string,

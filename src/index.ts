@@ -11,12 +11,11 @@ import { NativeErrors, ThrowError } from "./logger/logger";
 import { ThreadManager } from "./thread/threadtest";
 import { testParserExt } from "./test/parserExtTest";
 import { AutodocCombine, AutodocFormat } from "./autodoc/autocombine";
-import { Autodoc } from "./autodoc/autodoc";
+import { Autodoc, checkFileExistsSync } from "./autodoc/autodoc";
 
 var file: string = ''
 var fun: string = 'main'
 var args: string[] = []
-
 
 if(process.argv.length >= 3) {
     // only file is given

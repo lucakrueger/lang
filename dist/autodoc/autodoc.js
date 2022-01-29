@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Autodoc = void 0;
+exports.checkFileExistsSync = exports.Autodoc = void 0;
 const parserExtension_1 = require("../parser/parserExtension");
 const parser = require('../../parser/autodoc.js');
 const fs = __importStar(require("fs"));
@@ -39,7 +39,7 @@ class Autodoc extends parserExtension_1.ParserExtension {
     }
     onStart() {
         // check for autodoc config
-        if (this.checkFileExistsSync('autodoc.json')) {
+        if (checkFileExistsSync('autodoc.json')) {
             this.config = JSON.parse(fs.readFileSync('autodoc.json', { encoding: 'utf-8' }));
         }
     }
@@ -91,16 +91,6 @@ class Autodoc extends parserExtension_1.ParserExtension {
         }
         this.functions.push(temp);
     }
-    checkFileExistsSync(filepath) {
-        let flag = true;
-        try {
-            fs.accessSync(filepath, fs.constants.F_OK);
-        }
-        catch (e) {
-            flag = false;
-        }
-        return flag;
-    }
     makeid(length) {
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -113,3 +103,14 @@ class Autodoc extends parserExtension_1.ParserExtension {
     }
 }
 exports.Autodoc = Autodoc;
+function checkFileExistsSync(filepath) {
+    let flag = true;
+    try {
+        fs.accessSync(filepath, fs.constants.F_OK);
+    }
+    catch (e) {
+        flag = false;
+    }
+    return flag;
+}
+exports.checkFileExistsSync = checkFileExistsSync;

@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BuiltinProcess = exports.VMProcess = exports.Process = void 0;
 const readable_1 = require("../bytecodes/readable");
@@ -6,6 +25,7 @@ const bytecode_1 = require("../core/bytecode");
 const stack_1 = require("../internal/stack");
 const logger_1 = require("../logger/logger");
 const structs_1 = require("./structs");
+const crypto = __importStar(require("crypto"));
 class Process {
     constructor(processManager, args) {
         this.processManager = processManager;
@@ -223,6 +243,63 @@ class VMProcess extends Process {
                             break;
                         case '±':
                             this.stack.push([a + b, a - b]);
+                            break;
+                        case '<<':
+                            this.stack.push(a << b);
+                            break;
+                        case '>>':
+                            this.stack.push(a >> b);
+                            break;
+                        case '#':
+                            // hash operator
+                            // a # 'sha256'
+                            var hashed = '';
+                            var algo = '';
+                            if (a instanceof structs_1.VMDatatype) {
+                                hashed = a.getValue();
+                            }
+                            else {
+                                hashed = a;
+                            }
+                            if (b instanceof structs_1.VMDatatype) {
+                                algo = b.getValue();
+                            }
+                            else {
+                                algo = b;
+                            }
+                            this.stack.push(crypto.createHash(algo).update(hashed).digest('hex'));
+                            break;
+                        case '$':
+                            break;
+                        case '&':
+                            if (a instanceof structs_1.VMDatatype && b instanceof structs_1.VMDatatype) {
+                                this.stack.push(a.getValue() && b.getValue());
+                            }
+                            else if (a instanceof structs_1.VMDatatype && !(b instanceof structs_1.VMDatatype)) {
+                                this.stack.push(a.getValue() && b);
+                            }
+                            else if (b instanceof structs_1.VMDatatype && !(a instanceof structs_1.VMDatatype)) {
+                                this.stack.push(b.getValue() && a);
+                            }
+                            else {
+                                this.stack.push(a && b);
+                            }
+                            break;
+                        case '!':
+                            if (a instanceof structs_1.VMDatatype && b instanceof structs_1.VMDatatype) {
+                                this.stack.push(a.getValue() || b.getValue());
+                            }
+                            else if (a instanceof structs_1.VMDatatype && !(b instanceof structs_1.VMDatatype)) {
+                                this.stack.push(a.getValue() || b);
+                            }
+                            else if (b instanceof structs_1.VMDatatype && !(a instanceof structs_1.VMDatatype)) {
+                                this.stack.push(b.getValue() || a);
+                            }
+                            else {
+                                this.stack.push(a || b);
+                            }
+                            break;
+                        case '?':
                             break;
                         case '..':
                             var ls = [];
