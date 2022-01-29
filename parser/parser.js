@@ -2892,6 +2892,24 @@ module.exports = /*
                               s4 = peg$FAILED;
                               if (peg$silentFails === 0) { peg$fail(peg$c95); }
                             }
+                            if (s4 === peg$FAILED) {
+                              if (input.charCodeAt(peg$currPos) === 63) {
+                                s4 = peg$c45;
+                                peg$currPos++;
+                              } else {
+                                s4 = peg$FAILED;
+                                if (peg$silentFails === 0) { peg$fail(peg$c46); }
+                              }
+                              if (s4 === peg$FAILED) {
+                                if (input.charCodeAt(peg$currPos) === 8776) {
+                                  s4 = peg$c53;
+                                  peg$currPos++;
+                                } else {
+                                  s4 = peg$FAILED;
+                                  if (peg$silentFails === 0) { peg$fail(peg$c54); }
+                                }
+                              }
+                            }
                           }
                         }
                       }

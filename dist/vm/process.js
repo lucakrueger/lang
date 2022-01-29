@@ -231,15 +231,15 @@ class VMProcess extends Process {
                             this.stack.push(a % b);
                             break;
                         case '≈':
-                            const tolerance = 0.015;
-                            var aa = Math.round((a + Number.EPSILON) * 100) / 100;
-                            var bb = Math.round((b + Number.EPSILON) * 100) / 100;
-                            if ((aa <= (bb + tolerance)) && (aa >= (bb - tolerance))) {
-                                this.stack.push(new structs_1.Atom('true'));
-                            }
-                            else {
-                                this.stack.push(new structs_1.Atom('false'));
-                            }
+                            /*const tolerance = 0.015
+                            var aa = Math.round((a + Number.EPSILON) * 100) / 100
+                            var bb = Math.round((b + Number.EPSILON) * 100) / 100
+                            if((aa <= (bb + tolerance)) && (aa >= (bb - tolerance))) {
+                                this.stack.push(new Atom('true'))
+                            } else {
+                                this.stack.push(new Atom('false'))
+                            }*/
+                            this.stack.push(new structs_1.Atom(this.equalsTolerance(a, b)));
                             break;
                         case '±':
                             this.stack.push([a + b, a - b]);
@@ -598,7 +598,11 @@ class VMProcess extends Process {
                 }
                 return (arr[0] == value);
             case 'type':
-                return this.compareTypes(arg, value);
+                return this.compareTypes(arg, this.convertLiteral(value));
+            case '?':
+                return this.compareTypes(arg, this.convertLiteral(value));
+            case '≈':
+                return this.equalsTolerance(arg, this.convertLiteral(value));
             case 'url':
                 // evaluate url
                 // arg: supplied url
@@ -706,6 +710,17 @@ class VMProcess extends Process {
         for (var name of names) {
             this.addLocal(name, args[index]);
             index++;
+        }
+    }
+    equalsTolerance(a, b) {
+        const tolerance = 0.015;
+        var aa = Math.round((a + Number.EPSILON) * 100) / 100;
+        var bb = Math.round((b + Number.EPSILON) * 100) / 100;
+        if ((aa <= (bb + tolerance)) && (aa >= (bb - tolerance))) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
     arraysEqual(a, b) {

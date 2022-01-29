@@ -45,7 +45,7 @@ FunctionTypeDefinition
   = TypeDef: (Name _ "->" _ (_ Type " ")* _ "=>" _ Type _) {return {ident: 'function_type', name: TypeDef[0], types: TypeDef[4]}}
 
 ParameterRule
-  = Rule: ("(" _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "type" / "head" / "tail" / "url") _ (Name / atom / string / Number / Array) ")") {return {ident: 'rule', rule: Rule[2], value: Rule[4]}}
+  = Rule: ("(" _ ("<=" / ">=" / "/=" / "<" / ">" / "=" / "type" / "head" / "tail" / "url" / "?" / "≈") _ (Name / atom / string / Number / Array) ")") {return {ident: 'rule', rule: Rule[2], value: Rule[4]}}
 
 Set
   = Set: ("{" _ (Name _)+ _ "|" _ (","?_ Name _ ("<-" / "=>") _ Expression _)* _ (","? _ Operation)+ _ ("|" _ Expression _)? "}") {return {ident: 'set', args: Set[2], ops: Set[6], rules: Set[8], result: Set[10]}}

@@ -1,115 +1,4 @@
 
-## Strings
-
-
-### Chars
-
-> ```
-> Chars -> s => list
-> ```
->
-> Splits a string into its characters
->
->- `s` Any string
->
-> **Returns** `list`
-
-### Split
-
-> ```
-> Split -> st target => list
-> ```
->
-> Splits a string into multiple parts
-> The division is done by searching for a specific target
->
->- `st` Any string
->- `target` Target at which the string should be splitted
->
-> **Returns** `list`
-
-### Remove
-
-> ```
-> Remove -> str target => string
-> ```
->
-> Removes any instance of a specific character from a string
->
->- `str` Any string
->- `target` Any character
->
-> **Returns** `string`
-
-### Find
-
-> ```
-> Find -> str target => number | none
-> ```
->
-> Finds a specific character in a string
-> Returns the index of the first instace found
->
->- `str` Any string
->- `target` Any character
->
-> **Returns** `number | none`
-
-### Findls
-
-> ```
-> Findls -> str target => list
-> ```
->
-> Finds a specific character in a string
-> Returns all indices where an instance was found
->
->- `str` Any string
->- `target` Any character
->
-> **Returns** `list`
-
-## Map
-
-
-### Map
-
-> ```
-> Map => map
-> ```
->
-> Creates a Map
->
->
-> **Returns** `map`
-
-### Set
-
-> ```
-> Set -> map key value => map
-> ```
->
-> Set a key from a map to a value
->
->- `map` A map
->- `key` Key name
->- `value` Any value
->
-> **Returns** `map`
-
-### Get
-
-> ```
-> Get -> map key => any
-> ```
->
-> Get a value from map by key name
->
->- `map` A map
->- `key` Key name
->
-> **Returns** `any`
-
 ## Trig
 
 
@@ -221,35 +110,72 @@
 >
 > **Returns** `number`
 
-## Random
+## Maths
 
 
-### Random
+### Set
 
 > ```
-> Random -> min max => number
+> Set -> ls => true | false
 > ```
 >
-> Generates random number from a range
+> Check if a set is valid
 >
->- `min` Minimum
->- `max` Maximum
+>- `ls` List
+>
+> **Returns** `true | false`
+
+### sum
+
+> ```
+> sum -> j n f => number
+> ```
+>
+> Goes over range and sums all results by function
+>
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
 >
 > **Returns** `number`
 
-### Randomls
+### sumls
 
 > ```
-> Randomls -> length min max => list
+> sumls -> ls => number
 > ```
 >
-> Generates a list random number from a range
+> Goes over a list and sums all values
 >
->- `length` List length
->- `min` Minimum
->- `max` Maximum
+>- `ls` A list
 >
-> **Returns** `list`
+> **Returns** `number`
+
+### product
+
+> ```
+> product -> j n f => number
+> ```
+>
+> Goes over range and multiplies all results by function
+>
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
+>
+> **Returns** `number`
+
+### Prodcutls
+
+> ```
+> Prodcutls -> ls => number
+> ```
+>
+> Goes over a list and multiplies all values
+>
+>- `ls` A list
+>
+> **Returns** `number`
 
 ## Range
 
@@ -280,77 +206,6 @@
 >- `start` Starting number
 >- `end` Ending number
 >- `step` Step size
->
-> **Returns** `list`
-
-## Enum
-
-
-### enum
-
-> ```
-> enum -> values => enum
-> ```
->
-> Create an enum
->
->- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
->
-> **Returns** `enum`
-
-### isEnum
-
-> ```
-> isEnum -> value enum => any | none
-> ```
->
-> Checks if value is part of an Enum
->
->- `value` Any value
->- `enum` An Enum
->
-> **Returns** `any | none`
-
-## Expressions
-
-
-### if
-
-> ```
-> if -> cond result else => any
-> ```
->
-> Checks if value is true or false
->
->- `cond` Boolean
->- `result` Return value if cond is true
->- `else` Return value if cond is false
->
-> **Returns** `any`
-
-### if
-
-> ```
-> if -> cond result => any | none
-> ```
->
-> Checks if value is true or false
->
->- `cond` Boolean
->- `result` Return value if cond is true
->
-> **Returns** `any | none`
-
-### for
-
-> ```
-> for -> max fun => list
-> ```
->
-> A functional for loop starting at index zero
->
->- `max` Max value for index
->- `fun` Function takes elem index list result
 >
 > **Returns** `list`
 
@@ -522,6 +377,117 @@
 >- `ls` A list
 >
 > **Returns** `any`
+
+## Map
+
+
+### Map
+
+> ```
+> Map => map
+> ```
+>
+> Creates a Map
+>
+>
+> **Returns** `map`
+
+### Set
+
+> ```
+> Set -> map key value => map
+> ```
+>
+> Set a key from a map to a value
+>
+>- `map` A map
+>- `key` Key name
+>- `value` Any value
+>
+> **Returns** `map`
+
+### Get
+
+> ```
+> Get -> map key => any
+> ```
+>
+> Get a value from map by key name
+>
+>- `map` A map
+>- `key` Key name
+>
+> **Returns** `any`
+
+## Strings
+
+
+### Chars
+
+> ```
+> Chars -> s => list
+> ```
+>
+> Splits a string into its characters
+>
+>- `s` Any string
+>
+> **Returns** `list`
+
+### Split
+
+> ```
+> Split -> st target => list
+> ```
+>
+> Splits a string into multiple parts
+> The division is done by searching for a specific target
+>
+>- `st` Any string
+>- `target` Target at which the string should be splitted
+>
+> **Returns** `list`
+
+### Remove
+
+> ```
+> Remove -> str target => string
+> ```
+>
+> Removes any instance of a specific character from a string
+>
+>- `str` Any string
+>- `target` Any character
+>
+> **Returns** `string`
+
+### Find
+
+> ```
+> Find -> str target => number | none
+> ```
+>
+> Finds a specific character in a string
+> Returns the index of the first instace found
+>
+>- `str` Any string
+>- `target` Any character
+>
+> **Returns** `number | none`
+
+### Findls
+
+> ```
+> Findls -> str target => list
+> ```
+>
+> Finds a specific character in a string
+> Returns all indices where an instance was found
+>
+>- `str` Any string
+>- `target` Any character
+>
+> **Returns** `list`
 
 ## Builtin
 
@@ -720,69 +686,103 @@
 >
 > **Returns** `any`
 
-## Maths
+## Random
 
 
-### Set
-
-> ```
-> Set -> ls => true | false
-> ```
->
-> Check if a set is valid
->
->- `ls` List
->
-> **Returns** `true | false`
-
-### sum
+### Random
 
 > ```
-> sum -> j n f => number
+> Random -> min max => number
 > ```
 >
-> Goes over range and sums all results by function
+> Generates random number from a range
 >
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
+>- `min` Minimum
+>- `max` Maximum
 >
 > **Returns** `number`
 
-### sumls
+### Randomls
 
 > ```
-> sumls -> ls => number
+> Randomls -> length min max => list
 > ```
 >
-> Goes over a list and sums all values
+> Generates a list random number from a range
 >
->- `ls` A list
+>- `length` List length
+>- `min` Minimum
+>- `max` Maximum
 >
-> **Returns** `number`
+> **Returns** `list`
 
-### product
+## Expressions
 
-> ```
-> product -> j n f => number
-> ```
->
-> Goes over range and multiplies all results by function
->
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
->
-> **Returns** `number`
 
-### Prodcutls
+### if
 
 > ```
-> Prodcutls -> ls => number
+> if -> cond result else => any
 > ```
 >
-> Goes over a list and multiplies all values
+> Checks if value is true or false
 >
->- `ls` A list
+>- `cond` Boolean
+>- `result` Return value if cond is true
+>- `else` Return value if cond is false
 >
-> **Returns** `number`
+> **Returns** `any`
+
+### if
+
+> ```
+> if -> cond result => any | none
+> ```
+>
+> Checks if value is true or false
+>
+>- `cond` Boolean
+>- `result` Return value if cond is true
+>
+> **Returns** `any | none`
+
+### for
+
+> ```
+> for -> max fun => list
+> ```
+>
+> A functional for loop starting at index zero
+>
+>- `max` Max value for index
+>- `fun` Function takes elem index list result
+>
+> **Returns** `list`
+
+## Enum
+
+
+### enum
+
+> ```
+> enum -> values => enum
+> ```
+>
+> Create an enum
+>
+>- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
+>
+> **Returns** `enum`
+
+### isEnum
+
+> ```
+> isEnum -> value enum => any | none
+> ```
+>
+> Checks if value is part of an Enum
+>
+>- `value` Any value
+>- `enum` An Enum
+>
+> **Returns** `any | none`
