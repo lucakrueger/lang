@@ -1,4 +1,1 @@
-main => (test: :1.014)
-
-test -> x => :false
-test -> x (? :number) => :true
+main => { x | x <- (0 .. 20) (1 = 2) | index }

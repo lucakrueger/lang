@@ -29,7 +29,7 @@ const BuiltinPrint = (args: any[], processManager: ProcessManager): (any | VMErr
     // if type = vmDatatype, print toString() representation
     if(value instanceof VMDatatype) {
         // value is a custom datatype
-        printedValue = value.toString() // get string representation
+        printedValue = ':'+value.toString() // get string representation
     }
     // print value
     console.log(printedValue)

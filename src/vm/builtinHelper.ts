@@ -23,7 +23,7 @@ export function makeid(length: number) {
 
 export function printValue(a: any) {
     if(a instanceof VMDatatype) {
-        console.log(a.getValue())
+        console.log(':'+a.getValue())
     } else {
         console.log(a)
     }

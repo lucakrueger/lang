@@ -26,7 +26,7 @@ function makeid(length) {
 exports.makeid = makeid;
 function printValue(a) {
     if (a instanceof structs_1.VMDatatype) {
-        console.log(a.getValue());
+        console.log(':' + a.getValue());
     }
     else {
         console.log(a);

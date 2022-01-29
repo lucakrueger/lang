@@ -27,7 +27,7 @@ const BuiltinPrint = (args, processManager) => {
     // if type = vmDatatype, print toString() representation
     if (value instanceof structs_1.VMDatatype) {
         // value is a custom datatype
-        printedValue = value.toString(); // get string representation
+        printedValue = ':' + value.toString(); // get string representation
     }
     // print value
     console.log(printedValue);
