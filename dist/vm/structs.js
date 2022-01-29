@@ -6,7 +6,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Atom = exports.VMDatatype = void 0;
 class VMDatatype {
-    constructor() { }
+    constructor(ident) {
+        this.ident = ident;
+    }
+    getIdent() {
+        return this.ident;
+    }
 }
 exports.VMDatatype = VMDatatype;
 /*
@@ -14,7 +19,7 @@ exports.VMDatatype = VMDatatype;
 */
 class Atom extends VMDatatype {
     constructor(value) {
-        super();
+        super('atom');
         this.value = '';
         this.value = String(value);
     }

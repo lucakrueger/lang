@@ -1,7 +1,7 @@
 import { Bytecode } from "../bytecodes/bytecode";
 import { ThrowError, VMError, NativeErrors } from "../logger/logger";
 import { Builtin } from "./builtin";
-import { CheckParameterCount } from "./builtinHelper";
+import { CheckParameterCount, printValue } from "./builtinHelper";
 import { BuiltinProcess, Process, VMProcess } from "./process";
 
 export class ProcessManager {
@@ -14,7 +14,8 @@ export class ProcessManager {
             Print returning value
         */
        var returning = this.executeFunction(fun, args)
-       console.log(returning)
+       //console.log(returning)
+       printValue(returning)
     }
 
     public executeFunction(name: string, args: any[]): (any | VMError) {

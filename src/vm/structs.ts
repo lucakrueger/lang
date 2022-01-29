@@ -4,9 +4,12 @@
 */
 
 export abstract class VMDatatype {
-    constructor() {}
+    constructor(private ident: string) {}
     abstract toString(): string // string respresentation of datatype
     abstract getValue(): any // returns raw value
+    getIdent(): string {
+        return this.ident
+    }
     // TODO: maybe implement custom operator overloading, no need for it at the moment though
 }
 
@@ -17,7 +20,7 @@ export class Atom extends VMDatatype {
     private value: string = ''
 
     constructor(value: any) {
-        super()
+        super('atom')
         this.value = String(value)
     }
 

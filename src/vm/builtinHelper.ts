@@ -1,4 +1,5 @@
 import { VMError, ThrowError, NativeErrors } from "../logger/logger";
+import { VMDatatype } from "./structs";
 
 export function CheckParameterCount(functionName: string, paramCount: number, requiredCount: number): (VMError | undefined) {
     if(paramCount > requiredCount) { // check for too many args
@@ -18,4 +19,12 @@ export function makeid(length: number) {
  charactersLength));
    }
    return result;
+}
+
+export function printValue(a: any) {
+    if(a instanceof VMDatatype) {
+        console.log(a.getValue())
+    } else {
+        console.log(a)
+    }
 }

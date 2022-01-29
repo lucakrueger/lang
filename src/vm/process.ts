@@ -245,27 +245,30 @@ export class VMProcess extends Process {
                             break
                         case '&':
                             if(a instanceof VMDatatype && b instanceof VMDatatype) {
-                                this.stack.push(a.getValue() && b.getValue())
+                                this.stack.push(new Atom(a.getValue() && b.getValue()))
                             } else if(a instanceof VMDatatype && !(b instanceof VMDatatype)) {
-                                this.stack.push(a.getValue() && b)
+                                this.stack.push(new Atom(a.getValue() && b))
                             } else if(b instanceof VMDatatype && !(a instanceof VMDatatype)) {
-                                this.stack.push(b.getValue() && a)
+                                this.stack.push(new Atom(b.getValue() && a))
                             } else {
-                                this.stack.push(a && b)
+                                this.stack.push(new Atom(a && b))
                             }
                             break
                         case '!':
                             if(a instanceof VMDatatype && b instanceof VMDatatype) {
-                                this.stack.push(a.getValue() || b.getValue())
+                                this.stack.push(new Atom(a.getValue() || b.getValue()))
                             } else if(a instanceof VMDatatype && !(b instanceof VMDatatype)) {
-                                this.stack.push(a.getValue() || b)
+                                this.stack.push(new Atom(a.getValue() || b))
                             } else if(b instanceof VMDatatype && !(a instanceof VMDatatype)) {
-                                this.stack.push(b.getValue() || a)
+                                this.stack.push(new Atom(b.getValue() || a))
                             } else {
-                                this.stack.push(a || b)
+                                this.stack.push(new Atom(a || b))
                             }
                             break
                         case '?':
+                            // type comparison operator
+                            // (a ? :array)
+                            this.stack.push(new Atom(this.compareTypes(a, b)))
                             break
                         case '..':
                             var ls: number[] = []
@@ -569,6 +572,8 @@ export class VMProcess extends Process {
                     return (arr[0].getValue() == atom.getValue())
                 }
                 return (arr[0] == value)
+            case 'type':
+                return this.compareTypes(arg, value)
             case 'url':
                 // evaluate url
                 // arg: supplied url
@@ -628,6 +633,40 @@ export class VMProcess extends Process {
         }
 
         return match
+    }
+
+    private compareTypes(a: any, b: any): boolean {
+        var comparedType: string = 'string'
+        const typeNames = ['string', 'number', 'atom', 'list']
+        if(b instanceof Atom) {
+            // b is an atom
+            // check if b defines one of the types (typenames)
+            // string, number, atom, list
+            if(typeNames.includes(b.getValue())) {
+                // b describes a type name
+                comparedType = b.getValue()
+            } else {
+                // b does not describe a type name, but is atom
+                comparedType = 'atom'
+            }
+        } else {
+            comparedType = this.getType(b)
+        }
+        return (this.getType(a) == comparedType)
+    }
+
+    private getType(a: any): string {
+        if(a instanceof Atom) {
+            return 'atom'
+        } else if(Array.isArray(a)) {
+            return 'list'
+        } else if(isNaN(Number(a)) == false) {
+            return 'number'
+        } else if(a instanceof VMDatatype) {
+            return a.getIdent()
+        } else {
+            return 'string'
+        }
     }
 
     /**

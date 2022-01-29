@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProcessManager = void 0;
 const logger_1 = require("../logger/logger");
 const builtin_1 = require("./builtin");
+const builtinHelper_1 = require("./builtinHelper");
 const process_1 = require("./process");
 class ProcessManager {
     constructor(bytecode) {
@@ -15,7 +16,8 @@ class ProcessManager {
             Print returning value
         */
         var returning = this.executeFunction(fun, args);
-        console.log(returning);
+        //console.log(returning)
+        (0, builtinHelper_1.printValue)(returning);
     }
     executeFunction(name, args) {
         const func = this.bytecode.getFunction(name);

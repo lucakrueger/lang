@@ -273,33 +273,36 @@ class VMProcess extends Process {
                             break;
                         case '&':
                             if (a instanceof structs_1.VMDatatype && b instanceof structs_1.VMDatatype) {
-                                this.stack.push(a.getValue() && b.getValue());
+                                this.stack.push(new structs_1.Atom(a.getValue() && b.getValue()));
                             }
                             else if (a instanceof structs_1.VMDatatype && !(b instanceof structs_1.VMDatatype)) {
-                                this.stack.push(a.getValue() && b);
+                                this.stack.push(new structs_1.Atom(a.getValue() && b));
                             }
                             else if (b instanceof structs_1.VMDatatype && !(a instanceof structs_1.VMDatatype)) {
-                                this.stack.push(b.getValue() && a);
+                                this.stack.push(new structs_1.Atom(b.getValue() && a));
                             }
                             else {
-                                this.stack.push(a && b);
+                                this.stack.push(new structs_1.Atom(a && b));
                             }
                             break;
                         case '!':
                             if (a instanceof structs_1.VMDatatype && b instanceof structs_1.VMDatatype) {
-                                this.stack.push(a.getValue() || b.getValue());
+                                this.stack.push(new structs_1.Atom(a.getValue() || b.getValue()));
                             }
                             else if (a instanceof structs_1.VMDatatype && !(b instanceof structs_1.VMDatatype)) {
-                                this.stack.push(a.getValue() || b);
+                                this.stack.push(new structs_1.Atom(a.getValue() || b));
                             }
                             else if (b instanceof structs_1.VMDatatype && !(a instanceof structs_1.VMDatatype)) {
-                                this.stack.push(b.getValue() || a);
+                                this.stack.push(new structs_1.Atom(b.getValue() || a));
                             }
                             else {
-                                this.stack.push(a || b);
+                                this.stack.push(new structs_1.Atom(a || b));
                             }
                             break;
                         case '?':
+                            // type comparison operator
+                            // (a ? :array)
+                            this.stack.push(new structs_1.Atom(this.compareTypes(a, b)));
                             break;
                         case '..':
                             var ls = [];
@@ -594,6 +597,8 @@ class VMProcess extends Process {
                     return (arr[0].getValue() == atom.getValue());
                 }
                 return (arr[0] == value);
+            case 'type':
+                return this.compareTypes(arg, value);
             case 'url':
                 // evaluate url
                 // arg: supplied url
@@ -649,6 +654,44 @@ class VMProcess extends Process {
             }
         }
         return match;
+    }
+    compareTypes(a, b) {
+        var comparedType = 'string';
+        const typeNames = ['string', 'number', 'atom', 'list'];
+        if (b instanceof structs_1.Atom) {
+            // b is an atom
+            // check if b defines one of the types (typenames)
+            // string, number, atom, list
+            if (typeNames.includes(b.getValue())) {
+                // b describes a type name
+                comparedType = b.getValue();
+            }
+            else {
+                // b does not describe a type name, but is atom
+                comparedType = 'atom';
+            }
+        }
+        else {
+            comparedType = this.getType(b);
+        }
+        return (this.getType(a) == comparedType);
+    }
+    getType(a) {
+        if (a instanceof structs_1.Atom) {
+            return 'atom';
+        }
+        else if (Array.isArray(a)) {
+            return 'list';
+        }
+        else if (isNaN(Number(a)) == false) {
+            return 'number';
+        }
+        else if (a instanceof structs_1.VMDatatype) {
+            return a.getIdent();
+        }
+        else {
+            return 'string';
+        }
     }
     /**
      * Initialize a local variable
