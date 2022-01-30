@@ -19,10 +19,34 @@
                 {
                     "index": 0,
                     "bytecode": [
-                        "pushl 2021",
-                        "pushl 15",
-                        "pushl 35",
-                        "call Date 3"
+                        "pushl :zero",
+                        "call array_new 0",
+                        "call array_new 0",
+                        "pushl :zero",
+                        "call array_push 2",
+                        "pushl :no",
+                        "call array_push 2",
+                        "call array_push 2",
+                        "call array_new 0",
+                        "pushl :one",
+                        "call array_push 2",
+                        "pushl :first",
+                        "call array_push 2",
+                        "call array_push 2",
+                        "call array_new 0",
+                        "pushl :two",
+                        "call array_push 2",
+                        "pushl :second",
+                        "call array_push 2",
+                        "call array_push 2",
+                        "call array_new 0",
+                        "pushl :three",
+                        "call array_push 2",
+                        "pushl :third",
+                        "call array_push 2",
+                        "call array_push 2",
+                        "call enum 1",
+                        "call isEnum 2"
                     ]
                 }
             ]
@@ -438,7 +462,7 @@
                         "call array_push 2",
                         "push ls",
                         "operation ++",
-                        "pushl :IoaCnDVo",
+                        "pushl :qIEqFImU",
                         "call foreachls 2"
                     ]
                 }
@@ -602,7 +626,7 @@
                         "call array_push 2",
                         "push ls",
                         "operation ++",
-                        "pushl :vrEg1w2u",
+                        "pushl :q0NdUMrf",
                         "call foreachls 2"
                     ]
                 }
@@ -880,7 +904,7 @@
                         "push end",
                         "call splice 3",
                         "operation ++",
-                        "pushl :Mls5Tb1m",
+                        "pushl :7RyeyvBc",
                         "call foreachls 2"
                     ]
                 }
@@ -1029,7 +1053,7 @@
                         "call array_push 2",
                         "push xs",
                         "operation ++",
-                        "pushl :W137Fb1r",
+                        "pushl :8MAZnXuB",
                         "call foreachls 2",
                         "call qsort 1",
                         "push x",
@@ -1043,7 +1067,7 @@
                         "call array_push 2",
                         "push xs",
                         "operation ++",
-                        "pushl :VMdVuQ9J",
+                        "pushl :IHhmBBHh",
                         "call foreachls 2",
                         "call qsort 1",
                         "operation ++"
@@ -1488,7 +1512,7 @@
             ]
         },
         {
-            "name": "IoaCnDVo",
+            "name": "qIEqFImU",
             "definitions": [
                 {
                     "args": [
@@ -1612,7 +1636,7 @@
             ]
         },
         {
-            "name": "vrEg1w2u",
+            "name": "q0NdUMrf",
             "definitions": [
                 {
                     "args": [
@@ -1736,7 +1760,7 @@
             ]
         },
         {
-            "name": "Mls5Tb1m",
+            "name": "7RyeyvBc",
             "definitions": [
                 {
                     "args": [
@@ -1864,7 +1888,7 @@
             ]
         },
         {
-            "name": "W137Fb1r",
+            "name": "8MAZnXuB",
             "definitions": [
                 {
                     "args": [
@@ -1988,7 +2012,7 @@
             ]
         },
         {
-            "name": "VMdVuQ9J",
+            "name": "IHhmBBHh",
             "definitions": [
                 {
                     "args": [
@@ -2112,7 +2136,7 @@
             ]
         },
         {
-            "name": "Map",
+            "name": "map",
             "definitions": [
                 {
                     "args": [],
@@ -2124,6 +2148,30 @@
                             "args": []
                         }
                     ]
+                },
+                {
+                    "args": [
+                        "values"
+                    ],
+                    "arglength": 1,
+                    "similar": [
+                        [
+                            0
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 1,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "values",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "implementations": [
@@ -2133,6 +2181,94 @@
                         "call array_new 0",
                         "pushl :map",
                         "call array_push 2"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "bytecode": [
+                        "push values",
+                        "call enum 1",
+                        "call map_enum 1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "map_enum",
+            "definitions": [
+                {
+                    "args": [
+                        "enum"
+                    ],
+                    "arglength": 1,
+                    "similar": [
+                        [
+                            0
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "enum",
+                                    "rule": "head",
+                                    "value": ":enum"
+                                }
+                            ]
+                        },
+                        {
+                            "implementation": 1,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "enum",
+                                    "rule": "head",
+                                    "value": ":enum'"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "pushl :map",
+                        "call array_new 0",
+                        "call array_new 0",
+                        "push enum",
+                        "call array_push 2",
+                        "call array_push 2",
+                        "push enum",
+                        "operation ++",
+                        "pushl :SxLn1IZ9",
+                        "call foreachls 2",
+                        "operation ++"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "bytecode": [
+                        "push enum",
+                        "pushl 2",
+                        "call array_get 2",
+                        "pull values",
+                        "pushl :map",
+                        "call array_new 0",
+                        "call array_new 0",
+                        "push values",
+                        "call array_push 2",
+                        "call array_push 2",
+                        "push enum",
+                        "pushl 1",
+                        "call array_get 2",
+                        "operation ++",
+                        "pushl :IElRUNev",
+                        "call foreachls 2",
+                        "operation ++"
                     ]
                 }
             ]
@@ -2251,8 +2387,61 @@
                         "call array_push 2",
                         "push map",
                         "operation ++",
-                        "pushl :5beNrBBv",
-                        "call foreachls 2"
+                        "pushl :uZcSKtwA",
+                        "call foreachls 2",
+                        "pull xs",
+                        "push xs",
+                        "pushl 0",
+                        "call array_get 2"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "map.get",
+            "definitions": [
+                {
+                    "args": [
+                        "map",
+                        "key"
+                    ],
+                    "arglength": 2,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "map",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "key",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "push map",
+                        "push key",
+                        "call Get 2"
                     ]
                 }
             ]
@@ -2311,7 +2500,255 @@
             ]
         },
         {
-            "name": "5beNrBBv",
+            "name": "SxLn1IZ9",
+            "definitions": [
+                {
+                    "args": [
+                        "elem",
+                        "index",
+                        "list",
+                        "result"
+                    ],
+                    "arglength": 4,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ],
+                        [
+                            2
+                        ],
+                        [
+                            3
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "elem",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "index",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "list",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 3,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        },
+                        {
+                            "implementation": 1,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "elem",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "index",
+                                    "rule": "=",
+                                    "value": "0"
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "list",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 3,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "local x",
+                        "push elem",
+                        "pull x",
+                        "push index",
+                        "pushl 1",
+                        "operation -",
+                        "pull index",
+                        "call array_new 0",
+                        "pushl :true",
+                        "call array_push 2",
+                        "push x",
+                        "pushl :enum",
+                        "operation /=",
+                        "call array_push 2",
+                        "call identical 1",
+                        "push x",
+                        "push index",
+                        "call Pair 2",
+                        "call if 2"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "bytecode": [
+                        "pushl :none"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "IElRUNev",
+            "definitions": [
+                {
+                    "args": [
+                        "elem",
+                        "index",
+                        "list",
+                        "result"
+                    ],
+                    "arglength": 4,
+                    "similar": [
+                        [
+                            0
+                        ],
+                        [
+                            1
+                        ],
+                        [
+                            2
+                        ],
+                        [
+                            3
+                        ]
+                    ],
+                    "rules": [
+                        {
+                            "implementation": 0,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "elem",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "index",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "list",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 3,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        },
+                        {
+                            "implementation": 1,
+                            "args": [
+                                {
+                                    "index": 0,
+                                    "name": "elem",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 1,
+                                    "name": "index",
+                                    "rule": "=",
+                                    "value": "0"
+                                },
+                                {
+                                    "index": 2,
+                                    "name": "list",
+                                    "rule": "",
+                                    "value": ""
+                                },
+                                {
+                                    "index": 3,
+                                    "name": "result",
+                                    "rule": "",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "implementations": [
+                {
+                    "index": 0,
+                    "bytecode": [
+                        "local x",
+                        "push elem",
+                        "pull x",
+                        "push index",
+                        "pushl 1",
+                        "operation -",
+                        "pull index",
+                        "local xs",
+                        "push list",
+                        "call Head 1",
+                        "pushl 0",
+                        "call array_get 2",
+                        "pull xs",
+                        "call array_new 0",
+                        "pushl :true",
+                        "call array_push 2",
+                        "push x",
+                        "pushl :enum'",
+                        "operation /=",
+                        "call array_push 2",
+                        "call identical 1",
+                        "push x",
+                        "push xs",
+                        "push index",
+                        "call array_get 2",
+                        "call Pair 2",
+                        "call if 2"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "bytecode": [
+                        "pushl :none"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "uZcSKtwA",
             "definitions": [
                 {
                     "args": [
@@ -3765,7 +4202,7 @@
                         "call array_push 2",
                         "push a",
                         "operation ++",
-                        "pushl :Pi8tGmEs",
+                        "pushl :k0iqhDGy",
                         "call foreachls 2",
                         "operation ++"
                     ]
@@ -3826,7 +4263,7 @@
                         "call array_push 2",
                         "push a",
                         "operation ++",
-                        "pushl :97vOlplj",
+                        "pushl :aFFsofMN",
                         "call foreachls 2",
                         "operation ++"
                     ]
@@ -3903,7 +4340,7 @@
                         "call array_push 2",
                         "push b",
                         "operation ++",
-                        "pushl :TTfCVU9t",
+                        "pushl :wt9pYVnH",
                         "call foreachls 2",
                         "call Join 1"
                     ]
@@ -3919,7 +4356,7 @@
             ]
         },
         {
-            "name": "Pi8tGmEs",
+            "name": "k0iqhDGy",
             "definitions": [
                 {
                     "args": [
@@ -4052,7 +4489,7 @@
             ]
         },
         {
-            "name": "97vOlplj",
+            "name": "aFFsofMN",
             "definitions": [
                 {
                     "args": [
@@ -4185,7 +4622,7 @@
             ]
         },
         {
-            "name": "TTfCVU9t",
+            "name": "wt9pYVnH",
             "definitions": [
                 {
                     "args": [
@@ -4428,14 +4865,14 @@
                         "push length",
                         "call range 2",
                         "operation ++",
-                        "pushl :2bVVBE4Q",
+                        "pushl :e75ypcOG",
                         "call foreachls 2"
                     ]
                 }
             ]
         },
         {
-            "name": "2bVVBE4Q",
+            "name": "e75ypcOG",
             "definitions": [
                 {
                     "args": [
@@ -4658,7 +5095,7 @@
                         "pushl 100.01",
                         "operation ..",
                         "operation ++",
-                        "pushl :0jhoWvr4",
+                        "pushl :MnxP3pY7",
                         "call foreachls 2"
                     ]
                 }
@@ -4702,7 +5139,7 @@
             ]
         },
         {
-            "name": "0jhoWvr4",
+            "name": "MnxP3pY7",
             "definitions": [
                 {
                     "args": [
@@ -4879,9 +5316,20 @@
                         "call array_get 2",
                         "call identical 1",
                         "pushl :enum",
+                        "call array_new 0",
                         "push values",
+                        "call array_push 2",
                         "operation ++",
-                        "pushl :enum'",
+                        "call array_new 0",
+                        "pushl 0",
+                        "push values",
+                        "call len 1",
+                        "pushl 1",
+                        "operation -",
+                        "operation ..",
+                        "call array_push 2",
+                        "operation ++",
+                        "pushl :enum",
                         "push xs",
                         "operation ++",
                         "call if 3"
@@ -4923,40 +5371,6 @@
                                     "value": ":enum"
                                 }
                             ]
-                        },
-                        {
-                            "implementation": 1,
-                            "args": [
-                                {
-                                    "index": 0,
-                                    "name": "value",
-                                    "rule": "=",
-                                    "value": ":enum"
-                                },
-                                {
-                                    "index": 1,
-                                    "name": "enum",
-                                    "rule": "",
-                                    "value": ""
-                                }
-                            ]
-                        },
-                        {
-                            "implementation": 2,
-                            "args": [
-                                {
-                                    "index": 0,
-                                    "name": "value",
-                                    "rule": "",
-                                    "value": ""
-                                },
-                                {
-                                    "index": 1,
-                                    "name": "enum",
-                                    "rule": "head",
-                                    "value": ":enum'"
-                                }
-                            ]
                         }
                     ]
                 }
@@ -4964,20 +5378,6 @@
             "implementations": [
                 {
                     "index": 0,
-                    "bytecode": [
-                        "push enum",
-                        "push value",
-                        "call Search 2"
-                    ]
-                },
-                {
-                    "index": 1,
-                    "bytecode": [
-                        "pushl :none"
-                    ]
-                },
-                {
-                    "index": 2,
                     "bytecode": [
                         "push enum",
                         "pushl 1",
@@ -5021,7 +5421,7 @@
                                     "index": 1,
                                     "name": "enum",
                                     "rule": "head",
-                                    "value": ":enum'"
+                                    "value": ":enum"
                                 }
                             ]
                         },
@@ -5184,14 +5584,14 @@
                         "operation /",
                         "call range 2",
                         "operation ++",
-                        "pushl :hS0aToD4",
+                        "pushl :2lTPlgd7",
                         "call foreachls 2"
                     ]
                 }
             ]
         },
         {
-            "name": "hS0aToD4",
+            "name": "2lTPlgd7",
             "definitions": [
                 {
                     "args": [
@@ -5524,14 +5924,14 @@
                         "push max",
                         "call range 2",
                         "operation ++",
-                        "pushl :jfEexxPs",
+                        "pushl :uM2uPwo8",
                         "call foreachls 2"
                     ]
                 }
             ]
         },
         {
-            "name": "jfEexxPs",
+            "name": "uM2uPwo8",
             "definitions": [
                 {
                     "args": [
@@ -5815,7 +6215,7 @@
                         "push str",
                         "call Chars 1",
                         "operation ++",
-                        "pushl :oLBv0xra",
+                        "pushl :BZ3BgBFJ",
                         "call foreachls 2"
                     ]
                 }
@@ -5874,7 +6274,7 @@
                         "call array_push 2",
                         "push ls",
                         "operation ++",
-                        "pushl :xJhScw7q",
+                        "pushl :JVDXDa2k",
                         "call foreachls 2"
                     ]
                 }
@@ -5985,7 +6385,7 @@
                         "push str",
                         "call Chars 1",
                         "operation ++",
-                        "pushl :loAjkGt0",
+                        "pushl :3X7Nc170",
                         "call foreachls 2",
                         "call Join 1"
                     ]
@@ -6093,7 +6493,7 @@
             ]
         },
         {
-            "name": "oLBv0xra",
+            "name": "BZ3BgBFJ",
             "definitions": [
                 {
                     "args": [
@@ -6217,7 +6617,7 @@
             ]
         },
         {
-            "name": "xJhScw7q",
+            "name": "JVDXDa2k",
             "definitions": [
                 {
                     "args": [
@@ -6356,7 +6756,7 @@
             ]
         },
         {
-            "name": "loAjkGt0",
+            "name": "3X7Nc170",
             "definitions": [
                 {
                     "args": [
@@ -6938,43 +7338,6 @@
                         "push value",
                         "pushl 3",
                         "call array_get 2"
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "day_of_week",
-            "definitions": [
-                {
-                    "args": [
-                        "date"
-                    ],
-                    "arglength": 1,
-                    "similar": [
-                        [
-                            0
-                        ]
-                    ],
-                    "rules": [
-                        {
-                            "implementation": 0,
-                            "args": [
-                                {
-                                    "index": 0,
-                                    "name": "date",
-                                    "rule": "",
-                                    "value": ""
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "implementations": [
-                {
-                    "index": 0,
-                    "bytecode": [
-                        "pushl :ok"
                     ]
                 }
             ]

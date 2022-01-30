@@ -1,10 +1,22 @@
 /* @autodoc
     @module Map
-    @name Map
+    @name map
     @description Creates a Map
     @returns map
 */
-Map => [:map]
+map => [:map]
+
+/* @autodoc
+    @module Map
+    @name map
+    @description Creates a map with given values
+    @arg values Either a one or two dimensional array containing all values
+    @returns map
+*/
+map -> values => (map_enum: (enum: values))
+
+map_enum -> enum (head :enum) => (:map ++ { x | x <- enum, (x /= :enum) | (Pair: x, index) })
+map_enum -> enum (head :enum') | values => enum[2] => (:map ++ { x xs | x <- enum[1], xs => values, (x /= :enum') | (Pair: x, xs[index]) })
 
 /* @autodoc
     @module Map
@@ -25,6 +37,8 @@ Set -> map (head :map) key value => (map ++ [(Pair: key, value)])
     @arg key Key name
     @returns any
 */
-Get -> map (head :map) key => {x k | x <- map, k => key, (index > 0), ((Head: x) = :pair), ((Index: (Tail: x), 0) = k) | (Index: (Tail: x), 1) }
+Get -> map (head :map) key | xs => {x k | x <- map, k => key, (index > 0), ((Head: x) = :pair), ((Index: (Tail: x), 0) = k) | (Index: (Tail: x), 1) } => xs[0]
+
+map.get -> map key => (Get: map, key)
 
 Pair -> key value => [:pair, key, value]
