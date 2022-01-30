@@ -62,7 +62,7 @@ const ArrayPush = (args: any[], processManager: ProcessManager): (any | VMError)
 }
 
 // takes: array, index; returns: array
-const ArrayGet = (args: any[], processManager: ProcessManager): (any | VMError) => {
+const ArrayGetDepr = (args: any[], processManager: ProcessManager): (any | VMError) => {
     var err = CheckParameterCount('array_new', args.length, 2)
     if(err != undefined) {
         return err
@@ -78,6 +78,49 @@ const ArrayGet = (args: any[], processManager: ProcessManager): (any | VMError) 
     //console.log(arr[index])
 
     return arr[index]
+}
+
+// takes: array, index; returns: array
+const ArrayGet = (args: any[], processManager: ProcessManager): (any | VMError) => {
+    var err = CheckParameterCount('array_new', args.length, 2)
+    if(err != undefined) {
+        return err
+    }
+
+    /*
+        Overloading custom types
+        - if index is not a number -> check if arr has a header with a specific name -> type description
+        - if it is a typed array -> call head.get (list index) and return its value
+        - if it is not a typed array -> throw error
+    */
+
+    var arr: any[] | any = args[0]
+    var index: any = args[1]
+
+    if(!Array.isArray(arr)) { // check if is array, if not return value
+        return arr
+    }
+
+    if(arr.length == 0) { // check if array is empty
+        return arr
+    }
+
+    if(isNaN(Number(index)) == false) {
+        // index is number, return default index
+        if(index >= arr.length) {
+            return new Atom('none')
+        }
+        return arr[index]
+    }
+
+    if(arr[0] instanceof Atom) {
+        // typed array
+        return processManager.executeFunction(arr[0].getValue() + '.get', [arr, index])
+    }
+
+    ThrowError(NativeErrors.INTERNAL, `The index of a list has to be a number or a the list has to be typed`)
+    return arr
+
 }
 
 // takes: array, start, end -> array

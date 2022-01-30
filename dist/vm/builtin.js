@@ -53,7 +53,7 @@ const ArrayPush = (args, processManager) => {
     return arr;
 };
 // takes: array, index; returns: array
-const ArrayGet = (args, processManager) => {
+const ArrayGetDepr = (args, processManager) => {
     var err = (0, builtinHelper_1.CheckParameterCount)('array_new', args.length, 2);
     if (err != undefined) {
         return err;
@@ -65,6 +65,40 @@ const ArrayGet = (args, processManager) => {
     }
     //console.log(arr[index])
     return arr[index];
+};
+// takes: array, index; returns: array
+const ArrayGet = (args, processManager) => {
+    var err = (0, builtinHelper_1.CheckParameterCount)('array_new', args.length, 2);
+    if (err != undefined) {
+        return err;
+    }
+    /*
+        Overloading custom types
+        - if index is not a number -> check if arr has a header with a specific name -> type description
+        - if it is a typed array -> call head.get (list index) and return its value
+        - if it is not a typed array -> throw error
+    */
+    var arr = args[0];
+    var index = args[1];
+    if (!Array.isArray(arr)) { // check if is array, if not return value
+        return arr;
+    }
+    if (arr.length == 0) { // check if array is empty
+        return arr;
+    }
+    if (isNaN(Number(index)) == false) {
+        // index is number, return default index
+        if (index >= arr.length) {
+            return new structs_1.Atom('none');
+        }
+        return arr[index];
+    }
+    if (arr[0] instanceof structs_1.Atom) {
+        // typed array
+        return processManager.executeFunction(arr[0].getValue() + '.get', [arr, index]);
+    }
+    (0, logger_1.ThrowError)(logger_1.NativeErrors.INTERNAL, `The index of a list has to be a number or a the list has to be typed`);
+    return arr;
 };
 // takes: array, start, end -> array
 const ArraySplice = (args, processManager) => {

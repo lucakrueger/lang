@@ -266,158 +266,6 @@
 >
 > **Returns** `list`
 
-## Map
-
-
-### Map
-
-> ```
-> Map => map
-> ```
->
-> Creates a Map
->
->
-> **Returns** `map`
-
-### Set
-
-> ```
-> Set -> map key value => map
-> ```
->
-> Set a key from a map to a value
->
->- `map` A map
->- `key` Key name
->- `value` Any value
->
-> **Returns** `map`
-
-### Get
-
-> ```
-> Get -> map key => any
-> ```
->
-> Get a value from map by key name
->
->- `map` A map
->- `key` Key name
->
-> **Returns** `any`
-
-## Trig
-
-
-### sind
-
-> ```
-> sind -> x => number
-> ```
->
-> Sine in degrees
->
->- `x` Number
->
-> **Returns** `number`
-
-### cosd
-
-> ```
-> cosd -> x => number
-> ```
->
-> Cosine in degrees
->
->- `x` Number
->
-> **Returns** `number`
-
-### tand
-
-> ```
-> tand -> x => number
-> ```
->
-> Tan in degrees
->
->- `x` Number
->
-> **Returns** `number`
-
-### sinr
-
-> ```
-> sinr -> x => number
-> ```
->
-> Sine in rad
->
->- `x` Number
->
-> **Returns** `number`
-
-### cosr
-
-> ```
-> cosr -> x => number
-> ```
->
-> Cosine in rad
->
->- `x` Number
->
-> **Returns** `number`
-
-### tanr
-
-> ```
-> tanr -> x => number
-> ```
->
-> Tan in rad
->
->- `x` Number
->
-> **Returns** `number`
-
-### arsin
-
-> ```
-> arsin -> x => number
-> ```
->
-> Arcsine in rad
->
->- `x` Number
->
-> **Returns** `number`
-
-### degreeToRad
-
-> ```
-> degreeToRad -> x => number
-> ```
->
-> Converts degrees to rad
->
->- `x` Number
->
-> **Returns** `number`
-
-### degreeToRad
-
-> ```
-> degreeToRad -> x => number
-> ```
->
-> Converts rad to degrees
->
->- `x` Number
->
-> **Returns** `number`
-
 ## List
 
 
@@ -587,33 +435,72 @@
 >
 > **Returns** `any`
 
-## Enum
+## Maths
 
 
-### enum
-
-> ```
-> enum -> values => enum
-> ```
->
-> Create an enum
->
->- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
->
-> **Returns** `enum`
-
-### isEnum
+### Set
 
 > ```
-> isEnum -> value enum => any | none
+> Set -> ls => true | false
 > ```
 >
-> Checks if value is part of an Enum
+> Check if a set is valid
 >
->- `value` Any value
->- `enum` An Enum
+>- `ls` List
 >
-> **Returns** `any | none`
+> **Returns** `true | false`
+
+### sum
+
+> ```
+> sum -> j n f => number
+> ```
+>
+> Goes over range and sums all results by function
+>
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
+>
+> **Returns** `number`
+
+### sumls
+
+> ```
+> sumls -> ls => number
+> ```
+>
+> Goes over a list and sums all values
+>
+>- `ls` A list
+>
+> **Returns** `number`
+
+### product
+
+> ```
+> product -> j n f => number
+> ```
+>
+> Goes over range and multiplies all results by function
+>
+>- `j` Starting number
+>- `n` Ending number
+>- `f` Function takes elem index array result
+>
+> **Returns** `number`
+
+### Prodcutls
+
+> ```
+> Prodcutls -> ls => number
+> ```
+>
+> Goes over a list and multiplies all values
+>
+>- `ls` A list
+>
+> **Returns** `number`
 
 ## Random
 
@@ -644,6 +531,145 @@
 >- `max` Maximum
 >
 > **Returns** `list`
+
+## Enum
+
+
+### enum
+
+> ```
+> enum -> values => enum
+> ```
+>
+> Create an enum
+>
+>- `values` Either a list containing all keys or a two dimensional list containing keys and their corresponding values
+>
+> **Returns** `enum`
+
+### isEnum
+
+> ```
+> isEnum -> value enum => any | none
+> ```
+>
+> Checks if value is part of an Enum
+>
+>- `value` Any value
+>- `enum` An Enum
+>
+> **Returns** `any | none`
+
+## Trig
+
+
+### sind
+
+> ```
+> sind -> x => number
+> ```
+>
+> Sine in degrees
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### cosd
+
+> ```
+> cosd -> x => number
+> ```
+>
+> Cosine in degrees
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### tand
+
+> ```
+> tand -> x => number
+> ```
+>
+> Tan in degrees
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### sinr
+
+> ```
+> sinr -> x => number
+> ```
+>
+> Sine in rad
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### cosr
+
+> ```
+> cosr -> x => number
+> ```
+>
+> Cosine in rad
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### tanr
+
+> ```
+> tanr -> x => number
+> ```
+>
+> Tan in rad
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### arsin
+
+> ```
+> arsin -> x => number
+> ```
+>
+> Arcsine in rad
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### degreeToRad
+
+> ```
+> degreeToRad -> x => number
+> ```
+>
+> Converts degrees to rad
+>
+>- `x` Number
+>
+> **Returns** `number`
+
+### degreeToRad
+
+> ```
+> degreeToRad -> x => number
+> ```
+>
+> Converts rad to degrees
+>
+>- `x` Number
+>
+> **Returns** `number`
 
 ## Expressions
 
@@ -720,69 +746,43 @@
 >
 > **Returns** `list`
 
-## Maths
+## Map
 
+
+### Map
+
+> ```
+> Map => map
+> ```
+>
+> Creates a Map
+>
+>
+> **Returns** `map`
 
 ### Set
 
 > ```
-> Set -> ls => true | false
+> Set -> map key value => map
 > ```
 >
-> Check if a set is valid
+> Set a key from a map to a value
 >
->- `ls` List
+>- `map` A map
+>- `key` Key name
+>- `value` Any value
 >
-> **Returns** `true | false`
+> **Returns** `map`
 
-### sum
-
-> ```
-> sum -> j n f => number
-> ```
->
-> Goes over range and sums all results by function
->
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
->
-> **Returns** `number`
-
-### sumls
+### Get
 
 > ```
-> sumls -> ls => number
+> Get -> map key => any
 > ```
 >
-> Goes over a list and sums all values
+> Get a value from map by key name
 >
->- `ls` A list
+>- `map` A map
+>- `key` Key name
 >
-> **Returns** `number`
-
-### product
-
-> ```
-> product -> j n f => number
-> ```
->
-> Goes over range and multiplies all results by function
->
->- `j` Starting number
->- `n` Ending number
->- `f` Function takes elem index array result
->
-> **Returns** `number`
-
-### Prodcutls
-
-> ```
-> Prodcutls -> ls => number
-> ```
->
-> Goes over a list and multiplies all values
->
->- `ls` A list
->
-> **Returns** `number`
+> **Returns** `any`

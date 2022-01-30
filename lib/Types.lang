@@ -1,0 +1,14 @@
+is_number -> x => :false
+is_number -> x (? :number) => :true
+
+is_atom -> x => :false
+is_atom -> x (? :atom) => :true
+
+is_string -> x => :false
+is_string -> x (? :string) => :true
+
+is_list -> x => :false
+is_list -> x (? :list) => :true
+
+is_map -> x => :false
+is_map -> x (head :map) => :true

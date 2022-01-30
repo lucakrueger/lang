@@ -1,0 +1,5 @@
+Date -> year month day => [:date, year, (limit: month, 0, 12), (limit: day, 0, 31)]
+date.get -> value index => :none
+date.get -> value index (= :year) => value[1]
+date.get -> value index (= :month) => value[2]
+date.get -> value index (= :day) => value[3]

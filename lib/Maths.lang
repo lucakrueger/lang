@@ -63,3 +63,5 @@ Imaginary -> complex (head :complex) => complex[2]
 sqrt -> x => (x root 2)
 
 factorial -> n => (Product: (1..n))
+
+limit -> a min max | x => (if: (a < min), min, a) => (if: (x > max), max, x) => x
