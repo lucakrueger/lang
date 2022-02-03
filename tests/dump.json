@@ -436,7 +436,7 @@
                         "call array_push 2",
                         "push ls",
                         "operation ++",
-                        "pushl :s4DnILZd",
+                        "pushl :SKLem2Xw",
                         "call foreachls 2"
                     ]
                 }
@@ -600,7 +600,7 @@
                         "call array_push 2",
                         "push ls",
                         "operation ++",
-                        "pushl :OQEqjDeA",
+                        "pushl :17Cnp7jF",
                         "call foreachls 2"
                     ]
                 }
@@ -878,7 +878,7 @@
                         "push end",
                         "call splice 3",
                         "operation ++",
-                        "pushl :e28wv38W",
+                        "pushl :xbUTljuE",
                         "call foreachls 2"
                     ]
                 }
@@ -1027,7 +1027,7 @@
                         "call array_push 2",
                         "push xs",
                         "operation ++",
-                        "pushl :Z0G6G5wu",
+                        "pushl :qCYik6Jj",
                         "call foreachls 2",
                         "call qsort 1",
                         "push x",
@@ -1041,7 +1041,7 @@
                         "call array_push 2",
                         "push xs",
                         "operation ++",
-                        "pushl :tMqlX8Hl",
+                        "pushl :FS0Iv1MF",
                         "call foreachls 2",
                         "call qsort 1",
                         "operation ++"
@@ -1486,7 +1486,7 @@
             ]
         },
         {
-            "name": "s4DnILZd",
+            "name": "SKLem2Xw",
             "definitions": [
                 {
                     "args": [
@@ -1610,7 +1610,7 @@
             ]
         },
         {
-            "name": "OQEqjDeA",
+            "name": "17Cnp7jF",
             "definitions": [
                 {
                     "args": [
@@ -1734,7 +1734,7 @@
             ]
         },
         {
-            "name": "e28wv38W",
+            "name": "xbUTljuE",
             "definitions": [
                 {
                     "args": [
@@ -1862,7 +1862,7 @@
             ]
         },
         {
-            "name": "Z0G6G5wu",
+            "name": "qCYik6Jj",
             "definitions": [
                 {
                     "args": [
@@ -1986,7 +1986,7 @@
             ]
         },
         {
-            "name": "tMqlX8Hl",
+            "name": "FS0Iv1MF",
             "definitions": [
                 {
                     "args": [
@@ -2218,7 +2218,7 @@
                         "call array_push 2",
                         "push enum",
                         "operation ++",
-                        "pushl :OObMABIx",
+                        "pushl :RAiVS6Q2",
                         "call foreachls 2",
                         "operation ++"
                     ]
@@ -2240,7 +2240,7 @@
                         "pushl 1",
                         "call array_get 2",
                         "operation ++",
-                        "pushl :IGIDgAxK",
+                        "pushl :Xlr87Y4s",
                         "call foreachls 2",
                         "operation ++"
                     ]
@@ -2361,7 +2361,7 @@
                         "call array_push 2",
                         "push map",
                         "operation ++",
-                        "pushl :MYQKzqNb",
+                        "pushl :F0eVfJvL",
                         "call foreachls 2",
                         "pull xs",
                         "push xs",
@@ -2474,7 +2474,7 @@
             ]
         },
         {
-            "name": "OObMABIx",
+            "name": "RAiVS6Q2",
             "definitions": [
                 {
                     "args": [
@@ -2594,7 +2594,7 @@
             ]
         },
         {
-            "name": "IGIDgAxK",
+            "name": "Xlr87Y4s",
             "definitions": [
                 {
                     "args": [
@@ -2722,7 +2722,7 @@
             ]
         },
         {
-            "name": "MYQKzqNb",
+            "name": "F0eVfJvL",
             "definitions": [
                 {
                     "args": [
@@ -4176,7 +4176,7 @@
                         "call array_push 2",
                         "push a",
                         "operation ++",
-                        "pushl :JjL3lrGV",
+                        "pushl :OTwRj3PD",
                         "call foreachls 2",
                         "operation ++"
                     ]
@@ -4237,7 +4237,7 @@
                         "call array_push 2",
                         "push a",
                         "operation ++",
-                        "pushl :2uQpY4hr",
+                        "pushl :d55uR3gZ",
                         "call foreachls 2",
                         "operation ++"
                     ]
@@ -4314,7 +4314,7 @@
                         "call array_push 2",
                         "push b",
                         "operation ++",
-                        "pushl :tTef2urU",
+                        "pushl :IJ2bwBSe",
                         "call foreachls 2",
                         "call Join 1"
                     ]
@@ -4330,7 +4330,7 @@
             ]
         },
         {
-            "name": "JjL3lrGV",
+            "name": "OTwRj3PD",
             "definitions": [
                 {
                     "args": [
@@ -4463,7 +4463,7 @@
             ]
         },
         {
-            "name": "2uQpY4hr",
+            "name": "d55uR3gZ",
             "definitions": [
                 {
                     "args": [
@@ -4596,7 +4596,7 @@
             ]
         },
         {
-            "name": "tTef2urU",
+            "name": "IJ2bwBSe",
             "definitions": [
                 {
                     "args": [
@@ -4839,14 +4839,14 @@
                         "push length",
                         "call range 2",
                         "operation ++",
-                        "pushl :lr4A7rgV",
+                        "pushl :TUZcQ0bn",
                         "call foreachls 2"
                     ]
                 }
             ]
         },
         {
-            "name": "lr4A7rgV",
+            "name": "TUZcQ0bn",
             "definitions": [
                 {
                     "args": [
@@ -5069,7 +5069,7 @@
                         "pushl 100.01",
                         "operation ..",
                         "operation ++",
-                        "pushl :86eXtn5i",
+                        "pushl :z36JdzHo",
                         "call foreachls 2"
                     ]
                 }
@@ -5113,7 +5113,7 @@
             ]
         },
         {
-            "name": "86eXtn5i",
+            "name": "z36JdzHo",
             "definitions": [
                 {
                     "args": [
@@ -5607,14 +5607,14 @@
                         "operation /",
                         "call range 2",
                         "operation ++",
-                        "pushl :9yYMLhhH",
+                        "pushl :iATS4Mas",
                         "call foreachls 2"
                     ]
                 }
             ]
         },
         {
-            "name": "9yYMLhhH",
+            "name": "iATS4Mas",
             "definitions": [
                 {
                     "args": [
@@ -5947,14 +5947,14 @@
                         "push max",
                         "call range 2",
                         "operation ++",
-                        "pushl :IH25ZMl2",
+                        "pushl :aqdCIjsR",
                         "call foreachls 2"
                     ]
                 }
             ]
         },
         {
-            "name": "IH25ZMl2",
+            "name": "aqdCIjsR",
             "definitions": [
                 {
                     "args": [
@@ -6238,7 +6238,7 @@
                         "push str",
                         "call Chars 1",
                         "operation ++",
-                        "pushl :4aablTCA",
+                        "pushl :QQLewg3L",
                         "call foreachls 2"
                     ]
                 }
@@ -6297,7 +6297,7 @@
                         "call array_push 2",
                         "push ls",
                         "operation ++",
-                        "pushl :dQTwphCy",
+                        "pushl :d1BR8KV2",
                         "call foreachls 2"
                     ]
                 }
@@ -6408,7 +6408,7 @@
                         "push str",
                         "call Chars 1",
                         "operation ++",
-                        "pushl :w4bsf70E",
+                        "pushl :G7pS6f3G",
                         "call foreachls 2",
                         "call Join 1"
                     ]
@@ -6516,7 +6516,7 @@
             ]
         },
         {
-            "name": "4aablTCA",
+            "name": "QQLewg3L",
             "definitions": [
                 {
                     "args": [
@@ -6640,7 +6640,7 @@
             ]
         },
         {
-            "name": "dQTwphCy",
+            "name": "d1BR8KV2",
             "definitions": [
                 {
                     "args": [
@@ -6779,7 +6779,7 @@
             ]
         },
         {
-            "name": "w4bsf70E",
+            "name": "G7pS6f3G",
             "definitions": [
                 {
                     "args": [

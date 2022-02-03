@@ -39,7 +39,7 @@ bytecode.addDescriptions(preprocessor.descr)
 /*for(var elem of bytecode.getDescriptions().descriptions) {
     bytecode.print(elem.name)
 }*/
-fs.writeFileSync('./tests/dump.json', JSON.stringify(bytecode.getDescriptions(), null, 4))
+//fs.writeFileSync('./tests/dump.json', JSON.stringify(bytecode.getDescriptions(), null, 4))
 //var bytecode = new ReadableBytecode('tests/dump.json')
 AutodocCombine()
 AutodocFormat()
